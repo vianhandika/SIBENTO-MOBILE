@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/abu2"
+    tools:context=".Fragment.Pengadaan_Sparepart.PengadaanSparepartTambah">
+
+    <TextView
+        android:id="@+id/textTambahDataPengadaanSparepart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Tambah Data Pengadaan Sparepart"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textNomorPengadaanSparepart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textTambahDataPengadaanSparepart"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp"
+        android:text="Nomor"/>
+
+    <TextView
+        android:id="@+id/textTampilNomorPengadaanSparepart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textTambahDataPengadaanSparepart"
+        android:layout_toRightOf="@id/textNomorPengadaanSparepart"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="5dp"
+        android:textSize="20dp"
+        android:text="29"/>
+
+    <TextView
+        android:id="@+id/textTanggalPengadaanSparepart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textTampilNomorPengadaanSparepart"
+        android:layout_toLeftOf="@+id/textTampilNomorPengadaanSparepart"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:text="Tanggal"/>
+
+    <EditText
+        android:id="@+id/editTextTanggalPengadaanSparepart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textTampilNomorPengadaanSparepart"
+        android:layout_toRightOf="@+id/textTanggalPengadaanSparepart"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="5dp"
+        android:ems="10"
+        android:inputType="date" />
+
+    <TextView
+        android:id="@+id/textPengadaanSparepartSupplier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textTanggalPengadaanSparepart"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="33dp"
+        android:layout_toLeftOf="@+id/editTextTanggalPengadaanSparepart"
+        android:text="Supplier"
+        android:textSize="20dp" />
+
+    <Spinner
+        android:id="@+id/spinnerPengadaanSparepartSupplier"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/textPengadaanSparepartSupplier"
+        android:layout_toRightOf="@+id/textPengadaanSparepartSupplier"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="-130dp"
+        android:background="@color/white"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/textPengadaanSparepartSales"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:text="Perusahaan"/>
+
+    <Spinner
+        android:id="@+id/spinnerPengadaanSparepartSales"
+        android:layout_width="200dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/btnTambahSales"
+        android:layout_width="130dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="-80dp"
+        android:background="#70C29F"
+        android:text="SIMPAN"/>
+
+    <Button
+        android:id="@+id/btnBatalSales"
+        android:layout_width="130dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="-30dp"
+        android:layout_marginLeft="85dp"
+        android:background="#F44336"
+        android:text="BATAL"/>
+
+</RelativeLayout>

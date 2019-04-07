@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/abu2"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".Fragment.Sales.SalesTambah">
+
+
+    <TextView
+        android:id="@+id/textTambahDataSales"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="0dp"
+        android:text="Tambah Data Sales"
+        android:textSize="25dp"/>
+
+    <TextView
+        android:id="@+id/textNamaSales"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textSize="20dp"
+        android:text="Nama"/>
+
+    <EditText
+        android:id="@+id/editTextSalesNama"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:hint="Masukkan Nama"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/textSalesNoTelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:text="Nomor Telepon"/>
+
+    <EditText
+        android:id="@+id/editTextSalesNoTelp"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:hint="Masukkan Nomor Telepon"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/textSalesPerusahaan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:text="Perusahaan"/>
+
+    <Spinner
+        android:id="@+id/spinnerSparepartTipe"
+        android:layout_width="200dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/btnUbahSales"
+        android:layout_width="130dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="-80dp"
+        android:background="#70C29F"
+        android:text="SIMPAN"/>
+
+    <Button
+        android:id="@+id/btnBatalSales"
+        android:layout_width="130dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="-30dp"
+        android:layout_marginLeft="85dp"
+        android:background="#F44336"
+        android:text="BATAL"/>
+
+</LinearLayout>

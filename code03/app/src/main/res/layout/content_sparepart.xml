@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <TextView
+            android:id="@+id/namaSparepart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="20dp"
+            android:text="BAN RODA KAKI GAJAH"/>
+
+        <TextView
+            android:id="@+id/kodeSparepart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="37dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="17dp"
+            android:text="AG 440 DP"/>
+
+        <TextView
+            android:id="@+id/merkSparepart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="10dp"
+            android:text="YAMAHA"/>
+
+        <TextView
+            android:id="@+id/textStockSparepart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="73dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="10dp"
+            android:text="Sisa Stok:"/>
+
+        <TextView
+            android:id="@+id/stockSparepart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="73dp"
+            android:layout_marginLeft="65dp"
+            android:textSize="10dp"
+            android:text="18" />
+
+        <ImageView
+            android:id="@+id/btnEditSparepart"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="335dp"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/ic_edit" />
+
+        <ImageView
+            android:id="@+id/btnDeleteSparepart"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="335dp"
+            android:layout_marginTop="50dp"
+            app:srcCompat="@drawable/ic_delete" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
