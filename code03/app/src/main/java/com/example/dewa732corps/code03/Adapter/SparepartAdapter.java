@@ -1,7 +1,9 @@
 package com.example.dewa732corps.code03.Adapter;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 
 import com.example.dewa732corps.code03.Controller.ApiClient;
 import com.example.dewa732corps.code03.Controller.Sparepart;
+import com.example.dewa732corps.code03.Fragment.BerandaFragment;
+import com.example.dewa732corps.code03.Fragment.Sparepart.SparepartForm;
 import com.example.dewa732corps.code03.R;
 
 import okhttp3.ResponseBody;
@@ -32,6 +36,7 @@ import java.util.List;
 public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyViewHolder>{
     private List<Sparepart> SparepartBundle = new ArrayList<>();
     private Context context;
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView Nama, Kode, Merk, Stock;

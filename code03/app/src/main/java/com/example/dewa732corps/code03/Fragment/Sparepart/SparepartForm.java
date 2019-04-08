@@ -12,12 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.dewa732corps.code03.Controller.ApiClient;
 import com.example.dewa732corps.code03.Controller.RetrofitClient;
@@ -55,6 +57,7 @@ public class SparepartForm extends Fragment {
     public Bitmap ImageBitmap;
     int Image_Request_Code = 1;
     Uri FilePathUri,FilePathUri2;
+    String selectedId;
     private List<String> listNameType = new ArrayList<String>();
     private List<String> listIdType = new ArrayList<String>();
     private List<String> listPosisi = new ArrayList<String>();
@@ -73,28 +76,41 @@ public class SparepartForm extends Fragment {
 
         setInit();
         setDropdown();
-//        btnPick.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Creating intent.
-//                Intent intent = new Intent();
-//
-//                // Setting intent type as image to select image from phone storage.
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(Intent.createChooser(intent, "Please Select Image"), Image_Request_Code);
-//
-//            }
-//        });
-//
-//        btnAdd.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                addSparepart();
-//
-//
-//            }
-//        });
+        btnPilihGambar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Creating intent.
+                Intent intent = new Intent();
+
+                // Setting intent type as image to select image from phone storage.
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Please Select Image"), Image_Request_Code);
+
+            }
+        });
+
+        btnSaveSparepart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addSparepart();
+            }
+        });
+
+        dropdownType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                selectedId = listIdType.get(position);
+                //String selected = parentView.getItemAtPosition(position).toString();
+                Toast.makeText(getContext(), "Choose " + selectedId, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
 
         return dashboard;
     }
@@ -131,24 +147,16 @@ public class SparepartForm extends Fragment {
         if (requestCode == Image_Request_Code && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
             FilePathUri = data.getData();
-            Log.d("Test1",FilePathUri.toString());
-
+//            Log.d("Test1",FilePathUri.toString());
 
             try {
 
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(dashboard.getContext().getContentResolver(), FilePathUri);
-                imageSparepart.setImageBitmap(bitmap);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), FilePathUri);
                 ImageBitmap=bitmap;
-
-//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                ImageBitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
-//                InputStream is = getContentResolver().openInputStream(data.getData());
-//
-//                uploadImage(getBytes(is));
+                imageSparepart.setImageBitmap(bitmap);
 
             }
             catch (IOException e) {
-
                 e.printStackTrace();
             }
         }
@@ -219,19 +227,112 @@ public class SparepartForm extends Fragment {
                 .build();
 
         ApiClient retrofitInterface = retrofit.create(ApiClient.class);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageBitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
         byte[] data =baos.toByteArray();
 
+        String txtplacement = dropdownPosisi.getSelectedItem().toString()+'-'+dropdownTempat.getSelectedItem().toString()+'-'+txtNomor.getText().toString();
+        Log.d("id_sparepart: ",txtIdSparepart.getText().toString());
+        Log.d("name_sparepart: ",txtNamaSparepart.getText().toString());
+        Log.d("brand_sparepart: ",txtMerek.getText().toString());
+        Log.d("id_sparepart_type: ",selectedId);
+        Log.d("buy_price: ",txtHargaBeli.getText().toString());
+        Log.d("sell_price: ",txtHargaJual.getText().toString());
+        Log.d("placement: ",txtplacement);
+        Log.d("min_stock: ",txtMinStock.toString());
+        Log.d("stock: ",txtStock.toString());
+
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), data);
-        RequestBody requestId =
+
+
+        RequestBody id_sparepart =
                 RequestBody.create(
-                        MediaType.parse("multipart/form-data"), "1111-ASTRA-111");
+                        MediaType.parse("multipart/form-data"), txtIdSparepart.getText().toString());
+//        RequestBody requestId =
+//                RequestBody.create(
+//                        MediaType.parse("multipart/form-data"), "1111-ASTRA-111");
+
+        RequestBody name_sparepart =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), txtNamaSparepart.getText().toString());
+
+        RequestBody brand_sparepart =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), txtMerek.getText().toString());
+
+        RequestBody id_sparepart_type =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), selectedId);
+
+        RequestBody buy_price =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), txtHargaBeli.getText().toString());
+
+        RequestBody sell_price =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), txtHargaJual.getText().toString());
+
+        RequestBody placement =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), txtplacement);
+
+        RequestBody minimal_stock_sparepart =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), txtMinStock.getText().toString());
+
+        RequestBody stock_sparepart =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), txtStock.getText().toString());
+
+
+
 
         MultipartBody.Part body = MultipartBody.Part.createFormData("image_sparepart", "image.jpg", requestFile);
 
-        Call<ResponseBody> call = retrofitInterface.uploadImage(body,requestId);
+//        Call<ResponseBody> call = retrofitInterface.updateImageSparepart(body,requestId);
+////        mProgressBar.setVisibility(View.VISIBLE);
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+//
+////                mProgressBar.setVisibility(View.GONE);
+//
+//                if (response.isSuccessful()) {
+//
+//                    ResponseBody responseBody = response.body();
+//                    Log.d("SUKSES",responseBody.toString());
+////                    mBtImageShow.setVisibility(View.VISIBLE);
+////                     mImageUrl = URL + responseBody.getPath();
+////                    Snackbar.make(findViewById(R.id.content), responseBody.getMessage(),Snackbar.LENGTH_SHORT).show();
+//
+//                } else {
+//
+//                    ResponseBody errorBody = response.errorBody();
+//
+//                    Gson gson = new Gson();
+//
+//                    try {
+//
+//                        Response errorResponse = gson.fromJson(errorBody.string(), Response.class);
+////                        Snackbar.make(findViewById(R.id.content), errorResponse.getMessage(),Snackbar.LENGTH_SHORT).show();
+//
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                Log.d("onFailure: ",t.toString());
+//
+////                mProgressBar.setVisibility(View.GONE);
+////                Log.d(TAG, "onFailure: "+t.getLocalizedMessage());
+//            }
+//        });
+
+        Call<ResponseBody> call = retrofitInterface.addSparepart(body,id_sparepart,name_sparepart,brand_sparepart,stock_sparepart,minimal_stock_sparepart,buy_price,sell_price,placement,id_sparepart_type);
 //        mProgressBar.setVisibility(View.VISIBLE);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -248,19 +349,21 @@ public class SparepartForm extends Fragment {
 //                    Snackbar.make(findViewById(R.id.content), responseBody.getMessage(),Snackbar.LENGTH_SHORT).show();
 
                 } else {
+                    Log.d( "onResponse: ",response.message());
+                    Toast.makeText(getContext(), "Gagal", Toast.LENGTH_SHORT).show();
 
-                    ResponseBody errorBody = response.errorBody();
-
-                    Gson gson = new Gson();
-
-                    try {
-
-                        Response errorResponse = gson.fromJson(errorBody.string(), Response.class);
-//                        Snackbar.make(findViewById(R.id.content), errorResponse.getMessage(),Snackbar.LENGTH_SHORT).show();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+//                    ResponseBody errorBody = response.errorBody();
+//
+//                    Gson gson = new Gson();
+//
+//                    try {
+//
+//                        Response errorResponse = gson.fromJson(errorBody.string(), Response.class);
+////                        Snackbar.make(findViewById(R.id.content), errorResponse.getMessage(),Snackbar.LENGTH_SHORT).show();
+//
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
                 }
             }
 

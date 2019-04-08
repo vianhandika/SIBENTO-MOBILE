@@ -26,10 +26,27 @@ public interface ApiClient {
 
     @Multipart
     @POST("sparepart/updateimage")
-    Call<ResponseBody> uploadImage(
+    Call<ResponseBody> updateImageSparepart(
             @Part MultipartBody.Part image_sparepart,
             @Part("id_sparepart") RequestBody id_sparepart
     );
+
+    @Multipart
+    @POST("sparepart")
+    Call<ResponseBody> addSparepart(
+            @Part MultipartBody.Part image_sparepart,
+            @Part("id_sparepart") RequestBody id_sparepart,
+            @Part("name_sparepart") RequestBody name_sparepart,
+            @Part("brand_sparepart") RequestBody brand_sparepart,
+            @Part("stock_sparepart") RequestBody stock_sparepart,
+            @Part("minimal_stock_sparepart") RequestBody minimal_stock_sparepart,
+            @Part("buy_price") RequestBody buy_price,
+            @Part("sell_price") RequestBody sell_price,
+            @Part("placement") RequestBody placement,
+            @Part("id_sparepart_type") RequestBody id_sparepart_type
+
+    );
+
 
     @DELETE("sparepart/{id}")
     Call<ResponseBody> deleteSparepart(@Path("id") String id);

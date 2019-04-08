@@ -4,29 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/abu2"
+    android:background="@color/WhiteFragment"
     android:gravity="center_horizontal"
     android:orientation="vertical">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textSize="20dp"
-        android:text="DATA SPAREPART"/>
 
     <Button
         android:id="@+id/btnTambahSparepart"
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="120dp"
+        android:layout_marginTop="5dp"
         android:text="Tambah" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewSparepart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
 </LinearLayout>
