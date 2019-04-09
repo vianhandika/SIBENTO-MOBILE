@@ -28,7 +28,7 @@
         android:text="Nama"/>
 
     <EditText
-        android:id="@+id/editTextSupplierNama"
+        android:id="@+id/txtNameSupplier"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
@@ -45,7 +45,7 @@
         android:text="Alamat"/>
 
     <EditText
-        android:id="@+id/editTextSupplierAlamat"
+        android:id="@+id/txtAddressSupplier"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
@@ -62,16 +62,17 @@
         android:text="Nomor Telepon"/>
 
     <EditText
-        android:id="@+id/editTextSupplierNoTelp"
+        android:id="@+id/txtPhoneNumberSupplier"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         android:background="@color/white"
         android:hint="Masukkan Nomor Telepon"
+        android:inputType="number"
         android:textAlignment="center"/>
 
     <Button
-        android:id="@+id/btnTambahSupplier"
+        android:id="@+id/btnSaveSupplier"
         android:layout_width="130dp"
         android:layout_height="30dp"
         android:layout_marginTop="20dp"
@@ -80,7 +81,7 @@
         android:text="SIMPAN"/>
 
     <Button
-        android:id="@+id/btnBatalSupplier"
+        android:id="@+id/btnCancelSupplier"
         android:layout_width="130dp"
         android:layout_height="30dp"
         android:layout_marginTop="-30dp"

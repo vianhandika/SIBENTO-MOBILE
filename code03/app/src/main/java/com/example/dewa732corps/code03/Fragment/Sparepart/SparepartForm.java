@@ -93,7 +93,9 @@ public class SparepartForm extends Fragment {
         btnSaveSparepart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addSparepart();
+                if(formChecking()==0){
+                    addSparepart();
+                }
             }
         });
 
@@ -114,8 +116,72 @@ public class SparepartForm extends Fragment {
 
         return dashboard;
     }
+
+    private int formChecking(){
+        //Fungsi Check Form
+
+        String idSparepart=txtIdSparepart.getText().toString(),
+                namaSparepart=txtNamaSparepart .getText().toString(),
+                hargaBeli=txtHargaBeli .getText().toString(),
+                hargaJual=txtHargaJual  .getText().toString(),
+                nomorSparepart=txtNomor  .getText().toString(),
+                minStockSparepart=txtMinStock  .getText().toString(),
+                stockSparepart=txtMerek  .getText().toString(),
+                merek=txtMerek.getText().toString();
+
+        if(idSparepart.isEmpty()){
+            txtIdSparepart.setError("ID diperlukan.");
+            txtIdSparepart.requestFocus();
+            return 1;
+        }
+
+        if(namaSparepart.isEmpty()){
+            txtNamaSparepart.setError("Nama sparepart diperlukan.");
+            txtNamaSparepart.requestFocus();
+            return 1;
+        }
+
+        if(hargaBeli.isEmpty()){
+            txtHargaBeli.setError("Harga beli diperlukan.");
+            txtHargaBeli.requestFocus();
+            return 1;
+        }
+
+        if(hargaJual.isEmpty()){
+            txtHargaJual.setError("Harga jual diperlukan.");
+            txtHargaJual.requestFocus();
+            return 1;
+        }
+
+        if(nomorSparepart.isEmpty()){
+            txtNomor .setError("Nomor sparepart diperlukan.");
+            txtNomor .requestFocus();
+            return 1;
+        }
+
+        if(minStockSparepart.isEmpty()){
+            txtMinStock .setError("Minimal stock diperlukan.");
+            txtMinStock .requestFocus();
+            return 1;
+        }
+
+        if(stockSparepart.isEmpty()) {
+            txtStock.setError("Stock diperlukan.");
+            txtStock.requestFocus();
+            return 1;
+        }
+        if(merek.isEmpty()){
+            txtMerek  .setError("Merek diperlukan.");
+            txtMerek  .requestFocus();
+            return 1;
+        }
+        return 0;
+    }
+
     public void setInit(){
 
+
+        //depan itu nama form
         dropdownType = dashboard.findViewById(R.id.dropdownType);
         dropdownPosisi = dashboard.findViewById(R.id.dropdownPosisi);
         dropdownTempat = dashboard.findViewById(R.id.dropdownTempat);
@@ -135,8 +201,6 @@ public class SparepartForm extends Fragment {
         btnPilihGambar = dashboard.findViewById(R.id.btnPilihGambar);
         btnSaveSparepart = dashboard.findViewById(R.id.btnSaveSparepart);
         btnCancelSparepart = dashboard.findViewById(R.id.btnCancelSparepart);
-
-
     }
 
     @Override

@@ -102,7 +102,7 @@
                     android:layout_marginTop="16dp"
                     android:ems="10"
                     android:hint="Harga Beli"
-                    android:inputType="textPersonName" />
+                    android:inputType="number" />
 
                 <EditText
                     android:id="@+id/txtHargaJual"
@@ -121,7 +121,7 @@
                     android:layout_toRightOf="@+id/txtHargaBeli"
                     android:ems="10"
                     android:hint="Harga Jual"
-                    android:inputType="textPersonName" />
+                    android:inputType="number" />
 
                 <Spinner
                     android:id="@+id/dropdownPosisi"
@@ -165,7 +165,7 @@
                     android:layout_toRightOf="@+id/dropdownTempat"
                     android:ems="10"
                     android:hint="Nomor"
-                    android:inputType="textPersonName" />
+                    android:inputType="number" />
 
                 <EditText
                     android:id="@+id/txtMinStock"
@@ -181,7 +181,7 @@
                     android:layout_marginRight="8dp"
                     android:ems="10"
                     android:hint="Minimal Stok"
-                    android:inputType="textPersonName" />
+                    android:inputType="number" />
 
                 <EditText
                     android:id="@+id/txtStock"
@@ -199,7 +199,7 @@
                     android:layout_toRightOf="@+id/txtMinStock"
                     android:ems="10"
                     android:hint="Stok"
-                    android:inputType="textPersonName" />
+                    android:inputType="number" />
 
                 <Button
                     android:id="@+id/btnSaveSparepart"

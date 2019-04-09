@@ -3,40 +3,40 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#9A93ED"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp">
 
         <TextView
-            android:id="@+id/namaSparepart"
+            android:id="@+id/txtNameSparepart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
             android:textSize="20dp"
-            android:text="BAN RODA KAKI GAJAH"/>
+            android:text=""/>
 
         <TextView
-            android:id="@+id/kodeSparepart"
+            android:id="@+id/txtTypeSparepart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="37dp"
             android:layout_marginLeft="15dp"
             android:textSize="17dp"
-            android:text="AG 440 DP"/>
+            android:text=""/>
 
         <TextView
-            android:id="@+id/merkSparepart"
+            android:id="@+id/txtBrandSparepart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:layout_marginLeft="15dp"
             android:textSize="10dp"
-            android:text="YAMAHA"/>
+            android:text=""/>
 
         <TextView
-            android:id="@+id/textStockSparepart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="73dp"
@@ -45,13 +45,13 @@
             android:text="Sisa Stok:"/>
 
         <TextView
-            android:id="@+id/stockSparepart"
-            android:layout_width="wrap_content"
+            android:id="@+id/txtStockSparepart"
+            android:layout_width="39dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="73dp"
             android:layout_marginLeft="65dp"
-            android:textSize="10dp"
-            android:text="18" />
+            android:layout_marginTop="73dp"
+            android:text=""
+            android:textSize="10dp" />
 
         <ImageView
             android:id="@+id/btnEditSparepart"

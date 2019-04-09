@@ -1,5 +1,6 @@
 package com.example.dewa732corps.code03.Fragment.Sparepart;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -86,12 +87,10 @@ public class SparepartTampil extends Fragment {
             public void onFailure(Call<SparepartList> call, Throwable t) {
                 Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
             }
-
         });
-
-
         return dashboard;
     }
+
     public void setinit(){
         toolbar = (android.support.v7.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Manajemen Sparepart");
@@ -104,6 +103,5 @@ public class SparepartTampil extends Fragment {
                 transaction.commit();
             }
         });
-
     }
 }

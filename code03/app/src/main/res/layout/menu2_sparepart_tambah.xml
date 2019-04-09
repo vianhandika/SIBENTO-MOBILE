@@ -7,7 +7,7 @@
     android:background="#23313F"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".Fragment.Sparepart.SparepartForm">
+    tools:context=".Fragment.Sparepart.SparepartTambah">
 
     <TextView
         android:id="@+id/textTambahDataSparepart"

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.dewa732corps.code03.Controller.ApiClient;
 import com.example.dewa732corps.code03.Controller.Sparepart;
+import com.example.dewa732corps.code03.Controller.Supplier;
 import com.example.dewa732corps.code03.Fragment.BerandaFragment;
 import com.example.dewa732corps.code03.Fragment.Sparepart.SparepartForm;
 import com.example.dewa732corps.code03.R;
@@ -33,53 +34,51 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyViewHolder>{
-    private List<Sparepart> SparepartBundle = new ArrayList<>();
+public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.MyViewHolder>{
+    private List<Supplier> SupplierBundle = new ArrayList<>();
     private Context context;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView Name, Type, Brand, Stock;
+        public TextView Name, Address, PhoneNumber;
         public ImageView btnEdit, btnDelete;
 //        public LinearLayout topWraper;
 //        public LinearLayout bottomWraper;
 
         public MyViewHolder(View v) {
             super(v);
-            Name = v.findViewById(R.id.txtNameSparepart);
-            Type = v.findViewById(R.id.txtTypeSparepart);
-            Brand = v.findViewById(R.id.txtBrandSparepart);
-            Stock = v.findViewById(R.id.txtStockSparepart);
-            btnEdit = v.findViewById(R.id.btnEditSparepart);
-            btnDelete = v.findViewById(R.id.btnDeleteSparepart);
+            Name = v.findViewById(R.id.txtNameSupplier);
+            Address = v.findViewById(R.id.txtAddressSupplier);
+            PhoneNumber = v.findViewById(R.id.txtPhoneNumberSupplier);
+            btnEdit = v.findViewById(R.id.btnEditSupplier);
+            btnDelete = v.findViewById(R.id.btnDeleteSupplier);
 
 //            bottomWraper = v.findViewById(R.id.bottom_wrapper);
 //            topWraper = v.findViewById(R.id.top_wrapper);
         }
     }
 
-    public SparepartAdapter(List<Sparepart> SparepartBundle , Context context) {
-        this.SparepartBundle = SparepartBundle;
+    public SupplierAdapter(List<Supplier> SupplierBundler , Context context) {
+        this.SupplierBundle = SupplierBundler;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public SparepartAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public SupplierAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         // create a new view
         View v = (View) LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.content_sparepart, viewGroup, false);
-        return new SparepartAdapter.MyViewHolder(v);
+                .inflate(R.layout.content_supplier, viewGroup, false);
+        return new SupplierAdapter.MyViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SparepartAdapter.MyViewHolder vh, final int i) {
+    public void onBindViewHolder(@NonNull SupplierAdapter.MyViewHolder vh, final int i) {
 
-        final Sparepart data = SparepartBundle.get(i);
+        final Supplier data = SupplierBundle.get(i);
         final int ifinal = vh.getAdapterPosition();
         vh.Name.setText(data.getName());
-        vh.Type.setText(data.getId());
-        vh.Brand.setText(data.getBrand());
-        vh.Stock.setText(data.getStock());
+        vh.Address.setText(data.getAddress());
+        vh.PhoneNumber.setText(data.getPhoneNumber());
         vh.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +89,7 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
 //                intent.putExtra("number", data.getSupplierPhoneNumber());
 //                intent.putExtra("id", data.getIdSupplier());
 //                context.startActivity(intent);
+
             }
         });
 
@@ -103,23 +103,23 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
 
                 ApiClient apiClient = retrofit.create(ApiClient.class);
 
-                Call<ResponseBody> deleteSparepart = apiClient.deleteSparepart(data.getId());
-                deleteSparepart.enqueue(new Callback<ResponseBody>() {
+                Call<ResponseBody> deleteSupplier = apiClient.deleteSupplier(data.getId());
+                deleteSupplier.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.code() == 201){
-                            Toast.makeText(context.getApplicationContext(), "Berhasil hapus data Sparepart", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context.getApplicationContext(), "BERHASIL MENGHAPUS DATA SUPPLIER", Toast.LENGTH_SHORT).show();
                         }else{
-                            Toast.makeText(context.getApplicationContext(), "Gagal hapus data Sparepart", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context.getApplicationContext(), "GAGAL MENGHAPUS DATA SUPPLIER", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(context.getApplicationContext(), "Gagal hapus data Sparepart", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context.getApplicationContext(), "GAGAL MENGHAPUS DATA SUPPLIER", Toast.LENGTH_SHORT).show();
                     }
                 });
-                SparepartBundle.remove(ifinal);
+                SupplierBundle.remove(ifinal);
                 notifyItemRemoved(ifinal);
                 notifyItemRangeChanged(ifinal, getItemCount());
             }
@@ -128,6 +128,6 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
 
     @Override
     public int getItemCount() {
-        return SparepartBundle.size();
+        return SupplierBundle.size();
     }
 }

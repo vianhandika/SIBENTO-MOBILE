@@ -54,5 +54,19 @@ public interface ApiClient {
     @GET("spareparttype")
     Call<SparepartTypeList> getSparepartType();
 
+    // SUPPLIER
 
+    @GET("supplier")
+    Call<SupplierList> getSupplier();
+
+    @DELETE("supplier/{id}")
+    Call<ResponseBody> deleteSupplier(@Path("id") Integer id);
+
+    @Multipart
+    @POST("supplier")
+    Call<ResponseBody> addSupplier(
+                    @Part("name_supplier") RequestBody name_supplier,
+                    @Part("address_supplier") RequestBody address_supplier,
+                    @Part("phone_number_supplier") RequestBody phone_number_supplier
+            );
 }

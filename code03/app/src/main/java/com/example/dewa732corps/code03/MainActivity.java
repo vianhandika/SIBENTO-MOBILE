@@ -113,6 +113,8 @@ public class MainActivity extends AppCompatActivity
 //            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new PanelPegawaiFragment()).commit();
         } else if (id == R.id.nav_transaksipenjualan) {
 //            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new CekServiceFragment()).commit();
+        } else if (id == R.id.nav_ubahpassword) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new UbahPassword()).commit();
         } else if (id == R.id.nav_logout) {
 //            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new ListSparepartFragment()).commit();
         }
