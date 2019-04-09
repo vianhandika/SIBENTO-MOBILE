@@ -105,7 +105,7 @@ public class SupplierTampil extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.framelay, new SparepartForm());
+                transaction.replace(R.id.framelay, new SupplierTampil());
                 transaction.commit();
             }
         });

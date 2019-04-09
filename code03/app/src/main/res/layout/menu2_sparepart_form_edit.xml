@@ -41,8 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+
                 <EditText
-                    android:id="@+id/txtIdSparepart"
                     android:layout_width="266dp"
                     android:layout_height="53dp"
                     android:layout_alignParentStart="true"
@@ -76,7 +76,7 @@
                 <Spinner
                     android:id="@+id/dropdownType"
                     android:layout_width="185dp"
-                    android:layout_height="54dp"
+                    android:layout_height="50dp"
                     android:layout_below="@+id/txtNamaSparepart"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
@@ -91,7 +91,7 @@
 
                 <EditText
                     android:id="@+id/txtHargaBeli"
-                    android:layout_width="165dp"
+                    android:layout_width="181dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txtMerek"
                     android:layout_alignParentStart="true"
@@ -105,7 +105,7 @@
 
                 <EditText
                     android:id="@+id/txtHargaJual"
-                    android:layout_width="165dp"
+                    android:layout_width="185dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/dropdownType"
                     android:layout_alignParentEnd="true"
@@ -113,7 +113,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="17dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_toEndOf="@+id/txtHargaBeli"
@@ -124,7 +124,7 @@
 
                 <Spinner
                     android:id="@+id/dropdownPosisi"
-                    android:layout_width="120dp"
+                    android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:layout_below="@+id/txtHargaBeli"
                     android:layout_alignParentStart="true"
@@ -137,7 +137,7 @@
 
                 <Spinner
                     android:id="@+id/dropdownTempat"
-                    android:layout_width="120dp"
+                    android:layout_width="163dp"
                     android:layout_height="50dp"
                     android:layout_below="@+id/txtHargaBeli"
                     android:layout_marginStart="8dp"
@@ -200,6 +200,30 @@
                     android:hint="Stok"
                     android:inputType="number" />
 
+                <Button
+                    android:id="@+id/btnSaveSparepart"
+                    android:layout_width="140dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/txtMinStock"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginLeft="36dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Simpan" />
+
+                <Button
+                    android:id="@+id/btnCancelSparepart"
+                    android:layout_width="140dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/txtStock"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="36dp"
+                    android:layout_marginRight="36dp"
+                    android:layout_toEndOf="@+id/btnSaveSparepart"
+                    android:layout_toRightOf="@+id/btnSaveSparepart"
+                    android:text="Batal" />
+
                 <EditText
                     android:id="@+id/txtMerek"
                     android:layout_width="180dp"
@@ -209,36 +233,11 @@
                     android:layout_alignParentLeft="true"
                     android:layout_marginStart="17dp"
                     android:layout_marginLeft="17dp"
-                    android:layout_marginTop="13dp"
+                    android:layout_marginTop="12dp"
                     android:ems="10"
                     android:hint="Merek"
                     android:inputType="textPersonName" />
             </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="380dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_alignParentBottom="true">
-
-                    <Button
-                        android:id="@+id/btnSaveSparepart"
-                        android:layout_width="130dp"
-                        android:layout_height="30dp"
-                        android:background="#70C29F"
-                        android:text="SIMPAN" />
-
-                    <Button
-                        android:id="@+id/btnCancelSparepart"
-                        android:layout_width="130dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="20dp"
-                        android:background="#F44336"
-                        android:text="BATAL"/>
-                </LinearLayout>
 
 
         </LinearLayout>

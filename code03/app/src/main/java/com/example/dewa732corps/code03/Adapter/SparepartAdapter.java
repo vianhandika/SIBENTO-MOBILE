@@ -19,6 +19,7 @@ import com.example.dewa732corps.code03.Controller.ApiClient;
 import com.example.dewa732corps.code03.Controller.Sparepart;
 import com.example.dewa732corps.code03.Fragment.BerandaFragment;
 import com.example.dewa732corps.code03.Fragment.Sparepart.SparepartForm;
+import com.example.dewa732corps.code03.Fragment.Supplier.SupplierForm;
 import com.example.dewa732corps.code03.R;
 
 import okhttp3.ResponseBody;
@@ -80,16 +81,26 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
         vh.Type.setText(data.getId());
         vh.Brand.setText(data.getBrand());
         vh.Stock.setText(data.getStock());
+
         vh.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(context, AddSupplier.class);
-//                intent.putExtra("simpan", i);
-//                intent.putExtra("name", data.getSupplierName());
-//                intent.putExtra("address", data.getSupplierAddress());
-//                intent.putExtra("number", data.getSupplierPhoneNumber());
-//                intent.putExtra("id", data.getIdSupplier());
-//                context.startActivity(intent);
+                Intent intent = new Intent(v.getContext(), SparepartForm.class);
+                intent.putExtra("mode", i);
+                intent.putExtra("id", data.getId());
+                intent.putExtra("nama", data.getName());
+                intent.putExtra("merk", data.getBrand());
+                intent.putExtra("buy", data.getBuyPrice());
+                intent.putExtra("sell", data.getSellPrice());
+
+                intent.putExtra("posisi", data.getPlacementPosition());
+                intent.putExtra("tempat", data.getPlacementPlace());
+                intent.putExtra("tipe", data.getType());
+
+                intent.putExtra("nomor", data.getPlacementNumber());
+                intent.putExtra("minimalstock", data.getMinStock());
+                intent.putExtra("stock", data.getStock());
+                v.getContext().startActivity(intent);
             }
         });
 

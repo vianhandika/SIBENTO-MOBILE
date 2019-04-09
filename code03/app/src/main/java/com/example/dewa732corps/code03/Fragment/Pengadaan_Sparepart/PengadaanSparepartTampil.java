@@ -29,7 +29,7 @@ public class PengadaanSparepartTampil extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.framelay, new SparepartForm());
+                transaction.replace(R.id.framelay, new PengadaanSparepartTampil());
                 transaction.commit();
             }
         });

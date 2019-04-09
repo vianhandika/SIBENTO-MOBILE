@@ -1,6 +1,7 @@
 package com.example.dewa732corps.code03.Fragment.Sparepart;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -98,9 +99,8 @@ public class SparepartTampil extends Fragment {
         btnTambahSparepart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.framelay, new SparepartForm());
-                transaction.commit();
+                Intent intent = new Intent(getContext(), SparepartForm.class);
+                startActivity(intent);
             }
         });
     }

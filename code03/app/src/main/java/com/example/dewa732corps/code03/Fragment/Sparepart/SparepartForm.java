@@ -1,5 +1,6 @@
 package com.example.dewa732corps.code03.Fragment.Sparepart;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.dewa732corps.code03.Controller.ApiClient;
 import com.example.dewa732corps.code03.Controller.RetrofitClient;
+import com.example.dewa732corps.code03.Controller.Sparepart;
 import com.example.dewa732corps.code03.Controller.SparepartType;
 import com.example.dewa732corps.code03.Controller.SparepartTypeList;
 import com.example.dewa732corps.code03.R;
@@ -45,9 +48,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.app.Activity.RESULT_OK;
 
-public class SparepartForm extends Fragment {
+public class SparepartForm extends AppCompatActivity {
 
-    View dashboard;
     FrameLayout framelay;
     ImageView imageSparepart;
     Spinner dropdownType,dropdownPosisi,dropdownTempat;
@@ -68,14 +70,52 @@ public class SparepartForm extends Fragment {
 
     android.support.v7.widget.Toolbar toolbar;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-        dashboard= inflater.inflate(R.layout.menu2_sparepart_form,container,false);
-        toolbar = (android.support.v7.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle("Tambah Sparepart");
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.menu2_sparepart_form);
 
         setInit();
         setDropdown();
+//        dashboard= inflater.inflate(R.layout.menu2_sparepart_form,container,false);
+//        toolbar = (android.support.v7.widget.Toolbar) this.findViewById(R.id.toolbar);
+//        toolbar.setTitle("Tambah Sparepart");
+
+        Intent intent = getIntent();
+        Log.d("intentnya", String.valueOf(((Intent) intent).getStringExtra("id")));
+        if(!String.valueOf(intent.getStringExtra("id")).equals("null")) {
+            String id = intent.getStringExtra("id");
+            Log.d("id",id);
+            String nama = intent.getStringExtra("nama");
+            String merk = intent.getStringExtra("merk");
+            String buy = intent.getStringExtra("buy");
+            String sell = intent.getStringExtra("sell");
+
+            String posisi = intent.getStringExtra("posisi");
+            String tempat = intent.getStringExtra("tempat");
+            String tipe = intent.getStringExtra("tipe");
+
+            String nomor = intent.getStringExtra("nomor");
+            String minimalstock = intent.getStringExtra("minimalstock");
+            String stock = intent.getStringExtra("stock");
+            String gambar = intent.getStringExtra("gambar");
+//            Picasso.get().load("BASE_URL" + gambar).into(sparepartImg);
+
+            txtIdSparepart.setText(id);
+            txtNamaSparepart.setText(nama);
+            txtMinStock.setText(minimalstock);
+            txtStock.setText(sell);
+            txtHargaJual.setText(sell);
+            txtHargaBeli.setText(buy);
+            txtNomor.setText(nomor);
+            txtMerek.setText(merk);
+
+//            dropdownPosisi.set(posisi);
+//            dropdownTempat.setAdapter(tempat);
+//            dropdownType.setAdapter(tipe);
+//            etTipe.setText(tipe);
+//            buttonInsertImage.setVisibility(View.GONE);
+        }
+
         btnPilihGambar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +144,7 @@ public class SparepartForm extends Fragment {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 selectedId = listIdType.get(position);
                 //String selected = parentView.getItemAtPosition(position).toString();
-                Toast.makeText(getContext(), "Choose " + selectedId, Toast.LENGTH_SHORT).show();
+                Toast.makeText(SparepartForm.this, "Choose " + selectedId, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -113,8 +153,6 @@ public class SparepartForm extends Fragment {
             }
 
         });
-
-        return dashboard;
     }
 
     private int formChecking(){
@@ -182,25 +220,25 @@ public class SparepartForm extends Fragment {
 
 
         //depan itu nama form
-        dropdownType = dashboard.findViewById(R.id.dropdownType);
-        dropdownPosisi = dashboard.findViewById(R.id.dropdownPosisi);
-        dropdownTempat = dashboard.findViewById(R.id.dropdownTempat);
+        dropdownType = findViewById(R.id.dropdownType);
+        dropdownPosisi = findViewById(R.id.dropdownPosisi);
+        dropdownTempat = findViewById(R.id.dropdownTempat);
 
-        txtIdSparepart = dashboard.findViewById(R.id.txtIdSparepart);
-        txtNamaSparepart = dashboard.findViewById(R.id.txtNamaSparepart);
-        txtHargaBeli = dashboard.findViewById(R.id.txtHargaBeli);
-        txtHargaJual = dashboard.findViewById(R.id.txtHargaJual);
-        txtNomor = dashboard.findViewById(R.id.txtNomor);
-        txtMinStock =dashboard.findViewById(R.id.txtMinStock);
-        txtStock =dashboard.findViewById(R.id.txtStock);
-        txtMerek = dashboard.findViewById(R.id.txtMerek);
+        txtIdSparepart = findViewById(R.id.txtIdSparepart);
+        txtNamaSparepart = findViewById(R.id.txtNamaSparepart);
+        txtHargaBeli = findViewById(R.id.txtHargaBeli);
+        txtHargaJual = findViewById(R.id.txtHargaJual);
+        txtNomor = findViewById(R.id.txtNomor);
+        txtMinStock = findViewById(R.id.txtMinStock);
+        txtStock = findViewById(R.id.txtStock);
+        txtMerek =  findViewById(R.id.txtMerek);
 
 
-        imageSparepart = dashboard.findViewById(R.id.imageSparepart);
+        imageSparepart = findViewById(R.id.imageSparepart);
 
-        btnPilihGambar = dashboard.findViewById(R.id.btnPilihGambar);
-        btnSaveSparepart = dashboard.findViewById(R.id.btnSaveSparepart);
-        btnCancelSparepart = dashboard.findViewById(R.id.btnCancelSparepart);
+        btnPilihGambar = findViewById(R.id.btnPilihGambar);
+        btnSaveSparepart = findViewById(R.id.btnSaveSparepart);
+        btnCancelSparepart = findViewById(R.id.btnCancelSparepart);
     }
 
     @Override
@@ -215,7 +253,7 @@ public class SparepartForm extends Fragment {
 
             try {
 
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), FilePathUri);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), FilePathUri);
                 ImageBitmap=bitmap;
                 imageSparepart.setImageBitmap(bitmap);
 
@@ -237,12 +275,12 @@ public class SparepartForm extends Fragment {
         listTempat.add("DUS");
         listTempat.add("KAYU");
 
-        ArrayAdapter<String> adapterPosisi = new ArrayAdapter<>(getContext(),
+        ArrayAdapter<String> adapterPosisi = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item
                 , listPosisi);
         dropdownPosisi.setAdapter(adapterPosisi);
 
-        ArrayAdapter<String> adapterTempat = new ArrayAdapter<>(getContext(),
+        ArrayAdapter<String> adapterTempat = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item
                 , listTempat);
         dropdownTempat.setAdapter(adapterTempat);
@@ -267,7 +305,7 @@ public class SparepartForm extends Fragment {
 
                     }
 
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(SparepartForm.this,
                             android.R.layout.simple_spinner_dropdown_item
                             , listNameType);
                     dropdownType.setAdapter(adapter);
@@ -349,9 +387,6 @@ public class SparepartForm extends Fragment {
                 RequestBody.create(
                         MediaType.parse("multipart/form-data"), txtStock.getText().toString());
 
-
-
-
         MultipartBody.Part body = MultipartBody.Part.createFormData("image_sparepart", "image.jpg", requestFile);
 
 //        Call<ResponseBody> call = retrofitInterface.updateImageSparepart(body,requestId);
@@ -414,7 +449,7 @@ public class SparepartForm extends Fragment {
 
                 } else {
                     Log.d( "onResponse: ",response.message());
-                    Toast.makeText(getContext(), "Gagal", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SparepartForm.this, "Gagal", Toast.LENGTH_SHORT).show();
 
 //                    ResponseBody errorBody = response.errorBody();
 //
