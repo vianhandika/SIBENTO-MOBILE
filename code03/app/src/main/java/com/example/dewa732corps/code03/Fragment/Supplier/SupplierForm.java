@@ -35,7 +35,7 @@ public class SupplierForm extends Fragment {
     android.support.v7.widget.Toolbar toolbar;
     EditText txtNameSupplier,txtAddressSupplier,txtPhoneNumberSupplier;
 
-    public static final String URL = "https://sibento.yafetrakan.com/api/";
+    public static final String URL = "http://10.53.12.230/api/";
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);

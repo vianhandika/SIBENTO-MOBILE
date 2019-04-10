@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.dewa732corps.code03.Controller.SessionController;
 import com.example.dewa732corps.code03.Fragment.Kendaraan.KendaraanTampil;
 import com.example.dewa732corps.code03.Fragment.Pelanggan.PelangganTampil;
 import com.example.dewa732corps.code03.Fragment.Sales.SalesTampil;
@@ -116,6 +117,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_ubahpassword) {
             getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new UbahPassword()).commit();
         } else if (id == R.id.nav_logout) {
+            SessionController session = new SessionController(this);
+            session.logoutUser();
 //            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new ListSparepartFragment()).commit();
         }
 

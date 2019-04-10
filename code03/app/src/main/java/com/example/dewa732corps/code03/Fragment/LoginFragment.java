@@ -83,7 +83,7 @@ public class LoginFragment extends Fragment {
             progressDialog.show();
 
             Retrofit retrofit= new retrofit2.Retrofit.Builder()
-                    .baseUrl("https://sibento.yafetrakan.com/api/")
+                    .baseUrl("http://10.53.12.230/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 

@@ -92,6 +92,8 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
                 intent.putExtra("merk", data.getBrand());
                 intent.putExtra("buy", data.getBuyPrice());
                 intent.putExtra("sell", data.getSellPrice());
+                intent.putExtra("gambar", data.getImage());
+
 
                 intent.putExtra("posisi", data.getPlacementPosition());
                 intent.putExtra("tempat", data.getPlacementPlace());
@@ -108,7 +110,7 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
             @Override
             public void onClick(View v) {
                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                        .baseUrl("https://sibento.yafetrakan.com/api/")
+                        .baseUrl("http://10.53.12.230/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
