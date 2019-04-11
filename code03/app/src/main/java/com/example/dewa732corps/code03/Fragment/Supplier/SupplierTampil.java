@@ -1,5 +1,7 @@
 package com.example.dewa732corps.code03.Fragment.Supplier;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,7 +22,6 @@ import com.example.dewa732corps.code03.Controller.ApiClient;
 import com.example.dewa732corps.code03.Controller.SessionController;
 import com.example.dewa732corps.code03.Controller.SparepartList;
 import com.example.dewa732corps.code03.Controller.SupplierList;
-import com.example.dewa732corps.code03.Fragment.Sparepart.SparepartForm;
 import com.example.dewa732corps.code03.R;
 
 import java.util.ArrayList;
@@ -37,27 +38,19 @@ public class SupplierTampil extends Fragment {
     View dashboard;
     FrameLayout framelay;
     Button btnTambahSupplier;
+    android.support.v7.widget.Toolbar toolbar;
+
     private RecyclerView rview;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layout;
     private List<SupplierList> supplierLists;
-    android.support.v7.widget.Toolbar toolbar;
+
+    SessionController session;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
         dashboard= inflater.inflate(R.layout.menu2_supplier_tampil,container,false);
         setinit();
-
-        Button btnAddSupplier = dashboard.findViewById(R.id.btnAddSupplier);
-
-        btnAddSupplier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.framelay, new SupplierForm());
-                transaction.commit();
-            }
-        });
 
         rview = dashboard.findViewById(R.id.recyclerViewSupplier);
         rview.setHasFixedSize(true);
@@ -66,8 +59,11 @@ public class SupplierTampil extends Fragment {
 
         supplierLists = new ArrayList<>();
 
+        session = new SessionController(getContext());
+        session.checkLogin();
+
         Retrofit retrofit= new retrofit2.Retrofit.Builder()
-                .baseUrl("http://10.53.12.230/api/")
+                .baseUrl("https://sibento.yafetrakan.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -97,16 +93,16 @@ public class SupplierTampil extends Fragment {
         });
         return dashboard;
     }
+
     public void setinit(){
         toolbar = (android.support.v7.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Manajemen Supplier");
-        Button btnAddSparepart = dashboard.findViewById(R.id.btnAddSupplier);
-        btnAddSparepart.setOnClickListener(new View.OnClickListener() {
+        Button btnTambahSupplier = dashboard.findViewById(R.id.btnTambahSupplier);
+        btnTambahSupplier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.framelay, new SupplierTampil());
-                transaction.commit();
+                Intent intent = new Intent(getContext(), SupplierForm.class);
+                startActivity(intent);
             }
         });
     }

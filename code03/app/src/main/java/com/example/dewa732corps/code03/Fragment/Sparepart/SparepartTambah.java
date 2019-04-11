@@ -51,7 +51,7 @@ public class SparepartTambah extends Fragment {
 
 
 
-    public static final String URL = "http://10.53.12.230/api/";
+    public static final String URL = "https://sibento.yafetrakan.com/api/";
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);

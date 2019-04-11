@@ -61,7 +61,7 @@ public class SparepartTampil extends Fragment {
         session.checkLogin();
 
         Retrofit retrofit= new retrofit2.Retrofit.Builder()
-                .baseUrl("http://10.53.12.230/api/")
+                .baseUrl("https://sibento.yafetrakan.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

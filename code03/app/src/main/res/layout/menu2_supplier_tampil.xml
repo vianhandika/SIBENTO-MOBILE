@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btnAddSupplier"
+        android:id="@+id/btnTambahSupplier"
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"

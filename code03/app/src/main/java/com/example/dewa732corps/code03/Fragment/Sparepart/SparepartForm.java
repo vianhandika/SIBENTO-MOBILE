@@ -72,7 +72,7 @@ public class SparepartForm extends AppCompatActivity {
     private List<String> listTempat = new ArrayList<String>();
 
     private static final int INTENT_REQUEST_CODE = 100;
-    public static final String URL = "http://10.53.12.230/api/";
+    public static final String URL = "https://sibento.yafetrakan.com/api/";
 
     android.support.v7.widget.Toolbar toolbar;
 

@@ -110,7 +110,7 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
             @Override
             public void onClick(View v) {
                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                        .baseUrl("http://10.53.12.230/api/")
+                        .baseUrl("https://sibento.yafetrakan.com/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -121,15 +121,15 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.code() == 201){
-                            Toast.makeText(context.getApplicationContext(), "Berhasil hapus data Sparepart", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context.getApplicationContext(), "BERHASIL MENGHAPUS DATA SPAREPART", Toast.LENGTH_SHORT).show();
                         }else{
-                            Toast.makeText(context.getApplicationContext(), "Gagal hapus data Sparepart", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context.getApplicationContext(), "GAGAL MENGHAPUS DATA SPAREPART", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(context.getApplicationContext(), "Gagal hapus data Sparepart", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context.getApplicationContext(), "GAGAL HAPUS DATA SPAREPART", Toast.LENGTH_SHORT).show();
                     }
                 });
                 SparepartBundle.remove(ifinal);

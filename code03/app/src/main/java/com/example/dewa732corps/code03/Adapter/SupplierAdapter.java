@@ -97,7 +97,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.MyView
             @Override
             public void onClick(View v) {
                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                        .baseUrl("http://10.53.12.230/api/")
+                        .baseUrl("https://sibento.yafetrakan.com/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -116,7 +116,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.MyView
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(context.getApplicationContext(), "GAGAL MENGHAPUS DATA SUPPLIER", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context.getApplicationContext(), "GAGAL HAPUS DATA SUPPLIER", Toast.LENGTH_SHORT).show();
                     }
                 });
                 SupplierBundle.remove(ifinal);
