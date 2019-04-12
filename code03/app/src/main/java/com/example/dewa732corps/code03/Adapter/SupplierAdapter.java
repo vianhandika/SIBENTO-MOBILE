@@ -116,7 +116,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.MyView
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(context.getApplicationContext(), "GAGAL MENGHAPUS DATA SUPPLIER", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context.getApplicationContext(), "GAGAL HAPUS DATA SUPPLIER", Toast.LENGTH_SHORT).show();
                     }
                 });
                 SupplierBundle.remove(ifinal);

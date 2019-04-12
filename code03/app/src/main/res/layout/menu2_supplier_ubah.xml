@@ -11,7 +11,6 @@
 
 
     <TextView
-        android:id="@+id/textUbahDataSparepart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -20,7 +19,6 @@
         android:textSize="25dp"/>
 
     <TextView
-        android:id="@+id/textNamaSupplier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -28,7 +26,6 @@
         android:text="Nama"/>
 
     <EditText
-        android:id="@+id/editTextSupplierNama"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
@@ -37,7 +34,6 @@
         android:textAlignment="center"/>
 
     <TextView
-        android:id="@+id/textSupplierAlamat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -45,7 +41,6 @@
         android:text="Alamat"/>
 
     <EditText
-        android:id="@+id/editTextSupplierAlamat"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
@@ -54,7 +49,6 @@
         android:textAlignment="center"/>
 
     <TextView
-        android:id="@+id/textSupplierNoTelp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -62,7 +56,6 @@
         android:text="Nomor Telepon"/>
 
     <EditText
-        android:id="@+id/editTextSupplierNoTelp"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
@@ -71,7 +64,6 @@
         android:textAlignment="center"/>
 
     <Button
-        android:id="@+id/btnTambahSupplier"
         android:layout_width="130dp"
         android:layout_height="30dp"
         android:layout_marginTop="20dp"
@@ -80,7 +72,6 @@
         android:text="SIMPAN"/>
 
     <Button
-        android:id="@+id/btnBatalSupplier"
         android:layout_width="130dp"
         android:layout_height="30dp"
         android:layout_marginTop="-30dp"

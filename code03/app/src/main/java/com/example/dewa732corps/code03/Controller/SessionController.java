@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 
+import com.example.dewa732corps.code03.Main2Activity;
 import com.example.dewa732corps.code03.MainActivity;
 
 import java.util.HashMap;
@@ -72,9 +73,11 @@ public class SessionController {
         editor.clear();
         editor.commit();
 
-        Intent i = new Intent(context, MainActivity.class);
+        Intent i = new Intent(context, Main2Activity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
     }
+
+
 }

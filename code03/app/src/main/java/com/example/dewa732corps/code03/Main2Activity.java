@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.dewa732corps.code03.Controller.SessionController;
 import com.example.dewa732corps.code03.Fragment.BerandaFragment;
+import com.example.dewa732corps.code03.Fragment.CekServiceFragment;
+import com.example.dewa732corps.code03.Fragment.ListSparepartFragment;
 import com.example.dewa732corps.code03.Fragment.LoginFragment;
 
 public class Main2Activity extends AppCompatActivity {
@@ -49,14 +51,14 @@ public class Main2Activity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new BerandaFragment()).commit();
                     return true;
                 case R.id.nav_listsparepart:
-                    mTextMessage.setText("List Sparepart");
+                    getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new ListSparepartFragment()).commit();
                     return true;
                 case R.id.nav_panelpegawai:
                     getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new LoginFragment()).commit();
 //                    mTextMessage.setText("Panel Pegawai");
                     return true;
                 case R.id.nav_pengecekanstatusservice:
-                    mTextMessage.setText("Pengecekan Status Service");
+                    getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new CekServiceFragment()).commit();
                     return true;
             }
             return false;
