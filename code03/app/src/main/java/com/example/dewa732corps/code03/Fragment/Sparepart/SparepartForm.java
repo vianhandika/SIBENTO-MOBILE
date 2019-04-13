@@ -1,6 +1,7 @@
 package com.example.dewa732corps.code03.Fragment.Sparepart;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -63,6 +64,7 @@ public class SparepartForm extends AppCompatActivity {
     Spinner dropdownType,dropdownPosisi,dropdownTempat;
     Button btnPilihGambar, btnSaveSparepart,btnCancelSparepart;
     EditText txtIdSparepart,txtNamaSparepart,txtMinStock,txtStock,txtHargaJual,txtHargaBeli,txtNomor,txtMerek;
+    ProgressDialog mProgress;
 
     private int simpan=0;
     private int editMode=0;
@@ -87,6 +89,8 @@ public class SparepartForm extends AppCompatActivity {
 
         setInit();
         setDropdown();
+        mProgress = new ProgressDialog(this);
+        mProgress.setMessage("Loading Data");
 
 
 
@@ -176,6 +180,7 @@ public class SparepartForm extends AppCompatActivity {
 
 //        Log.d("Id Sparepart", String.valueOf(((Intent) intent).getStringExtra("id")));
         if(!String.valueOf(intent.getStringExtra("id")).equals("null")) {
+
             String id = intent.getStringExtra("id");
             //Log.d("id",id);
             String nama = intent.getStringExtra("nama");
@@ -208,7 +213,7 @@ public class SparepartForm extends AppCompatActivity {
             dropdownPosisi.setSelection(getIndex(dropdownPosisi, posisi));
             dropdownTempat.setSelection(getIndex(dropdownTempat, tempat));
             editMode = 1; //pengubahan menjadi mode edit
-
+//            mProgress.hide();
         }
     }
     private int formChecking(){ //Fungsi Check Form
@@ -344,6 +349,7 @@ public class SparepartForm extends AppCompatActivity {
                     Intent intent = getIntent();
 
                     if(!String.valueOf(intent.getStringExtra("id")).equals("null")) { //pengecekan ada atau tidaknya parsing data dari aktivity sebelumnya
+//                        mProgress.show();
                         getPutExtra();
                     }
 

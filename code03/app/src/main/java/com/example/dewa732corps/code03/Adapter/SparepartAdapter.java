@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,10 +35,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyViewHolder>{
     private List<Sparepart> SparepartBundle = new ArrayList<>();
+    private List<Sparepart> SparepartListFilter = new ArrayList<>();
+
     private Context context;
+    ProgressDialog mProgress;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView Name, Type, Brand, Stock;
@@ -61,6 +67,9 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
     public SparepartAdapter(List<Sparepart> SparepartBundle , Context context) {
         this.SparepartBundle = SparepartBundle;
         this.context = context;
+        this.SparepartListFilter = SparepartBundle;
+        mProgress = new ProgressDialog(context);
+        mProgress.setMessage("Loading");
     }
 
     @NonNull
@@ -72,10 +81,66 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
         return new SparepartAdapter.MyViewHolder(v);
     }
 
+    public void filter(String charText) {
+        Log.d( "filter: ", charText);
+
+        charText = charText.toLowerCase(Locale.getDefault());
+        SparepartListFilter.clear();
+        if (charText.length() == 0) {
+            SparepartListFilter.addAll(SparepartBundle);
+        }
+        else
+        {
+            for (Sparepart obj : SparepartBundle) {
+                if (obj.getName().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    SparepartListFilter.add(obj);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    SparepartListFilter = SparepartBundle;
+                } else {
+                    List<Sparepart> filteredList = new ArrayList<>();
+                    for (Sparepart obj : SparepartBundle) {
+
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        if (obj.getName().toLowerCase().contains(charString.toLowerCase()) || obj.getId().contains(charSequence)) {
+                            filteredList.add(obj);
+                        }
+                    }
+
+                    SparepartListFilter = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = SparepartListFilter;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                SparepartListFilter = (ArrayList<Sparepart>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
     @Override
     public void onBindViewHolder(@NonNull SparepartAdapter.MyViewHolder vh, final int i) {
 
-        final Sparepart data = SparepartBundle.get(i);
+//        final Sparepart data = SparepartBundle.get(i);
+        final Sparepart data = SparepartListFilter.get(i);
+
         final int ifinal = vh.getAdapterPosition();
         vh.Name.setText(data.getName());
         vh.Type.setText(data.getId());
@@ -109,6 +174,8 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
         vh.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                mProgress.show();
                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
                         .baseUrl("https://sibento.yafetrakan.com/api/")
                         .addConverterFactory(GsonConverterFactory.create())
@@ -122,14 +189,17 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.code() == 201){
                             Toast.makeText(context.getApplicationContext(), "BERHASIL MENGHAPUS DATA SPAREPART", Toast.LENGTH_SHORT).show();
+                            mProgress.hide();
                         }else{
                             Toast.makeText(context.getApplicationContext(), "GAGAL MENGHAPUS DATA SPAREPART", Toast.LENGTH_SHORT).show();
+                            mProgress.hide();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         Toast.makeText(context.getApplicationContext(), "GAGAL HAPUS DATA SPAREPART", Toast.LENGTH_SHORT).show();
+                        mProgress.hide();
                     }
                 });
                 SparepartBundle.remove(ifinal);
@@ -141,6 +211,7 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
 
     @Override
     public int getItemCount() {
-        return SparepartBundle.size();
+//        return SparepartBundle.size();
+        return SparepartListFilter.size();
     }
 }
