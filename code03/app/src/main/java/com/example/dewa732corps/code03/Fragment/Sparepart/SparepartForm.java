@@ -33,12 +33,16 @@ import com.example.dewa732corps.code03.Fragment.Supplier.SupplierTampil;
 import com.example.dewa732corps.code03.MainActivity;
 import com.example.dewa732corps.code03.R;
 import com.google.gson.Gson;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -60,7 +64,8 @@ public class SparepartForm extends AppCompatActivity {
     Button btnPilihGambar, btnSaveSparepart,btnCancelSparepart;
     EditText txtIdSparepart,txtNamaSparepart,txtMinStock,txtStock,txtHargaJual,txtHargaBeli,txtNomor,txtMerek;
 
-    private int simpan=-1;
+    private int simpan=0;
+    private int editMode=0;
 
     public Bitmap ImageBitmap;
     int Image_Request_Code = 1;
@@ -76,72 +81,14 @@ public class SparepartForm extends AppCompatActivity {
 
     android.support.v7.widget.Toolbar toolbar;
 
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {  //Fungsi didalamnya dijalankan pertama kali
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu2_sparepart_form);
 
         setInit();
         setDropdown();
-//        dashboard= inflater.inflate(R.layout.menu2_sparepart_form,container,false);
-//        toolbar = (android.support.v7.widget.Toolbar) this.findViewById(R.id.toolbar);
-//        toolbar.setTitle("Tambah Sparepart");
-
-        setInit();
-        simpan = getIntent().getIntExtra("simpan", 0);
-
-        Intent intent = getIntent();
-        Log.d("intentnya", String.valueOf(((Intent) intent).getStringExtra("id")));
-        if(!String.valueOf(intent.getStringExtra("id")).equals("null")) {
-            String id = intent.getStringExtra("id");
-            Log.d("id",id);
-            String nama = intent.getStringExtra("nama");
-            String merk = intent.getStringExtra("merk");
-            String buy = intent.getStringExtra("buy");
-            String sell = intent.getStringExtra("sell");
-
-            String posisi = intent.getStringExtra("posisi");
-            String tempat = intent.getStringExtra("tempat");
-            String tipe = intent.getStringExtra("tipe");
-
-            String nomor = intent.getStringExtra("nomor");
-            String minimalstock = intent.getStringExtra("minimalstock");
-            String stock = intent.getStringExtra("stock");
-            String gambar = intent.getStringExtra("gambar");
-            Log.d("gambar","http://10.53.12.230/"+gambar);
-            Picasso.get().load("http://10.53.12.230/" + gambar).into(imageSparepart);
-
-            if(simpan <= 0){
-                txtIdSparepart.setText(id);
-                txtNamaSparepart.setText(nama);
-                txtMinStock.setText(minimalstock);
-                txtStock.setText(sell);
-                txtHargaJual.setText(sell);
-                txtHargaBeli.setText(buy);
-                txtNomor.setText(nomor);
-                txtMerek.setText(merk);
-
-                simpan=-1;
-            }
-            else
-            {
-                txtIdSparepart.setText(getIntent().getStringExtra("id"));
-                txtNamaSparepart.setText(getIntent().getStringExtra("nama"));
-                txtMinStock.setText(getIntent().getStringExtra("minimalstock"));
-                txtStock.setText(getIntent().getStringExtra("stock"));
-                txtHargaJual.setText(getIntent().getStringExtra("sell"));
-                txtHargaBeli.setText(getIntent().getStringExtra("buy"));
-                txtNomor.setText(getIntent().getStringExtra("nomor"));
-                txtMerek.setText(getIntent().getStringExtra("merk"));
-            }
 
 
-
-//            dropdownPosisi.set(posisi);
-//            dropdownTempat.setAdapter(tempat);
-//            dropdownType.setAdapter(tipe);
-//            etTipe.setText(tipe);
-//            buttonInsertImage.setVisibility(View.GONE);
-        }
 
         btnPilihGambar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,31 +106,112 @@ public class SparepartForm extends AppCompatActivity {
 
         btnSaveSparepart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if(formChecking()==0){
+            public void onClick(View v) { //Listener button btnSaveSparepart saat di klik
+                if(formChecking()==0 && editMode ==0){ //kalau pengecekan form benar dan tidak pada mode edit
                     addSparepart();
+                }
+                else if (formChecking()==0 && editMode ==1){ //kalau pengecekan form benar dan pada mode edit
+                    editSparepart();
                 }
             }
         });
 
-        dropdownType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        dropdownType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown tipe sparepart saat dipilih
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                selectedId = listIdType.get(position);
-                //String selected = parentView.getItemAtPosition(position).toString();
-                Toast.makeText(SparepartForm.this, "Choose " + selectedId, Toast.LENGTH_SHORT).show();
+                selectedId = listIdType.get(position); //Mendapatkan id dari dropdown yang dipilih
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
+
             }
 
         });
+
+
     }
 
-    private int formChecking(){
-        //Fungsi Check Form
+    public void setInit(){ //pendeklarasian objek-objek yang ada di layout
+
+        //depan itu nama form
+        dropdownType = findViewById(R.id.dropdownType);
+        dropdownPosisi = findViewById(R.id.dropdownPosisi);
+        dropdownTempat = findViewById(R.id.dropdownTempat);
+
+        txtIdSparepart = findViewById(R.id.txtIdSparepart);
+        txtNamaSparepart = findViewById(R.id.txtNamaSparepart);
+        txtHargaBeli = findViewById(R.id.txtHargaBeli);
+        txtHargaJual = findViewById(R.id.txtHargaJual);
+        txtNomor = findViewById(R.id.txtNomor);
+        txtMinStock = findViewById(R.id.txtMinStock);
+        txtStock = findViewById(R.id.txtStock);
+        txtMerek =  findViewById(R.id.txtMerek);
+
+
+        imageSparepart = findViewById(R.id.imageSparepart);
+
+        btnPilihGambar = findViewById(R.id.btnPilihGambar);
+        btnSaveSparepart = findViewById(R.id.btnSaveSparepart);
+        btnCancelSparepart = findViewById(R.id.btnCancelSparepart);
+
+
+    }
+
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+    public void getPutExtra(){ // mendapatkan parsing data dari activity sebelumnya beserta pengesetan form sesuai parsing data
+        Intent intent = getIntent();
+        simpan = getIntent().getIntExtra("simpan", 0);
+
+//        Log.d("Id Sparepart", String.valueOf(((Intent) intent).getStringExtra("id")));
+        if(!String.valueOf(intent.getStringExtra("id")).equals("null")) {
+            String id = intent.getStringExtra("id");
+            //Log.d("id",id);
+            String nama = intent.getStringExtra("nama");
+            String merk = intent.getStringExtra("merk");
+            String buy = intent.getStringExtra("buy");
+            String sell = intent.getStringExtra("sell");
+
+            String posisi = intent.getStringExtra("posisi");
+            String tempat = intent.getStringExtra("tempat");
+            String tipe = intent.getStringExtra("tipe");
+
+            String nomor = intent.getStringExtra("nomor");
+            String minimalstock = intent.getStringExtra("minimalstock");
+            String stock = intent.getStringExtra("stock");
+            String gambar = intent.getStringExtra("gambar");
+//            Log.d("gambar","https://sibento.yafetrakan.com/"+gambar);
+            Picasso.get().load("https://sibento.yafetrakan.com/"+gambar).memoryPolicy(MemoryPolicy.NO_CACHE) .networkPolicy(NetworkPolicy.NO_CACHE).into(imageSparepart);
+
+            txtIdSparepart.setText(id);
+            txtIdSparepart.setEnabled(false);
+            txtNamaSparepart.setText(nama);
+            txtMinStock.setText(minimalstock);
+            txtStock.setText(sell);
+            txtHargaJual.setText(sell);
+            txtHargaBeli.setText(buy);
+            txtNomor.setText(nomor);
+            txtMerek.setText(merk);
+
+            dropdownType.setSelection(getIndex(dropdownType, tipe));
+            dropdownPosisi.setSelection(getIndex(dropdownPosisi, posisi));
+            dropdownTempat.setSelection(getIndex(dropdownTempat, tempat));
+            editMode = 1; //pengubahan menjadi mode edit
+
+        }
+    }
+    private int formChecking(){ //Fungsi Check Form
 
         String idSparepart=txtIdSparepart.getText().toString(),
                 namaSparepart=txtNamaSparepart .getText().toString(),
@@ -243,33 +271,10 @@ public class SparepartForm extends AppCompatActivity {
         return 0;
     }
 
-    public void setInit(){
 
-
-        //depan itu nama form
-        dropdownType = findViewById(R.id.dropdownType);
-        dropdownPosisi = findViewById(R.id.dropdownPosisi);
-        dropdownTempat = findViewById(R.id.dropdownTempat);
-
-        txtIdSparepart = findViewById(R.id.txtIdSparepart);
-        txtNamaSparepart = findViewById(R.id.txtNamaSparepart);
-        txtHargaBeli = findViewById(R.id.txtHargaBeli);
-        txtHargaJual = findViewById(R.id.txtHargaJual);
-        txtNomor = findViewById(R.id.txtNomor);
-        txtMinStock = findViewById(R.id.txtMinStock);
-        txtStock = findViewById(R.id.txtStock);
-        txtMerek =  findViewById(R.id.txtMerek);
-
-
-        imageSparepart = findViewById(R.id.imageSparepart);
-
-        btnPilihGambar = findViewById(R.id.btnPilihGambar);
-        btnSaveSparepart = findViewById(R.id.btnSaveSparepart);
-        btnCancelSparepart = findViewById(R.id.btnCancelSparepart);
-    }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) { // Mendapatkan data gambar yang dipilih
 
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -291,7 +296,7 @@ public class SparepartForm extends AppCompatActivity {
         }
     }
 
-    public void setDropdown(){
+    public void setDropdown(){ // Mengeset dropdown dari data pemanggilan API server
 
         listPosisi.add("DPN");
         listPosisi.add("TGH");
@@ -329,13 +334,19 @@ public class SparepartForm extends AppCompatActivity {
                         listNameType.add(nameType);
                         listIdType.add(idType);
 
-
                     }
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(SparepartForm.this,
                             android.R.layout.simple_spinner_dropdown_item
                             , listNameType);
                     dropdownType.setAdapter(adapter);
+
+                    Intent intent = getIntent();
+
+                    if(!String.valueOf(intent.getStringExtra("id")).equals("null")) { //pengecekan ada atau tidaknya parsing data dari aktivity sebelumnya
+                        getPutExtra();
+                    }
+
                 }
 
             }
@@ -348,7 +359,7 @@ public class SparepartForm extends AppCompatActivity {
         });
     }
 
-    private void addSparepart() {
+    private void addSparepart() { // Fungsi menambahkan sparepart
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -363,15 +374,7 @@ public class SparepartForm extends AppCompatActivity {
             byte[] data =baos.toByteArray();
 
             String txtplacement = dropdownPosisi.getSelectedItem().toString()+'-'+dropdownTempat.getSelectedItem().toString()+'-'+txtNomor.getText().toString();
-            Log.d("id_sparepart: ",txtIdSparepart.getText().toString());
-            Log.d("name_sparepart: ",txtNamaSparepart.getText().toString());
-            Log.d("brand_sparepart: ",txtMerek.getText().toString());
-            Log.d("id_sparepart_type: ",selectedId);
-            Log.d("buy_price: ",txtHargaBeli.getText().toString());
-            Log.d("sell_price: ",txtHargaJual.getText().toString());
-            Log.d("placement: ",txtplacement);
-            Log.d("min_stock: ",txtMinStock.toString());
-            Log.d("stock: ",txtStock.toString());
+
 
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), data);
 
@@ -443,18 +446,6 @@ public class SparepartForm extends AppCompatActivity {
                         Log.d( "onResponse: ",response.message());
                         Toast.makeText(SparepartForm.this, "Gagal", Toast.LENGTH_SHORT).show();
 
-//                    ResponseBody errorBody = response.errorBody();
-//
-//                    Gson gson = new Gson();
-//
-//                    try {
-//
-//                        Response errorResponse = gson.fromJson(errorBody.string(), Response.class);
-////                        Snackbar.make(findViewById(R.id.content), errorResponse.getMessage(),Snackbar.LENGTH_SHORT).show();
-//
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
                     }
                 }
 
@@ -470,5 +461,115 @@ public class SparepartForm extends AppCompatActivity {
         else{
             Toast.makeText(SparepartForm.this, "Foto harus ditambahkan!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void editSparepart() { // Fungsi mengedit Data sparepart
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiClient retrofitInterface = retrofit.create(ApiClient.class);
+
+
+        String txtplacement = dropdownPosisi.getSelectedItem().toString()+'-'+dropdownTempat.getSelectedItem().toString()+'-'+txtNomor.getText().toString();
+
+
+
+        String id_sparepart = txtIdSparepart.getText().toString();
+        String name_sparepart = txtNamaSparepart.getText().toString();
+        String brand_sparepart = txtMerek.getText().toString();
+        Integer id_sparepart_type = Integer.parseInt(selectedId);
+        Integer buy_price = Integer.parseInt(txtHargaBeli.getText().toString());
+        Integer sell_price = Integer.parseInt(txtHargaJual.getText().toString());
+        String placement = txtplacement;
+        Integer minimal_stock_sparepart = Integer.parseInt(txtMinStock.getText().toString());
+        Integer stock_sparepart = Integer.parseInt(txtStock.getText().toString());
+
+
+        Call<ResponseBody> call = retrofitInterface.editSparepart(id_sparepart,name_sparepart,brand_sparepart,stock_sparepart,minimal_stock_sparepart,buy_price,sell_price,placement,id_sparepart_type);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+
+
+                if (response.isSuccessful()) {
+                    if(ImageBitmap!=null) { // kalau ada image yang dipilih menandakan mengupdate image sparepart juga
+//                        Log.d("Masuk Image","true");
+                        editImageSparepart();
+                    }
+                    ResponseBody responseBody = response.body();
+                    Log.d("SUKSES UPDATE DATA",responseBody.toString());
+                    Toast.makeText(SparepartForm.this, "SUKSES UPDATE SPAREPART", Toast.LENGTH_SHORT).show();
+                    final Intent intent = new Intent(SparepartForm.this, MainActivity.class);
+                    startActivity(intent);
+
+                } else {
+                    Log.d( "onResponse: ",response.message());
+                    Toast.makeText(SparepartForm.this, "Gagal Update Data", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("onFailure: ",t.toString());
+
+//                mProgressBar.setVisibility(View.GONE);
+//                Log.d(TAG, "onFailure: "+t.getLocalizedMessage());
+            }
+        });
+
+    }
+
+    private void editImageSparepart() { //Fungsi mengupdate gambar sparepart
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiClient retrofitInterface = retrofit.create(ApiClient.class);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageBitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] data =baos.toByteArray();
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), data);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("image_sparepart", "image.jpg", requestFile);
+
+        RequestBody id_sparepart =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), txtIdSparepart.getText().toString());
+
+
+
+        Call<ResponseBody> call = retrofitInterface.editImageSparepart(body,id_sparepart);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+
+
+                if (response.isSuccessful()) {
+
+                    ResponseBody responseBody = response.body();
+                    Log.d("SUKSES UPDATE IMAGE",responseBody.toString());
+                    Toast.makeText(SparepartForm.this, "SUKSES UPDATE IMAGE", Toast.LENGTH_SHORT).show();
+
+
+                } else {
+                    Log.d( "onResponse: ",response.message());
+                    Toast.makeText(SparepartForm.this, "Gagal Update Iamge", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("onFailure: ",t.toString());
+
+            }
+        });
+
     }
 }

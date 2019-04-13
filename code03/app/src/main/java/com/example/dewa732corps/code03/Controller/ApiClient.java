@@ -10,6 +10,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
@@ -24,12 +25,7 @@ public interface ApiClient {
     @GET("sparepart")
     Call<SparepartList> getSparepart();
 
-    @Multipart
-    @POST("sparepart/updateimage")
-    Call<ResponseBody> updateImageSparepart(
-            @Part MultipartBody.Part image_sparepart,
-            @Part("id_sparepart") RequestBody id_sparepart
-    );
+
 
     @Multipart
     @POST("sparepart")
@@ -44,6 +40,29 @@ public interface ApiClient {
             @Part("sell_price") RequestBody sell_price,
             @Part("placement") RequestBody placement,
             @Part("id_sparepart_type") RequestBody id_sparepart_type
+
+    );
+
+    @PATCH("sparepart/{id_sparepart}")
+    @FormUrlEncoded
+    Call<ResponseBody> editSparepart(
+            @Path("id_sparepart") String id_sparepart,
+            @Field("name_sparepart") String name_sparepart,
+            @Field("brand_sparepart") String brand_sparepart,
+            @Field("stock_sparepart") Integer stock_sparepart,
+            @Field("minimal_stock_sparepart") Integer minimal_stock_sparepart,
+            @Field("buy_price") Integer buy_price,
+            @Field("sell_price") Integer sell_price,
+            @Field("placement") String placement,
+            @Field("id_sparepart_type") Integer id_sparepart_type
+
+    );
+
+    @Multipart
+    @POST("sparepart/updateimage")
+    Call<ResponseBody> editImageSparepart(
+            @Part MultipartBody.Part image_sparepart,
+            @Part("id_sparepart") RequestBody id_sparepart
 
     );
 
