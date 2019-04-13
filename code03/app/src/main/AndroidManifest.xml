@@ -47,6 +47,10 @@
             android:name=".Fragment.Sparepart.SparepartForm">
 
         </activity>
+        <activity
+            android:name=".Fragment.Supplier.SupplierForm">
+
+        </activity>
     </application>
 
 </manifest>

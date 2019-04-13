@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.dewa732corps.code03.Controller.SessionController;
+import com.example.dewa732corps.code03.Fragment.BerandaFragment;
 import com.example.dewa732corps.code03.Fragment.Kendaraan.KendaraanTampil;
 import com.example.dewa732corps.code03.Fragment.Pelanggan.PelangganTampil;
 import com.example.dewa732corps.code03.Fragment.Sales.SalesTampil;
@@ -41,6 +43,20 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         toolbar.setTitle("DASHBOARD");
 
+        getPutExtra();
+
+    }
+
+    public void getPutExtra() {
+        switch (getIntent().getIntExtra("menuBefore",0)){
+            case 0: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SparepartTampil()).commit();Log.d("getPutExtra: ","0");
+                break;
+            case 1: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SparepartTampil()).commit();Log.d("getPutExtra: ","1");
+                break;
+            case 2: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SupplierTampil()).commit();Log.d("getPutExtra: ","2");
+                break;
+//  case 3: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new BerandaFragment()).commit();
+        }
     }
 
     @Override

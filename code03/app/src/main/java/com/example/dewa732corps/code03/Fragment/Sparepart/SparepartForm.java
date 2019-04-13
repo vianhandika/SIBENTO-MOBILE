@@ -436,7 +436,7 @@ public class SparepartForm extends AppCompatActivity {
                         Log.d("SUKSES",responseBody.toString());
                         Toast.makeText(SparepartForm.this, "Sukses", Toast.LENGTH_SHORT).show();
                         final Intent intent = new Intent(SparepartForm.this, MainActivity.class);
-                        intent.putExtra("addDialog", 1);
+                        intent.putExtra("menuBefore", 1);
                         startActivity(intent);
 //                    mBtImageShow.setVisibility(View.VISIBLE);
 //                     mImageUrl = URL + responseBody.getPath();
@@ -500,9 +500,10 @@ public class SparepartForm extends AppCompatActivity {
                         editImageSparepart();
                     }
                     ResponseBody responseBody = response.body();
-                    Log.d("SUKSES UPDATE DATA",responseBody.toString());
+//                    Log.d("SUKSES UPDATE DATA",responseBody.toString());
                     Toast.makeText(SparepartForm.this, "SUKSES UPDATE SPAREPART", Toast.LENGTH_SHORT).show();
                     final Intent intent = new Intent(SparepartForm.this, MainActivity.class);
+                    intent.putExtra("menuBefore", 1);
                     startActivity(intent);
 
                 } else {
@@ -553,7 +554,7 @@ public class SparepartForm extends AppCompatActivity {
                 if (response.isSuccessful()) {
 
                     ResponseBody responseBody = response.body();
-                    Log.d("SUKSES UPDATE IMAGE",responseBody.toString());
+//                    Log.d("SUKSES UPDATE IMAGE",responseBody.toString());
                     Toast.makeText(SparepartForm.this, "SUKSES UPDATE IMAGE", Toast.LENGTH_SHORT).show();
 
 

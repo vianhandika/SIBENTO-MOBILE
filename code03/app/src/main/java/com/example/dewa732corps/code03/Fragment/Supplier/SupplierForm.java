@@ -200,7 +200,7 @@ public class SupplierForm extends AppCompatActivity {
                     Log.d("SUKSES", responseBody.toString());
                     Toast.makeText(SupplierForm.this, "Sukses", Toast.LENGTH_SHORT).show();
                     final Intent intent = new Intent(SupplierForm.this, MainActivity.class);
-                    intent.putExtra("addDialog", 1);
+                    intent.putExtra("menuBefore", 2);
                     startActivity(intent);
 //                    mBtImageShow.setVisibility(View.VISIBLE);
 //                     mImageUrl = URL + responseBody.getPath();
