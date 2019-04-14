@@ -25,18 +25,25 @@ import android.widget.Toast;
 
 import com.example.dewa732corps.code03.Controller.ApiClient;
 import com.example.dewa732corps.code03.Controller.RetrofitClient;
+import com.example.dewa732corps.code03.Controller.Sparepart;
+import com.example.dewa732corps.code03.Controller.SparepartType;
+import com.example.dewa732corps.code03.Controller.SparepartTypeList;
 import com.example.dewa732corps.code03.Controller.Supplier;
 import com.example.dewa732corps.code03.Fragment.Supplier.SupplierForm;
 import com.example.dewa732corps.code03.Fragment.Supplier.SupplierTampil;
 import com.example.dewa732corps.code03.MainActivity;
 import com.example.dewa732corps.code03.R;
 import com.google.gson.Gson;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -53,71 +60,80 @@ import static android.app.Activity.RESULT_OK;
 public class SupplierForm extends AppCompatActivity {
 
     FrameLayout framelay;
-    Spinner dropdownType,dropdownPosisi,dropdownTempat;
     Button btnSaveSupplier,btnCancelSupplier;
-    EditText txtNamaSupplier,txtAlamatSupplier,txtNoTelpSupplier;
+    EditText txtIdSupplier, txtNamaSupplier,txtAlamatSupplier,txtNoTelpSupplier;
 
-    private int simpan=-1;
+    private int simpan=0;
+    private int editMode=0;
 
-    public Bitmap ImageBitmap;
-    int Image_Request_Code = 1;
-    Uri FilePathUri,FilePathUri2;
+    String selectedId;
+    private List<String> listNameType = new ArrayList<String>();
+    private List<String> listIdType = new ArrayList<String>();
+    private List<String> listPosisi = new ArrayList<String>();
+    private List<String> listTempat = new ArrayList<String>();
 
     private static final int INTENT_REQUEST_CODE = 100;
     public static final String URL = "https://sibento.yafetrakan.com/api/";
 
     android.support.v7.widget.Toolbar toolbar;
 
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {  //Fungsi didalamnya dijalankan pertama kali
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu2_supplier_form);
 
         setInit();
-//        simpan = getIntent().getIntExtra("simpan", 0);
-//
-//        Intent intent = getIntent();
-//        Log.d("intentnya", String.valueOf(((Intent) intent).getStringExtra("id")));
-//        if(!String.valueOf(intent.getStringExtra("id")).equals("null")) {
-//            String id = intent.getStringExtra("id");
-//            String nama = intent.getStringExtra("nama");
-//            String alamat = intent.getStringExtra("alamat");
-//            String notelp = intent.getStringExtra("notelp");
-//
-//            if(simpan <= 0){
-//                txtNamaSupplier.setText(nama);
-//                txtAlamatSupplier.setText(alamat);
-//                txtNoTelpSupplier.setText(notelp);
-//
-//                simpan=-1;
-//            }
-//            else
-//            {
-//                txtNamaSupplier.setText(getIntent().getStringExtra("nama"));
-//                txtAlamatSupplier.setText(getIntent().getStringExtra("alamat"));
-//                txtNoTelpSupplier.setText(getIntent().getStringExtra("notelp"));
-//            }
-
-
-
-//            dropdownPosisi.set(posisi);
-//            dropdownTempat.setAdapter(tempat);
-//            dropdownType.setAdapter(tipe);
-//            etTipe.setText(tipe);
-//            buttonInsertImage.setVisibility(View.GONE);
-//        }
 
         btnSaveSupplier.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if(formChecking()==0){
+            public void onClick(View v) { //Listener button btnSaveSparepart saat di klik
+                if(formChecking()==0 && editMode ==0){ //kalau pengecekan form benar dan tidak pada mode edit
                     addSupplier();
+                }
+                else if (formChecking()==0 && editMode ==1){ //kalau pengecekan form benar dan pada mode edit
+                    editSupplier();
                 }
             }
         });
     }
 
-    private int formChecking(){
-        //Fungsi Check Form
+    public void setInit(){ //pendeklarasian objek-objek yang ada di layout
+
+        //depan itu nama form
+
+        txtNamaSupplier = findViewById(R.id.txtNamaSupplier);
+        txtAlamatSupplier = findViewById(R.id.txtAlamatSupplier);
+        txtNoTelpSupplier = findViewById(R.id.txtNoTelpSupplier);
+
+        btnSaveSupplier = findViewById(R.id.btnSaveSupplier);
+        btnCancelSupplier = findViewById(R.id.btnCancelSupplier);
+    }
+
+    public void getPutExtra(){ // mendapatkan parsing data dari activity sebelumnya beserta pengesetan form sesuai parsing data
+        Intent intent = getIntent();
+        simpan = getIntent().getIntExtra("simpan", 0);
+
+//        Log.d("Id Sparepart", String.valueOf(((Intent) intent).getStringExtra("id")));
+        if(!String.valueOf(intent.getStringExtra("id")).equals("null")) {
+
+            String id = intent.getStringExtra("id");
+            //Log.d("id",id);
+            String nama = intent.getStringExtra("nama");
+            String alamat = intent.getStringExtra("alamat");
+            String notelp = intent.getStringExtra("notelp");
+//            List<ListSales>
+
+//            Log.d("gambar","https://sibento.yafetrakan.com/"+gambar);
+
+            txtIdSupplier.setText(id);
+            txtNamaSupplier.setText(nama);
+            txtAlamatSupplier.setText(alamat);
+            txtNoTelpSupplier.setText(notelp);
+//            txtListSales.setList(sales);
+
+            editMode = 1; //pengubahan menjadi mode edit
+        }
+    }
+    private int formChecking(){ //Fungsi Check Form
 
         String  namaSupplier=txtNamaSupplier .getText().toString(),
                 alamatSupplier=txtAlamatSupplier  .getText().toString(),
@@ -143,20 +159,7 @@ public class SupplierForm extends AppCompatActivity {
         return 0;
     }
 
-    public void setInit(){
-
-
-        //depan itu nama form
-
-        txtNamaSupplier = findViewById(R.id.txtNamaSupplier);
-        txtAlamatSupplier = findViewById(R.id.txtAlamatSupplier);
-        txtNoTelpSupplier = findViewById(R.id.txtNoTelpSupplier);
-
-        btnSaveSupplier = findViewById(R.id.btnSaveSupplier);
-        btnCancelSupplier = findViewById(R.id.btnCancelSupplier);
-    }
-
-    private void addSupplier() {
+    private void addSupplier() { // Fungsi menambahkan supplier
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -164,11 +167,6 @@ public class SupplierForm extends AppCompatActivity {
                 .build();
 
         ApiClient retrofitInterface = retrofit.create(ApiClient.class);
-
-        Log.d("name_supplier: ", txtNamaSupplier.getText().toString());
-        Log.d("address_supplier: ", txtAlamatSupplier.getText().toString());
-        Log.d("phonenumber_supplier: ", txtNoTelpSupplier.getText().toString());
-
 
         RequestBody name_supplier =
                 RequestBody.create(
@@ -184,54 +182,88 @@ public class SupplierForm extends AppCompatActivity {
         RequestBody phonenumber_supplier =
                 RequestBody.create(
                         MediaType.parse("multipart/form-data"), txtNoTelpSupplier.getText().toString());
-//
 
         Call<ResponseBody> call = retrofitInterface.addSupplier(name_supplier, address_supplier, phonenumber_supplier);
 //        mProgressBar.setVisibility(View.VISIBLE);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
 
 //                mProgressBar.setVisibility(View.GONE);
 
-                if (response.isSuccessful()) {
+                    if (response.isSuccessful()) {
 
-                    ResponseBody responseBody = response.body();
-                    Log.d("SUKSES", responseBody.toString());
-                    Toast.makeText(SupplierForm.this, "Sukses", Toast.LENGTH_SHORT).show();
-                    final Intent intent = new Intent(SupplierForm.this, MainActivity.class);
-                    intent.putExtra("menuBefore", 2);
-                    startActivity(intent);
+                        ResponseBody responseBody = response.body();
+                        Log.d("SUKSES",responseBody.toString());
+                        Toast.makeText(SupplierForm.this, "Sukses", Toast.LENGTH_SHORT).show();
+                        final Intent intent = new Intent(SupplierForm.this, MainActivity.class);
+                        intent.putExtra("menuBefore", 1);
+                        startActivity(intent);
 //                    mBtImageShow.setVisibility(View.VISIBLE);
 //                     mImageUrl = URL + responseBody.getPath();
 //                    Snackbar.make(findViewById(R.id.content), responseBody.getMessage(),Snackbar.LENGTH_SHORT).show();
 
-                } else {
-                    Log.d("onResponse: ", response.message());
-                    Toast.makeText(SupplierForm.this, "Gagal", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Log.d( "onResponse: ",response.message());
+                        Toast.makeText(SupplierForm.this, "Gagal", Toast.LENGTH_SHORT).show();
 
-//                    ResponseBody errorBody = response.errorBody();
-//
-//                    Gson gson = new Gson();
-//
-//                    try {
-//
-//                        Response errorResponse = gson.fromJson(errorBody.string(), Response.class);
-////                        Snackbar.make(findViewById(R.id.content), errorResponse.getMessage(),Snackbar.LENGTH_SHORT).show();
-//
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.d("onFailure: ",t.toString());
+
+//                mProgressBar.setVisibility(View.GONE);
+//                Log.d(TAG, "onFailure: "+t.getLocalizedMessage());
+                }
+            });
+        }
+
+    private void editSupplier() { // Fungsi mengedit Data Supplier
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiClient retrofitInterface = retrofit.create(ApiClient.class);
+
+        String name_supplier = txtNamaSupplier .getText().toString();
+        String address_supplier=txtAlamatSupplier.getText().toString();
+        String phonenumber_supplier=txtNoTelpSupplier.getText().toString();
+
+
+        Call<ResponseBody> call = retrofitInterface.editSupplier(name_supplier, address_supplier, phonenumber_supplier);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+
+                if (response.isSuccessful()) {
+                    ResponseBody responseBody = response.body();
+//                    Log.d("SUKSES UPDATE DATA",responseBody.toString());
+                    Toast.makeText(SupplierForm.this, "SUKSES UPDATE SUPPLIER", Toast.LENGTH_SHORT).show();
+                    final Intent intent = new Intent(SupplierForm.this, MainActivity.class);
+                    intent.putExtra("menuBefore", 1);
+                    startActivity(intent);
+
+                } else {
+                    Log.d( "onResponse: ",response.message());
+                    Toast.makeText(SupplierForm.this, "Gagal Update Data Supplier", Toast.LENGTH_SHORT).show();
+
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("onFailure: ", t.toString());
+                Log.d("onFailure: ",t.toString());
 
 //                mProgressBar.setVisibility(View.GONE);
 //                Log.d(TAG, "onFailure: "+t.getLocalizedMessage());
             }
         });
+
     }
 }

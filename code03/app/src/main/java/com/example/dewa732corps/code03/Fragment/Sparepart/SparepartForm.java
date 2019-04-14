@@ -88,8 +88,6 @@ public class SparepartForm extends AppCompatActivity {
         setInit();
         setDropdown();
 
-
-
         btnPilihGambar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -474,8 +472,6 @@ public class SparepartForm extends AppCompatActivity {
 
 
         String txtplacement = dropdownPosisi.getSelectedItem().toString()+'-'+dropdownTempat.getSelectedItem().toString()+'-'+txtNomor.getText().toString();
-
-
 
         String id_sparepart = txtIdSparepart.getText().toString();
         String name_sparepart = txtNamaSparepart.getText().toString();

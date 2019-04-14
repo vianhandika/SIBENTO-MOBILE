@@ -20,6 +20,7 @@ import com.example.dewa732corps.code03.Controller.Sparepart;
 import com.example.dewa732corps.code03.Controller.Supplier;
 import com.example.dewa732corps.code03.Fragment.BerandaFragment;
 import com.example.dewa732corps.code03.Fragment.Sparepart.SparepartForm;
+import com.example.dewa732corps.code03.Fragment.Supplier.SupplierForm;
 import com.example.dewa732corps.code03.R;
 
 import okhttp3.ResponseBody;
@@ -79,17 +80,19 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.MyView
         vh.Name.setText(data.getName());
         vh.Address.setText(data.getAddress());
         vh.PhoneNumber.setText(data.getPhoneNumber());
+
         vh.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(context, AddSupplier.class);
-//                intent.putExtra("simpan", i);
-//                intent.putExtra("name", data.getSupplierName());
-//                intent.putExtra("address", data.getSupplierAddress());
-//                intent.putExtra("number", data.getSupplierPhoneNumber());
-//                intent.putExtra("id", data.getIdSupplier());
-//                context.startActivity(intent);
+                Intent intent = new Intent(v.getContext(), SupplierForm.class);
+                intent.putExtra("mode", i);
 
+                intent.putExtra("id", data.getId());
+                intent.putExtra("nama", data.getName());
+                intent.putExtra("notelp", data.getPhoneNumber());
+                intent.putExtra("alamat", data.getAddress());
+//                intent.putExtra("listsales", data.getSales());
+                v.getContext().startActivity(intent);
             }
         });
 

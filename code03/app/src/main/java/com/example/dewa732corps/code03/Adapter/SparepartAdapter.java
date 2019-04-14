@@ -87,6 +87,7 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), SparepartForm.class);
                 intent.putExtra("mode", i);
+
                 intent.putExtra("id", data.getId());
                 intent.putExtra("nama", data.getName());
                 intent.putExtra("merk", data.getBrand());

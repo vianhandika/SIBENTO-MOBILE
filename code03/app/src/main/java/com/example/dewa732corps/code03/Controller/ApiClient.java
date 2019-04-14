@@ -22,10 +22,9 @@ public interface ApiClient {
             @Field("username")String username,
             @Field("password")String password);
 
+    // SPAREPART
     @GET("sparepart")
     Call<SparepartList> getSparepart();
-
-
 
     @Multipart
     @POST("sparepart")
@@ -74,7 +73,6 @@ public interface ApiClient {
     Call<SparepartTypeList> getSparepartType();
 
     // SUPPLIER
-
     @GET("supplier")
     Call<SupplierList> getSupplier();
 
@@ -88,4 +86,37 @@ public interface ApiClient {
                     @Part("address_supplier") RequestBody address_supplier,
                     @Part("phone_number_supplier") RequestBody phone_number_supplier
             );
+
+
+    @PATCH("sparepart/{id_sparepart}")
+    @FormUrlEncoded
+    Call<ResponseBody> editSupplier(
+            @Path("name_supplier") String name_supplier,
+            @Field("address_supplier") String address_supplier,
+            @Field("phone_number_supplier") String phone_number_supplier
+    );
+
+    // SALES
+    @GET("sales")
+    Call<SalesList> getSales();
+
+    @DELETE("sales/{id}")
+    Call<ResponseBody> deleteSales(@Path("id") Integer id);
+
+    @Multipart
+    @POST("sales")
+    Call<ResponseBody> addSales(
+            @Part("name_supplier") RequestBody name_supplier,
+            @Part("address_supplier") RequestBody address_supplier,
+            @Part("phone_number_supplier") RequestBody phone_number_supplier
+    );
+
+
+    @PATCH("sparepart/{id_sales}")
+    @FormUrlEncoded
+    Call<ResponseBody> editSales(
+            @Path("name_supplier") String name_supplier,
+            @Field("address_supplier") String address_supplier,
+            @Field("phone_number_supplier") String phone_number_supplier
+    );
 }
