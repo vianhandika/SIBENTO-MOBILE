@@ -1,6 +1,7 @@
 package com.example.dewa732corps.code03.Fragment.Supplier;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -29,6 +30,9 @@ import com.example.dewa732corps.code03.Controller.Sparepart;
 import com.example.dewa732corps.code03.Controller.SparepartType;
 import com.example.dewa732corps.code03.Controller.SparepartTypeList;
 import com.example.dewa732corps.code03.Controller.Supplier;
+import com.example.dewa732corps.code03.Controller.SupplierType;
+import com.example.dewa732corps.code03.Controller.SupplierTypeList;
+import com.example.dewa732corps.code03.Fragment.Sparepart.SparepartForm;
 import com.example.dewa732corps.code03.Fragment.Supplier.SupplierForm;
 import com.example.dewa732corps.code03.Fragment.Supplier.SupplierTampil;
 import com.example.dewa732corps.code03.MainActivity;
@@ -61,12 +65,12 @@ public class SupplierForm extends AppCompatActivity {
 
     FrameLayout framelay;
     Button btnSaveSupplier,btnCancelSupplier;
-    EditText txtIdSupplier, txtNamaSupplier,txtAlamatSupplier,txtNoTelpSupplier;
+    EditText txtNamaSupplier,txtAlamatSupplier,txtNoTelpSupplier;
 
     private int simpan=0;
     private int editMode=0;
 
-    String selectedId;
+    String selectedId, idSupplier;
     private List<String> listNameType = new ArrayList<String>();
     private List<String> listIdType = new ArrayList<String>();
     private List<String> listPosisi = new ArrayList<String>();
@@ -82,6 +86,7 @@ public class SupplierForm extends AppCompatActivity {
         setContentView(R.layout.menu2_supplier_form);
 
         setInit();
+        getPutExtra();
 
         btnSaveSupplier.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,12 +99,21 @@ public class SupplierForm extends AppCompatActivity {
                 }
             }
         });
+
+        btnCancelSupplier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { //Listener button btnSaveSparepart saat di klik
+                Toast.makeText(SupplierForm.this, "Batal.", Toast.LENGTH_SHORT).show();
+                final Intent intent = new Intent(SupplierForm.this, MainActivity.class);
+                intent.putExtra("menuBefore", 2);
+                startActivity(intent);
+            }
+        });
     }
 
     public void setInit(){ //pendeklarasian objek-objek yang ada di layout
 
         //depan itu nama form
-
         txtNamaSupplier = findViewById(R.id.txtNamaSupplier);
         txtAlamatSupplier = findViewById(R.id.txtAlamatSupplier);
         txtNoTelpSupplier = findViewById(R.id.txtNoTelpSupplier);
@@ -113,10 +127,11 @@ public class SupplierForm extends AppCompatActivity {
         simpan = getIntent().getIntExtra("simpan", 0);
 
 //        Log.d("Id Sparepart", String.valueOf(((Intent) intent).getStringExtra("id")));
-        if(!String.valueOf(intent.getStringExtra("id")).equals("null")) {
+        if(!String.valueOf(intent.getStringExtra("nama")).equals("null")) {
 
             String id = intent.getStringExtra("id");
             //Log.d("id",id);
+            idSupplier = id;
             String nama = intent.getStringExtra("nama");
             String alamat = intent.getStringExtra("alamat");
             String notelp = intent.getStringExtra("notelp");
@@ -124,13 +139,13 @@ public class SupplierForm extends AppCompatActivity {
 
 //            Log.d("gambar","https://sibento.yafetrakan.com/"+gambar);
 
-            txtIdSupplier.setText(id);
             txtNamaSupplier.setText(nama);
             txtAlamatSupplier.setText(alamat);
             txtNoTelpSupplier.setText(notelp);
 //            txtListSales.setList(sales);
 
             editMode = 1; //pengubahan menjadi mode edit
+            Log.d("Coba","ok");
         }
     }
     private int formChecking(){ //Fungsi Check Form
@@ -171,55 +186,51 @@ public class SupplierForm extends AppCompatActivity {
         RequestBody name_supplier =
                 RequestBody.create(
                         MediaType.parse("multipart/form-data"), txtNamaSupplier.getText().toString());
-//        RequestBody requestId =
-//                RequestBody.create(
-//                        MediaType.parse("multipart/form-data"), "1111-ASTRA-111");
 
         RequestBody address_supplier =
                 RequestBody.create(
                         MediaType.parse("multipart/form-data"), txtAlamatSupplier.getText().toString());
 
-        RequestBody phonenumber_supplier =
+        RequestBody phone_number_supplier =
                 RequestBody.create(
                         MediaType.parse("multipart/form-data"), txtNoTelpSupplier.getText().toString());
 
-        Call<ResponseBody> call = retrofitInterface.addSupplier(name_supplier, address_supplier, phonenumber_supplier);
+        Call<ResponseBody> call = retrofitInterface.addSupplier(name_supplier, address_supplier, phone_number_supplier);
 //        mProgressBar.setVisibility(View.VISIBLE);
-            call.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
 
 //                mProgressBar.setVisibility(View.GONE);
 
-                    if (response.isSuccessful()) {
+                if (response.isSuccessful()) {
 
-                        ResponseBody responseBody = response.body();
-                        Log.d("SUKSES",responseBody.toString());
-                        Toast.makeText(SupplierForm.this, "Sukses", Toast.LENGTH_SHORT).show();
-                        final Intent intent = new Intent(SupplierForm.this, MainActivity.class);
-                        intent.putExtra("menuBefore", 1);
-                        startActivity(intent);
+                    ResponseBody responseBody = response.body();
+                    Log.d("SUKSES",responseBody.toString());
+                    Toast.makeText(SupplierForm.this, "Sukses", Toast.LENGTH_SHORT).show();
+                    final Intent intent = new Intent(SupplierForm.this, MainActivity.class);
+                    intent.putExtra("menuBefore", 2);
+                    startActivity(intent);
 //                    mBtImageShow.setVisibility(View.VISIBLE);
 //                     mImageUrl = URL + responseBody.getPath();
 //                    Snackbar.make(findViewById(R.id.content), responseBody.getMessage(),Snackbar.LENGTH_SHORT).show();
 
-                    }
-                    else {
-                        Log.d( "onResponse: ",response.message());
-                        Toast.makeText(SupplierForm.this, "Gagal", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d( "onResponse: ",response.message());
+                    Toast.makeText(SupplierForm.this, "Gagal", Toast.LENGTH_SHORT).show();
 
-                    }
                 }
+            }
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Log.d("onFailure: ",t.toString());
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("onFailure: ",t.toString());
 
 //                mProgressBar.setVisibility(View.GONE);
 //                Log.d(TAG, "onFailure: "+t.getLocalizedMessage());
-                }
-            });
-        }
+            }
+        });
+    }
 
     private void editSupplier() { // Fungsi mengedit Data Supplier
 
@@ -230,29 +241,29 @@ public class SupplierForm extends AppCompatActivity {
 
         ApiClient retrofitInterface = retrofit.create(ApiClient.class);
 
+        Integer id_supplier = Integer.parseInt(idSupplier);
         String name_supplier = txtNamaSupplier .getText().toString();
         String address_supplier=txtAlamatSupplier.getText().toString();
-        String phonenumber_supplier=txtNoTelpSupplier.getText().toString();
+        String phone_number_supplier=txtNoTelpSupplier.getText().toString();
 
 
-        Call<ResponseBody> call = retrofitInterface.editSupplier(name_supplier, address_supplier, phonenumber_supplier);
-
+        Call<ResponseBody> call = retrofitInterface.editSupplier(id_supplier, name_supplier, address_supplier, phone_number_supplier);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+
 
                 if (response.isSuccessful()) {
                     ResponseBody responseBody = response.body();
 //                    Log.d("SUKSES UPDATE DATA",responseBody.toString());
                     Toast.makeText(SupplierForm.this, "SUKSES UPDATE SUPPLIER", Toast.LENGTH_SHORT).show();
                     final Intent intent = new Intent(SupplierForm.this, MainActivity.class);
-                    intent.putExtra("menuBefore", 1);
+                    intent.putExtra("menuBefore", 2);
                     startActivity(intent);
 
                 } else {
                     Log.d( "onResponse: ",response.message());
                     Toast.makeText(SupplierForm.this, "Gagal Update Data Supplier", Toast.LENGTH_SHORT).show();
-
                 }
             }
 

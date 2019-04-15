@@ -160,7 +160,6 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
                 intent.putExtra("sell", data.getSellPrice());
                 intent.putExtra("gambar", data.getImage());
 
-
                 intent.putExtra("posisi", data.getPlacementPosition());
                 intent.putExtra("tempat", data.getPlacementPlace());
                 intent.putExtra("tipe", data.getType());

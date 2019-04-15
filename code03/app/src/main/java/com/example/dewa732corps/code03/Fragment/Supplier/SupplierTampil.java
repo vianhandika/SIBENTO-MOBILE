@@ -9,24 +9,33 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.dewa732corps.code03.Adapter.SparepartAdapter;
 import com.example.dewa732corps.code03.Adapter.SupplierAdapter;
 import com.example.dewa732corps.code03.Controller.ApiClient;
 import com.example.dewa732corps.code03.Controller.SessionController;
+import com.example.dewa732corps.code03.Controller.Sparepart;
 import com.example.dewa732corps.code03.Controller.SparepartList;
+import com.example.dewa732corps.code03.Controller.Supplier;
 import com.example.dewa732corps.code03.Controller.SupplierList;
+import com.example.dewa732corps.code03.Fragment.Sparepart.SparepartForm;
 import com.example.dewa732corps.code03.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,11 +48,17 @@ public class SupplierTampil extends Fragment {
     FrameLayout framelay;
     Button btnTambahSupplier;
     android.support.v7.widget.Toolbar toolbar;
+    private SearchView search;
 
     private RecyclerView rview;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layout;
     private List<SupplierList> supplierLists;
+    private List<Supplier> supplierData;
+
+    SupplierAdapter sAdapter;
+    ProgressDialog mProgress;
+    ResponseBody AllData;
 
     SessionController session;
 
@@ -51,6 +66,10 @@ public class SupplierTampil extends Fragment {
         //return super.onCreateView(inflater, container, savedInstanceState);
         dashboard= inflater.inflate(R.layout.menu2_supplier_tampil,container,false);
         setinit();
+
+        mProgress = new ProgressDialog(getContext());
+        mProgress.setMessage("Loading Data");
+        mProgress.show();
 
         rview = dashboard.findViewById(R.id.recyclerViewSupplier);
         rview.setHasFixedSize(true);
@@ -75,12 +94,14 @@ public class SupplierTampil extends Fragment {
             @Override
             public void onResponse(Call<SupplierList> call, Response<SupplierList> response) {
                 try {
-                    adapter = new SupplierAdapter(response.body().getData(),getContext());
-                    adapter.notifyDataSetChanged();
-//                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-//                    rview.setLayoutManager(mLayoutManager);
-//                    rview.setItemAnimator(new DefaultItemAnimator());
-                    rview.setAdapter(adapter);
+                    supplierData = response.body().getData();
+                    sAdapter = new SupplierAdapter(response.body().getData(),getContext());
+                    sAdapter.notifyDataSetChanged();
+
+                    rview.setAdapter(sAdapter);
+
+                    mProgress.hide();
+
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "Tidak Ada Supplier!", Toast.LENGTH_SHORT).show();
                 }
@@ -89,20 +110,42 @@ public class SupplierTampil extends Fragment {
             @Override
             public void onFailure(Call<SupplierList> call, Throwable t) {
                 Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                mProgress.hide();
             }
         });
         return dashboard;
     }
 
     public void setinit(){
-        toolbar = (android.support.v7.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Manajemen Supplier");
         Button btnTambahSupplier = dashboard.findViewById(R.id.btnTambahSupplier);
+
+        search = dashboard.findViewById(R.id.searchBarSupplier);
+
         btnTambahSupplier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SupplierForm.class);
                 startActivity(intent);
+            }
+        });
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                Log.d("onQueryTextSubmit: ",query);
+                //SAdapter.filter(query);
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d("onQueryTextChange: ","true");
+                String text = newText.toLowerCase(Locale.getDefault());
+                sAdapter.getFilter().filter(text);
+//                adapter = SAdapter;
+//                rview.setAdapter(adapter);
+                return true;
             }
         });
     }

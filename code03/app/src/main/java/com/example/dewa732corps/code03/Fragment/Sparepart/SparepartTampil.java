@@ -52,7 +52,7 @@ public class SparepartTampil extends Fragment {
     private List<SparepartList> sparepartLists;
     private List<Sparepart> sparepartData;
 
-    SparepartAdapter SAdapter;
+    SparepartAdapter sAdapter;
     ProgressDialog mProgress;
     ResponseBody AllData;
 
@@ -62,7 +62,6 @@ public class SparepartTampil extends Fragment {
         //return super.onCreateView(inflater, container, savedInstanceState);
         dashboard= inflater.inflate(R.layout.menu2_sparepart_tampil,container,false);
         setinit();
-
 
         mProgress = new ProgressDialog(getContext());
         mProgress.setMessage("Loading Data");
@@ -92,8 +91,8 @@ public class SparepartTampil extends Fragment {
             public void onResponse(Call<SparepartList> call, Response<SparepartList> response) {
                 try {
                     sparepartData = response.body().getData();
-                    SAdapter = new SparepartAdapter(response.body().getData(),getContext());
-                    SAdapter.notifyDataSetChanged();
+                    sAdapter = new SparepartAdapter(response.body().getData(),getContext());
+                    sAdapter.notifyDataSetChanged();
 
 //                    adapter = new SparepartAdapter(response.body().getData(),getContext());
 //                    adapter.notifyDataSetChanged();
@@ -103,7 +102,7 @@ public class SparepartTampil extends Fragment {
 //                    rview.setLayoutManager(mLayoutManager);
 //                    rview.setItemAnimator(new DefaultItemAnimator());
 //                    rview.setAdapter(adapter);
-                    rview.setAdapter(SAdapter);
+                    rview.setAdapter(sAdapter);
 
                     mProgress.hide();
 
@@ -128,7 +127,7 @@ public class SparepartTampil extends Fragment {
         toolbar.setTitle("Manajemen Sparepart");
         Button btnTambahSparepart = dashboard.findViewById(R.id.btnTambahSparepart);
 
-        search = dashboard.findViewById(R.id.searchBar);
+        search = dashboard.findViewById(R.id.searchBarSparepart);
 
         btnTambahSparepart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,13 +148,11 @@ public class SparepartTampil extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 Log.d("onQueryTextChange: ","true");
                 String text = newText.toLowerCase(Locale.getDefault());
-                SAdapter.getFilter().filter(text);
+                sAdapter.getFilter().filter(text);
 //                adapter = SAdapter;
 //                rview.setAdapter(adapter);
                 return true;
             }
         });
-
-
     }
 }

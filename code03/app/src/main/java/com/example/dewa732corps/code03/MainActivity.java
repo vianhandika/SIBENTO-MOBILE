@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case 2: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SupplierTampil()).commit();Log.d("getPutExtra: ","2");
                 break;
-//  case 3: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new BerandaFragment()).commit();
+            case 3: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SalesTampil()).commit();Log.d("getPutExtra", "3");
         }
     }
 

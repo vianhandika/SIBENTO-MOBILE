@@ -22,7 +22,7 @@ public interface ApiClient {
             @Field("username")String username,
             @Field("password")String password);
 
-    // SPAREPART
+    // ==============================================================  SPAREPART
     @GET("sparepart")
     Call<SparepartList> getSparepart();
 
@@ -39,7 +39,6 @@ public interface ApiClient {
             @Part("sell_price") RequestBody sell_price,
             @Part("placement") RequestBody placement,
             @Part("id_sparepart_type") RequestBody id_sparepart_type
-
     );
 
     @PATCH("sparepart/{id_sparepart}")
@@ -62,9 +61,7 @@ public interface ApiClient {
     Call<ResponseBody> editImageSparepart(
             @Part MultipartBody.Part image_sparepart,
             @Part("id_sparepart") RequestBody id_sparepart
-
     );
-
 
     @DELETE("sparepart/{id}")
     Call<ResponseBody> deleteSparepart(@Path("id") String id);
@@ -72,51 +69,52 @@ public interface ApiClient {
     @GET("spareparttype")
     Call<SparepartTypeList> getSparepartType();
 
-    // SUPPLIER
+    // ============================================================== SUPPLIER
     @GET("supplier")
     Call<SupplierList> getSupplier();
-
-    @DELETE("supplier/{id}")
-    Call<ResponseBody> deleteSupplier(@Path("id") Integer id);
 
     @Multipart
     @POST("supplier")
     Call<ResponseBody> addSupplier(
-                    @Part("name_supplier") RequestBody name_supplier,
-                    @Part("address_supplier") RequestBody address_supplier,
-                    @Part("phone_number_supplier") RequestBody phone_number_supplier
-            );
 
-
-    @PATCH("sparepart/{id_sparepart}")
-    @FormUrlEncoded
-    Call<ResponseBody> editSupplier(
-            @Path("name_supplier") String name_supplier,
-            @Field("address_supplier") String address_supplier,
-            @Field("phone_number_supplier") String phone_number_supplier
-    );
-
-    // SALES
-    @GET("sales")
-    Call<SalesList> getSales();
-
-    @DELETE("sales/{id}")
-    Call<ResponseBody> deleteSales(@Path("id") Integer id);
-
-    @Multipart
-    @POST("sales")
-    Call<ResponseBody> addSales(
             @Part("name_supplier") RequestBody name_supplier,
             @Part("address_supplier") RequestBody address_supplier,
             @Part("phone_number_supplier") RequestBody phone_number_supplier
     );
 
-
-    @PATCH("sparepart/{id_sales}")
+    @PATCH("supplier/{id_supplier}")
     @FormUrlEncoded
-    Call<ResponseBody> editSales(
-            @Path("name_supplier") String name_supplier,
+    Call<ResponseBody> editSupplier(
+            @Path ("id_supplier") Integer id_supplier,
+            @Field("name_supplier") String name_supplier,
             @Field("address_supplier") String address_supplier,
             @Field("phone_number_supplier") String phone_number_supplier
     );
+
+    @DELETE("supplier/{id}")
+    Call<ResponseBody> deleteSupplier(@Path("id") Integer id);
+
+    // ==============================================================  SALES
+    @GET("sales")
+    Call<SalesList> getSales();
+
+    @Multipart
+    @POST("sales")
+    Call<ResponseBody> addSales(
+            @Part("name_sales") RequestBody name_sales,
+            @Part("phone_number_sales") RequestBody phone_number_sales,
+            @Part("id_supplier") RequestBody id_supplier
+    );
+
+
+    @PATCH("sales/{id_sales}")
+    @FormUrlEncoded
+    Call<ResponseBody> editSales(
+            @Path("id_sales") String id_sales,
+            @Field("name_sales") String name_supplier,
+            @Field("phone_number_sales") Integer phone_number_supplier
+    );
+
+    @DELETE("sales/{id}")
+    Call<ResponseBody> deleteSales(@Path("id") Integer id);
 }
