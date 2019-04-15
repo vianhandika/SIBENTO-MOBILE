@@ -18,12 +18,12 @@
             android:textSize="20dp" />
 
         <TextView
-            android:id="@+id/txtAddressSales"
+            android:id="@+id/txtNoTelpSales"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="37dp"
-            android:text="Jl Diana 55H"
+            android:text="082233445566"
             android:textSize="17dp" />
 
         <TextView

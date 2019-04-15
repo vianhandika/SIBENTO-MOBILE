@@ -5,7 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class SalesList {
+public class SalesList
+{
 
     @SerializedName("data")
     @Expose
@@ -34,4 +35,5 @@ public class SalesList {
     public void setData(List<Sales> data) {
         this.data = data;
     }
+
 }

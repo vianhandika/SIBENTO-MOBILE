@@ -5,6 +5,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Sales {
+
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -16,7 +17,7 @@ public class Sales {
     private String phoneNumber;
     @SerializedName("supplier")
     @Expose
-    private List<Object> supplier = null;
+    private Object supplier = null;
 
     /**
      * No args constructor for use in serialization
@@ -32,7 +33,7 @@ public class Sales {
      * @param name
      * @param supplier
      */
-    public Sales(Integer id, String name, String phoneNumber, List<Object> supplier) {
+    public Sales(Integer id, String name, String phoneNumber, Object supplier) {
         super();
         this.id = id;
         this.name = name;
@@ -64,11 +65,12 @@ public class Sales {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<Object> getSupplier() {
+    public Object getSupplier() {
         return supplier;
     }
 
-    public void setSupplier(List<Object> supplier) {
+    public void setSupplier(Object supplier) {
         this.supplier = supplier;
     }
+
 }

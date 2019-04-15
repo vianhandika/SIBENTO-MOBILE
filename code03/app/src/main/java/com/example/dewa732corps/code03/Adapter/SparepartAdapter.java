@@ -81,26 +81,6 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
         return new SparepartAdapter.MyViewHolder(v);
     }
 
-    public void filter(String charText) {
-        Log.d( "filter: ", charText);
-
-        charText = charText.toLowerCase(Locale.getDefault());
-        SparepartListFilter.clear();
-        if (charText.length() == 0) {
-            SparepartListFilter.addAll(SparepartBundle);
-        }
-        else
-        {
-            for (Sparepart obj : SparepartBundle) {
-                if (obj.getName().toLowerCase(Locale.getDefault()).contains(charText)) {
-                    SparepartListFilter.add(obj);
-                }
-            }
-        }
-        notifyDataSetChanged();
-    }
-
-
     public Filter getFilter() {
         return new Filter() {
             @Override
