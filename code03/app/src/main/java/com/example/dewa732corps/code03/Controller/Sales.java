@@ -17,7 +17,7 @@ public class Sales {
     private String phoneNumber;
     @SerializedName("supplier")
     @Expose
-    private Object supplier = null;
+    private Supplier supplier;
 
     /**
      * No args constructor for use in serialization
@@ -33,7 +33,7 @@ public class Sales {
      * @param name
      * @param supplier
      */
-    public Sales(Integer id, String name, String phoneNumber, Object supplier) {
+    public Sales(Integer id, String name, String phoneNumber, Supplier supplier) {
         super();
         this.id = id;
         this.name = name;
@@ -65,11 +65,11 @@ public class Sales {
         this.phoneNumber = phoneNumber;
     }
 
-    public Object getSupplier() {
+    public Supplier getSupplier() {
         return supplier;
     }
 
-    public void setSupplier(Object supplier) {
+    public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
 

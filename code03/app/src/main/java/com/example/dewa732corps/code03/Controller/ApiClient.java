@@ -101,16 +101,16 @@ public interface ApiClient {
     @Multipart
     @POST("sales")
     Call<ResponseBody> addSales(
+            @Part("id_supplier") RequestBody id_supplier,
             @Part("name_sales") RequestBody name_sales,
-            @Part("phone_number_sales") RequestBody phone_number_sales,
-            @Part("id_supplier") RequestBody id_supplier
+            @Part("phone_number_sales") RequestBody phone_number_sales
     );
-
 
     @PATCH("sales/{id_sales}")
     @FormUrlEncoded
     Call<ResponseBody> editSales(
-            @Path("id_sales") String id_sales,
+            @Path("id_sales") Integer id_sales,
+            @Field("id_supplier") String id_supplier,
             @Field("name_sales") String name_supplier,
             @Field("phone_number_sales") Integer phone_number_supplier
     );

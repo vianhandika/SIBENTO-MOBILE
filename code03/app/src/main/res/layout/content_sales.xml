@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
-            android:text="DILA AMANDA"
+            android:text=""
             android:textSize="20dp" />
 
         <TextView
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="37dp"
-            android:text="082233445566"
+            android:text=""
             android:textSize="17dp" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="60dp"
-            android:text="PT Astra Jaya"
+            android:text=""
             android:textSize="10dp" />
 
         <ImageView

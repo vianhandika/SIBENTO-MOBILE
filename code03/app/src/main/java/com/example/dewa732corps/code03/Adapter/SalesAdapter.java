@@ -47,7 +47,7 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
     ProgressDialog mProgress;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView Name, PhoneNumber;
+        public TextView Name, PhoneNumber, IdSupplier;
         public ImageView btnEdit, btnDelete;
 //        public LinearLayout topWraper;
 //        public LinearLayout bottomWraper;
@@ -56,6 +56,7 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
             super(v);
             Name = v.findViewById(R.id.txtNameSales);
             PhoneNumber = v.findViewById(R.id.txtNoTelpSales);
+            IdSupplier = v.findViewById(R.id.txtNameOfSupplier);
 
             btnEdit = v.findViewById(R.id.btnEditSales);
             btnDelete = v.findViewById(R.id.btnDeleteSales);
@@ -121,7 +122,6 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
                     }
                     SalesListFilter = filteredList;
                 }
-
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = SalesListFilter;
                 return filterResults;
@@ -144,16 +144,23 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
         final int ifinal = vh.getAdapterPosition();
         vh.Name.setText(data.getName());
         vh.PhoneNumber.setText(data.getPhoneNumber());
+        vh.IdSupplier.setText(data.getSupplier().getName());
 
         vh.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), SalesForm.class);
-                intent.putExtra("mode", i);
+                intent.putExtra("mode", i); // FUNGSI PUT EXTRA ITU UTK NGAMBIL DATA YANG SUDAH DISET SEBELUMNYA, CONTOHNYA UNTUK EDIT KAN SEBELUMNYA UDAH ADA DATA BIAR MUNCUL
 
-                intent.putExtra("id", data.getId());
+                intent.putExtra("id", data.getId().toString());
                 intent.putExtra("nama", data.getName());
                 intent.putExtra("notelp", data.getPhoneNumber());
+                intent.putExtra("name_supplier", data.getSupplier().getName().toString());
+
+                Log.d("ID Sales: ", data.getId().toString());
+                Log.d("Nama: ", data.getName());
+                Log.d("No Telp: ", data.getPhoneNumber());
+                Log.d("ID Supplier: ", data.getSupplier().getName().toString());
 
 //                intent.putExtra("supplier", data.getSupplier());
 

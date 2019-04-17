@@ -70,7 +70,7 @@ public class SalesForm extends AppCompatActivity {
     private int simpan=0;
     private int editMode=0;
 
-    String selectedId;
+    String selectedId, idSales;
     private List<String> listNameSupplier = new ArrayList<String>();
     private List<String> listIdSupplier = new ArrayList<String>();
 
@@ -92,9 +92,11 @@ public class SalesForm extends AppCompatActivity {
             @Override
             public void onClick(View v) { //Listener button btnSaveSparepart saat di klik
                 if(formChecking()==0 && editMode ==0){ //kalau pengecekan form benar dan tidak pada mode edit
+                    Log.d("sukses","addSales");
                     addSales();
                 }
                 else if (formChecking()==0 && editMode ==1){ //kalau pengecekan form benar dan pada mode edit
+                    Log.d("sukses","editSales");
                     editSales();
                 }
             }
@@ -154,24 +156,27 @@ public class SalesForm extends AppCompatActivity {
 
             String id = intent.getStringExtra("id");
             //Log.d("id",id);
+            idSales = id;
             String nama = intent.getStringExtra("nama");
-            String alamat = intent.getStringExtra("alamat");
-            String salessupplier = intent.getStringExtra("salessuplier");
+            String notelp = intent.getStringExtra("notelp");
+            String name_supplier = intent.getStringExtra("name_supplier");
 
-//            Log.d("gambar","https://sibento.yafetrakan.com/"+gambar);
+            Log.d("Nama: ", nama);
+            Log.d("No Telp Sales: ", notelp);
+            Log.d("Supplier: ", name_supplier);
 
-            txtNamaSales.setText(id);
-            txtNoTelpSales.setEnabled(false);
+            txtNamaSales.setText(nama);
+            txtNoTelpSales.setText(notelp);
 
-            dropdownNameOfSupplier.setSelection(getIndex(dropdownNameOfSupplier, salessupplier));
+            dropdownNameOfSupplier.setSelection(getIndex(dropdownNameOfSupplier, name_supplier));
             editMode = 1; //pengubahan menjadi mode edit
 //            mProgress.hide();
         }
     }
+
     private int formChecking(){ //Fungsi Check Form
 
         String  namaSales=txtNamaSales .getText().toString(),
-                //untuk nama sales dari supplier belom
                 noTelpSales=txtNoTelpSales .getText().toString();
 
         if(namaSales.isEmpty()){
@@ -240,11 +245,13 @@ public class SalesForm extends AppCompatActivity {
 
         ApiClient retrofitInterface = retrofit.create(ApiClient.class);
 
-            String ddsalessupplier = dropdownNameOfSupplier.getSelectedItem().toString();
+            Log.d("Nama: ", txtNamaSales.getText().toString()); //untuk edit text
+            Log.d("No Telp Sales: ", txtNoTelpSales.getText().toString());
+            Log.d("Drop: ", selectedId); //karena drop down gak perlu makannya
 
             RequestBody id_supplier =
                     RequestBody.create(
-                            MediaType.parse("multipart/form-data"), ddsalessupplier);
+                            MediaType.parse("multipart/form-data"), selectedId);
 
             RequestBody name_sales =
                     RequestBody.create(
@@ -301,11 +308,12 @@ public class SalesForm extends AppCompatActivity {
 
         String ddsalessupplier = dropdownNameOfSupplier.getSelectedItem().toString();
 
-        String id_supplier = txtIdSales.getText().toString();
+        Integer id_sales = Integer.parseInt(idSales);
+        String id_supplier = selectedId;
         String name_sales = txtNamaSales.getText().toString();
         Integer phone_number_sales = Integer.parseInt(selectedId);
 
-        Call<ResponseBody> call = retrofitInterface.editSales(id_supplier, name_sales, phone_number_sales);
+        Call<ResponseBody> call = retrofitInterface.editSales(id_sales, id_supplier, name_sales, phone_number_sales);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {

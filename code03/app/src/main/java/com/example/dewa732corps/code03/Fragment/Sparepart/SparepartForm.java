@@ -183,7 +183,7 @@ public class SparepartForm extends AppCompatActivity {
 
             String id = intent.getStringExtra("id");
             //Log.d("id",id);
-            String nama = intent.getStringExtra("nama");
+            String nama = intent.getStringExtra("nama"); //yang ijo2 itu nama pack age
             String merk = intent.getStringExtra("merk");
             String buy = intent.getStringExtra("buy");
             String sell = intent.getStringExtra("sell");
@@ -196,6 +196,7 @@ public class SparepartForm extends AppCompatActivity {
             String minimalstock = intent.getStringExtra("minimalstock");
             String stock = intent.getStringExtra("stock");
             String gambar = intent.getStringExtra("gambar");
+
 //            Log.d("gambar","https://sibento.yafetrakan.com/"+gambar);
             Picasso.get().load("https://sibento.yafetrakan.com/"+gambar).memoryPolicy(MemoryPolicy.NO_CACHE) .networkPolicy(NetworkPolicy.NO_CACHE).into(imageSparepart);
 
@@ -203,7 +204,7 @@ public class SparepartForm extends AppCompatActivity {
             txtIdSparepart.setEnabled(false);
             txtNamaSparepart.setText(nama);
             txtMinStock.setText(minimalstock);
-            txtStock.setText(sell);
+            txtStock.setText(stock);
             txtHargaJual.setText(sell);
             txtHargaBeli.setText(buy);
             txtNomor.setText(nomor);
