@@ -231,7 +231,7 @@ public class SparepartForm extends AppCompatActivity {
 
         if(idSparepart.isEmpty()){
             txtIdSparepart.setError("ID diperlukan.");
-            txtIdSparepart.requestFocus();
+            txtIdSparepart.requestFocus(); //INPUTANNYA DIARAHKAN KESITU
             return 1;
         }
 

@@ -117,4 +117,61 @@ public interface ApiClient {
 
     @DELETE("sales/{id}")
     Call<ResponseBody> deleteSales(@Path("id") Integer id);
+
+    // ==============================================================  CUSTOMER
+    @GET("customer")
+    Call<CustomerList> getCustomer();
+
+    @Multipart
+    @POST("customer")
+    Call<ResponseBody> addCustomer(
+
+            @Part("name_customer") RequestBody name_customer,
+            @Part("address_customer") RequestBody address_customer,
+            @Part("phone_number_customer") RequestBody phone_number_customer
+    );
+
+    @PATCH("customer/{id_customer}")
+    @FormUrlEncoded
+    Call<ResponseBody> editCustomer(
+            @Path ("id_customer") Integer id_customer,
+            @Field("name_customer") String name_customer,
+            @Field("address_customer") String address_customer,
+            @Field("phone_number_customer") String phone_number_customer
+    );
+
+    @DELETE("customer/{id}")
+    Call<ResponseBody> deleteCustomer(@Path("id") Integer id);
+
+    // ==============================================================  MOTOR CUSTOMER
+    @GET("motorcustomer")
+    Call<MotorCustomerList> getMotorCustomer();
+
+    @Multipart
+    @POST("motorcustomer")
+    Call<ResponseBody> addMotorCustomer(
+            @Part("plate_motorcustomer") RequestBody plate_motorcustomer,
+            @Part("id_brandcustomer") RequestBody id_brandcustomer,
+            @Part("id_typecustomer") RequestBody id_typecustomer
+    );
+
+    @PATCH("motorCustomer/{id_motorcustomer}")
+    @FormUrlEncoded
+    Call<ResponseBody> editMotorCustomer(
+            @Path ("id_motorcustomer") Integer id_customer,
+            @Field("plate_motorcustomer") String plate_motorcustomer,
+            @Field("brand_motorcustomer") String brand_motorcustomer,
+            @Field("type_motorcustomer") String type_motorcustomer
+    );
+
+    @DELETE("motorcustomer/{id}")
+    Call<ResponseBody> deleteMotorCustomer(@Path("id") Integer id);
+
+    // ==============================================================  BRAND MOTOR
+    @GET("motorbrand")
+    Call<BrandMotorList> getBrandMotor();
+
+    // ==============================================================  TYPE MOTOR
+    @GET("typemotor")
+    Call<TypeMotorList> getTypeMotor();
 }
