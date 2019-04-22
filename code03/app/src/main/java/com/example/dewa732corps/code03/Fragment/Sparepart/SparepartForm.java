@@ -92,8 +92,6 @@ public class SparepartForm extends AppCompatActivity {
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("Loading Data");
 
-
-
         btnPilihGambar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,21 +118,26 @@ public class SparepartForm extends AppCompatActivity {
             }
         });
 
+        btnCancelSparepart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { //Listener button btnSaveSparepart saat di klik
+                Toast.makeText(SparepartForm.this, "Batal.", Toast.LENGTH_SHORT).show();
+                final Intent intent = new Intent(SparepartForm.this, MainActivity.class);
+                intent.putExtra("menuBefore", 1);
+                startActivity(intent);
+            }
+        });
+
         dropdownType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown tipe sparepart saat dipilih
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 selectedId = listIdType.get(position); //Mendapatkan id dari dropdown yang dipilih
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-
             }
-
         });
-
-
     }
 
     public void setInit(){ //pendeklarasian objek-objek yang ada di layout
@@ -153,14 +156,11 @@ public class SparepartForm extends AppCompatActivity {
         txtStock = findViewById(R.id.txtStock);
         txtMerek =  findViewById(R.id.txtMerek);
 
-
         imageSparepart = findViewById(R.id.imageSparepart);
 
         btnPilihGambar = findViewById(R.id.btnPilihGambar);
         btnSaveSparepart = findViewById(R.id.btnSaveSparepart);
         btnCancelSparepart = findViewById(R.id.btnCancelSparepart);
-
-
     }
 
     private int getIndex(Spinner spinner, String myString){
@@ -183,7 +183,7 @@ public class SparepartForm extends AppCompatActivity {
 
             String id = intent.getStringExtra("id");
             //Log.d("id",id);
-            String nama = intent.getStringExtra("nama");
+            String nama = intent.getStringExtra("nama"); //yang ijo2 itu nama pack age
             String merk = intent.getStringExtra("merk");
             String buy = intent.getStringExtra("buy");
             String sell = intent.getStringExtra("sell");
@@ -196,6 +196,7 @@ public class SparepartForm extends AppCompatActivity {
             String minimalstock = intent.getStringExtra("minimalstock");
             String stock = intent.getStringExtra("stock");
             String gambar = intent.getStringExtra("gambar");
+
 //            Log.d("gambar","https://sibento.yafetrakan.com/"+gambar);
             Picasso.get().load("https://sibento.yafetrakan.com/"+gambar).memoryPolicy(MemoryPolicy.NO_CACHE) .networkPolicy(NetworkPolicy.NO_CACHE).into(imageSparepart);
 
@@ -203,7 +204,7 @@ public class SparepartForm extends AppCompatActivity {
             txtIdSparepart.setEnabled(false);
             txtNamaSparepart.setText(nama);
             txtMinStock.setText(minimalstock);
-            txtStock.setText(sell);
+            txtStock.setText(stock);
             txtHargaJual.setText(sell);
             txtHargaBeli.setText(buy);
             txtNomor.setText(nomor);
@@ -212,6 +213,7 @@ public class SparepartForm extends AppCompatActivity {
             dropdownType.setSelection(getIndex(dropdownType, tipe));
             dropdownPosisi.setSelection(getIndex(dropdownPosisi, posisi));
             dropdownTempat.setSelection(getIndex(dropdownTempat, tempat));
+
             editMode = 1; //pengubahan menjadi mode edit
 //            mProgress.hide();
         }
@@ -229,7 +231,7 @@ public class SparepartForm extends AppCompatActivity {
 
         if(idSparepart.isEmpty()){
             txtIdSparepart.setError("ID diperlukan.");
-            txtIdSparepart.requestFocus();
+            txtIdSparepart.requestFocus(); //INPUTANNYA DIARAHKAN KESITU
             return 1;
         }
 
@@ -338,7 +340,6 @@ public class SparepartForm extends AppCompatActivity {
                         String idType = spinnerArrayList.get(i).getId().toString();
                         listNameType.add(nameType);
                         listIdType.add(idType);
-
                     }
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(SparepartForm.this,
@@ -426,8 +427,6 @@ public class SparepartForm extends AppCompatActivity {
 
             MultipartBody.Part body = MultipartBody.Part.createFormData("image_sparepart", "image.jpg", requestFile);
 
-//
-
             Call<ResponseBody> call = retrofitInterface.addSparepart(body,id_sparepart,name_sparepart,brand_sparepart,stock_sparepart,minimal_stock_sparepart,buy_price,sell_price,placement,id_sparepart_type);
 //        mProgressBar.setVisibility(View.VISIBLE);
             call.enqueue(new Callback<ResponseBody>() {
@@ -451,7 +450,6 @@ public class SparepartForm extends AppCompatActivity {
                     } else {
                         Log.d( "onResponse: ",response.message());
                         Toast.makeText(SparepartForm.this, "Gagal", Toast.LENGTH_SHORT).show();
-
                     }
                 }
 
@@ -480,8 +478,6 @@ public class SparepartForm extends AppCompatActivity {
 
 
         String txtplacement = dropdownPosisi.getSelectedItem().toString()+'-'+dropdownTempat.getSelectedItem().toString()+'-'+txtNomor.getText().toString();
-
-
 
         String id_sparepart = txtIdSparepart.getText().toString();
         String name_sparepart = txtNamaSparepart.getText().toString();

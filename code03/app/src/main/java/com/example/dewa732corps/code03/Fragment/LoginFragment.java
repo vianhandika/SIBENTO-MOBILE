@@ -73,8 +73,8 @@ public class LoginFragment extends Fragment {
     }
     public void login(){
         if(txtUsername.getText().toString().isEmpty()|| txtPassword.getText().toString().isEmpty()){
-            txtUsername.setError("Username harus ada");
-            txtPassword.setError("Password harus ada");
+            txtUsername.setError("Username harus diisi!");
+            txtPassword.setError("Password harus diisi!");
 
         }else{
 
@@ -128,7 +128,7 @@ public class LoginFragment extends Fragment {
                     } catch (Throwable e){
                         progressDialog.dismiss();
 //                        tError.setText("Username dan Password tidak cocok");
-                        Toast.makeText(getContext(), "Username dan Password tidak cocok", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Username atau Password Salah!", Toast.LENGTH_SHORT).show();
 
                     }
                 }

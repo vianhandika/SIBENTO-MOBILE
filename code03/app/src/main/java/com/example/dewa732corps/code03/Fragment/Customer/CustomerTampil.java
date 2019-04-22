@@ -1,4 +1,4 @@
-package com.example.dewa732corps.code03.Fragment.Sales;
+package com.example.dewa732corps.code03.Fragment.Customer;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -20,18 +19,11 @@ import android.widget.FrameLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.dewa732corps.code03.Adapter.SalesAdapter;
-import com.example.dewa732corps.code03.Adapter.SparepartAdapter;
-import com.example.dewa732corps.code03.Adapter.SupplierAdapter;
+import com.example.dewa732corps.code03.Adapter.CustomerAdapter;
 import com.example.dewa732corps.code03.Controller.ApiClient;
-import com.example.dewa732corps.code03.Controller.Sales;
-import com.example.dewa732corps.code03.Controller.SalesList;
+import com.example.dewa732corps.code03.Controller.Customer;
+import com.example.dewa732corps.code03.Controller.CustomerList;
 import com.example.dewa732corps.code03.Controller.SessionController;
-import com.example.dewa732corps.code03.Controller.Sparepart;
-import com.example.dewa732corps.code03.Controller.SparepartList;
-import com.example.dewa732corps.code03.Controller.Supplier;
-import com.example.dewa732corps.code03.Controller.SupplierList;
-import com.example.dewa732corps.code03.Fragment.Sparepart.SparepartForm;
 import com.example.dewa732corps.code03.R;
 
 import java.util.ArrayList;
@@ -45,21 +37,21 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SalesTampil extends Fragment {
+public class CustomerTampil extends Fragment {
 
     View dashboard;
     FrameLayout framelay;
-    Button btnTambahSales;
+    Button btnTambahCustomer;
     android.support.v7.widget.Toolbar toolbar;
     private SearchView search;
 
     private RecyclerView rview;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layout;
-    private List<SalesList> salesLists;
-    private List<Sales> salesData;
+    private List<CustomerList> customerLists;
+    private List<Customer> customerData;
 
-    SalesAdapter sAdapter;
+    CustomerAdapter sAdapter;
     ProgressDialog mProgress;
     ResponseBody AllData;
 
@@ -67,19 +59,19 @@ public class SalesTampil extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        dashboard= inflater.inflate(R.layout.menu2_sales_tampil,container,false);
+        dashboard= inflater.inflate(R.layout.menu2_customer_tampil,container,false);
         setinit();
 
         mProgress = new ProgressDialog(getContext());
         mProgress.setMessage("Loading Data");
         mProgress.show();
 
-        rview = dashboard.findViewById(R.id.recyclerViewSales);
+        rview = dashboard.findViewById(R.id.recyclerViewCustomer);
         rview.setHasFixedSize(true);
         layout = new LinearLayoutManager(getContext());
         rview.setLayoutManager(layout);
 
-        salesLists = new ArrayList<>();
+        customerLists = new ArrayList<>();
 
         session = new SessionController(getContext());
         session.checkLogin();
@@ -91,27 +83,27 @@ public class SalesTampil extends Fragment {
 
         ApiClient apiClient = retrofit.create(ApiClient.class);
 
-        Call<SalesList> salesGet = apiClient.getSales();
-//        Log.d("a",salesGet.toString());
-        salesGet.enqueue(new Callback<SalesList>() {
+        Call<CustomerList> customerGet = apiClient.getCustomer();
+
+        customerGet.enqueue(new Callback<CustomerList>() {
             @Override
-            public void onResponse(Call<SalesList> call, Response<SalesList> response) {
+            public void onResponse(Call<CustomerList> call, Response<CustomerList> response) {
                 try {
-                    salesData = response.body().getData();
-                    sAdapter = new SalesAdapter(response.body().getData(),getContext());
+                    customerData = response.body().getData();
+                    sAdapter = new CustomerAdapter(response.body().getData(),getContext());
                     sAdapter.notifyDataSetChanged();
-                    Log.d( "onResponse: ","A");
+
                     rview.setAdapter(sAdapter);
 
                     mProgress.hide();
 
                 } catch (Exception e) {
-                    Toast.makeText(getContext(), "Tidak Ada Sales!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Tidak Ada Customer!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<SalesList> call, Throwable t) {
+            public void onFailure(Call<CustomerList> call, Throwable t) {
                 Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
                 mProgress.hide();
             }
@@ -121,15 +113,15 @@ public class SalesTampil extends Fragment {
 
     public void setinit(){
         toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle("Manajemen Sales");
-        Button btnTambahSales = dashboard.findViewById(R.id.btnTambahSales);
+        toolbar.setTitle("Manajemen Customer");
+        Button btnTambahCustomer = dashboard.findViewById(R.id.btnTambahCustomer);
 
-        search = dashboard.findViewById(R.id.searchBarSales);
+        search = dashboard.findViewById(R.id.searchBarCustomer);
 
-        btnTambahSales.setOnClickListener(new View.OnClickListener() {
+        btnTambahCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), SalesForm.class);
+                Intent intent = new Intent(getContext(), CustomerForm.class);
                 startActivity(intent);
             }
         });

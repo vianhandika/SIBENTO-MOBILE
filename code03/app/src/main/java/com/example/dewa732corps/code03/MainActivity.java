@@ -17,9 +17,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.dewa732corps.code03.Controller.SessionController;
-import com.example.dewa732corps.code03.Fragment.BerandaFragment;
 import com.example.dewa732corps.code03.Fragment.Kendaraan.KendaraanTampil;
-import com.example.dewa732corps.code03.Fragment.Pelanggan.PelangganTampil;
+import com.example.dewa732corps.code03.Fragment.Customer.CustomerTampil;
+import com.example.dewa732corps.code03.Fragment.Motor_Customer.MotorCustomerTampil;
 import com.example.dewa732corps.code03.Fragment.Sales.SalesTampil;
 import com.example.dewa732corps.code03.Fragment.Sparepart.SparepartTampil;
 import com.example.dewa732corps.code03.Fragment.Supplier.SupplierTampil;
@@ -55,7 +55,16 @@ public class MainActivity extends AppCompatActivity
                 break;
             case 2: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SupplierTampil()).commit();Log.d("getPutExtra: ","2");
                 break;
-//  case 3: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new BerandaFragment()).commit();
+            case 3: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SalesTampil()).commit();Log.d("getPutExtra", "3");
+                break;
+            case 4: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new CustomerTampil()).commit();Log.d("getPutExtra", "4");
+                break;
+            case 5: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new MotorCustomerTampil()).commit();Log.d("getPutExtra", "5");
+//                break;
+//            case 3: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SalesTampil()).commit();Log.d("getPutExtra", "3");
+//                break;
+//            case 3: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SalesTampil()).commit();Log.d("getPutExtra", "3");
+//                break;
         }
     }
 
@@ -121,10 +130,10 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SalesTampil()).commit();
 //            toolbar.setTitle("Manajemen Sales");
         } else if (id == R.id.nav_pelanggan) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new PelangganTampil()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new CustomerTampil()).commit();
 //            toolbar.setTitle("Manajemen Pelanggan");
         } else if (id == R.id.nav_kendaraan) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new KendaraanTampil()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new MotorCustomerTampil()).commit();
 //            toolbar.setTitle("Manajemen Kendaraan");
         } else if (id == R.id.nav_pengadaansparepart) {
 //            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new PanelPegawaiFragment()).commit();

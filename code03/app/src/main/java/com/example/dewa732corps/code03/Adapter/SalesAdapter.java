@@ -18,9 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dewa732corps.code03.Controller.ApiClient;
+import com.example.dewa732corps.code03.Controller.Sales;
 import com.example.dewa732corps.code03.Controller.Sparepart;
-import com.example.dewa732corps.code03.Controller.Supplier;
 import com.example.dewa732corps.code03.Fragment.BerandaFragment;
+import com.example.dewa732corps.code03.Fragment.Sales.SalesForm;
+import com.example.dewa732corps.code03.Fragment.Sparepart.SparepartForm;
 import com.example.dewa732corps.code03.Fragment.Supplier.SupplierForm;
 import com.example.dewa732corps.code03.R;
 
@@ -37,68 +39,69 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.MyViewHolder>{
-    private List<Supplier> SupplierBundle = new ArrayList<>();
-    private List<Supplier> SupplierListFilter = new ArrayList<>();
+public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder>{
+    private List<Sales> SalesBundle = new ArrayList<>();
+    private List<Sales> SalesListFilter = new ArrayList<>();
 
     private Context context;
     ProgressDialog mProgress;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView Name, Address, PhoneNumber;
+        public TextView Name, PhoneNumber, IdSupplier;
         public ImageView btnEdit, btnDelete;
 //        public LinearLayout topWraper;
 //        public LinearLayout bottomWraper;
 
         public MyViewHolder(View v) {
             super(v);
-            Name = v.findViewById(R.id.txtNameSupplier);
-            Address = v.findViewById(R.id.txtAddressSupplier);
-            PhoneNumber = v.findViewById(R.id.txtPhoneNumberSupplier);
-            btnEdit = v.findViewById(R.id.btnEditSupplier);
-            btnDelete = v.findViewById(R.id.btnDeleteSupplier);
+            Name = v.findViewById(R.id.txtNameSales);
+            PhoneNumber = v.findViewById(R.id.txtNoTelpSales);
+            IdSupplier = v.findViewById(R.id.txtNameOfSupplier);
+
+            btnEdit = v.findViewById(R.id.btnEditSales);
+            btnDelete = v.findViewById(R.id.btnDeleteSales);
 
 //            bottomWraper = v.findViewById(R.id.bottom_wrapper);
 //            topWraper = v.findViewById(R.id.top_wrapper);
         }
     }
 
-    public SupplierAdapter(List<Supplier> SupplierBundle , Context context) {
-        this.SupplierBundle = SupplierBundle;
+    public SalesAdapter(List<Sales> SalesBundle , Context context) {
+        this.SalesBundle = SalesBundle;
         this.context = context;
-
-        this.SupplierListFilter = SupplierBundle;
+        this.SalesListFilter = SalesBundle;
         mProgress = new ProgressDialog(context);
         mProgress.setMessage("Loading");
     }
 
     @NonNull
     @Override
-    public SupplierAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public SalesAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         // create a new view
         View v = (View) LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.content_supplier, viewGroup, false);
-        return new SupplierAdapter.MyViewHolder(v);
+                .inflate(R.layout.content_sales, viewGroup, false);
+        return new SalesAdapter.MyViewHolder(v);
     }
 
     public void filter(String charText) {
         Log.d( "filter: ", charText);
 
         charText = charText.toLowerCase(Locale.getDefault());
-        SupplierListFilter.clear();
+        SalesListFilter.clear();
         if (charText.length() == 0) {
-            SupplierListFilter.addAll(SupplierBundle);
+            SalesListFilter.addAll(SalesBundle);
         }
         else
         {
-            for (Supplier obj : SupplierBundle) {
+            for (Sales obj : SalesBundle) {
                 if (obj.getName().toLowerCase(Locale.getDefault()).contains(charText)) {
-                    SupplierListFilter.add(obj);
+                    SalesListFilter.add(obj);
                 }
             }
         }
         notifyDataSetChanged();
     }
+
 
     public Filter getFilter() {
         return new Filter() {
@@ -106,60 +109,61 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.MyView
             protected FilterResults performFiltering(CharSequence charSequence) {
                 String charString = charSequence.toString();
                 if (charString.isEmpty()) {
-                    SupplierListFilter = SupplierBundle;
+                    SalesListFilter = SalesBundle;
                 } else {
-                    List<Supplier> filteredList = new ArrayList<>();
-                    for (Supplier obj : SupplierBundle) {
+                    List<Sales> filteredList = new ArrayList<>();
+                    for (Sales obj : SalesBundle) {
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
-                        if (obj.getName().toLowerCase().contains(charString.toLowerCase())) // || obj.getId().contains(charString) ini error di constain nya karena integer
-                        {
-                            Log.d("search: ",charString.toLowerCase());
-                            Log.d( "Nama: ", obj.getName());
+                        if (obj.getName().toLowerCase().contains(charString.toLowerCase())) { // || obj.getId().contains(charSequence)
                             filteredList.add(obj);
                         }
                     }
-
-                    SupplierListFilter = filteredList;
+                    SalesListFilter = filteredList;
                 }
-
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = SupplierListFilter;
+                filterResults.values = SalesListFilter;
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                SupplierListFilter = (ArrayList<Supplier>) filterResults.values;
+                SalesListFilter = (ArrayList<Sales>) filterResults.values;
                 notifyDataSetChanged();
             }
         };
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SupplierAdapter.MyViewHolder vh, final int i) {
+    public void onBindViewHolder(@NonNull SalesAdapter.MyViewHolder vh, final int i) {
 
 //        final Sparepart data = SparepartBundle.get(i);
-        final Supplier data = SupplierListFilter.get(i);
+        final Sales data = SalesListFilter.get(i);
 
         final int ifinal = vh.getAdapterPosition();
-
         vh.Name.setText(data.getName());
-        vh.Address.setText(data.getAddress());
         vh.PhoneNumber.setText(data.getPhoneNumber());
+        vh.IdSupplier.setText(data.getSupplier().getName());
 
         vh.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SupplierForm.class);
-                intent.putExtra("mode", i);
+                Intent intent = new Intent(v.getContext(), SalesForm.class);
+                intent.putExtra("mode", i); // FUNGSI PUT EXTRA ITU UTK NGAMBIL DATA YANG SUDAH DISET SEBELUMNYA, CONTOHNYA UNTUK EDIT KAN SEBELUMNYA UDAH ADA DATA BIAR MUNCUL
 
                 intent.putExtra("id", data.getId().toString());
                 intent.putExtra("nama", data.getName());
                 intent.putExtra("notelp", data.getPhoneNumber());
-                intent.putExtra("alamat", data.getAddress());
-//                intent.putExtra("listsales", data.getSales());
+                intent.putExtra("name_supplier", data.getSupplier().getName().toString());
+
+                Log.d("ID Sales: ", data.getId().toString());
+                Log.d("Nama: ", data.getName());
+                Log.d("No Telp: ", data.getPhoneNumber());
+                Log.d("ID Supplier: ", data.getSupplier().getName().toString());
+
+//                intent.putExtra("supplier", data.getSupplier());
+
                 v.getContext().startActivity(intent);
             }
         });
@@ -176,26 +180,26 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.MyView
 
                 ApiClient apiClient = retrofit.create(ApiClient.class);
 
-                Call<ResponseBody> deleteSupplier = apiClient.deleteSupplier(data.getId());
-                deleteSupplier.enqueue(new Callback<ResponseBody>() {
+                Call<ResponseBody> deleteSales = apiClient.deleteSales(data.getId());
+                deleteSales.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.code() == 201){
-                            Toast.makeText(context.getApplicationContext(), "BERHASIL MENGHAPUS DATA SUPPLIER", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context.getApplicationContext(), "BERHASIL MENGHAPUS DATA SALES", Toast.LENGTH_SHORT).show();
                             mProgress.hide();
                         }else{
-                            Toast.makeText(context.getApplicationContext(), "GAGAL MENGHAPUS DATA SUPPLIER", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context.getApplicationContext(), "GAGAL MENGHAPUS DATA SALES", Toast.LENGTH_SHORT).show();
                             mProgress.hide();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(context.getApplicationContext(), "GAGAL HAPUS DATA SUPPLIER", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context.getApplicationContext(), "GAGAL HAPUS DATA SALES", Toast.LENGTH_SHORT).show();
                         mProgress.hide();
                     }
                 });
-                SupplierBundle.remove(ifinal);
+                SalesBundle.remove(ifinal);
                 notifyItemRemoved(ifinal);
                 notifyItemRangeChanged(ifinal, getItemCount());
             }
@@ -204,6 +208,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.MyView
 
     @Override
     public int getItemCount() {
-        return SupplierListFilter.size();
+//        return SparepartBundle.size();
+        return SalesListFilter.size();
     }
 }

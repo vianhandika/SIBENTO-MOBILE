@@ -40,16 +40,26 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_main2">
-
         </activity>
 
         <activity
             android:name=".Fragment.Sparepart.SparepartForm">
-
         </activity>
+
         <activity
             android:name=".Fragment.Supplier.SupplierForm">
+        </activity>
 
+        <activity
+            android:name=".Fragment.Sales.SalesForm">
+        </activity>
+
+        <activity
+            android:name=".Fragment.Customer.CustomerForm">
+        </activity>
+
+        <activity
+            android:name=".Fragment.Motor_Customer.MotorCustomerForm">
         </activity>
     </application>
 

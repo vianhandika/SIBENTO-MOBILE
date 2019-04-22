@@ -8,39 +8,52 @@ public class Sparepart {
     @SerializedName("id")
     @Expose
     private String id;
+
     @SerializedName("name")
     @Expose
     private String name;
+
     @SerializedName("brand")
     @Expose
     private String brand;
+
     @SerializedName("type")
     @Expose
     private String type;
+
     @SerializedName("stock")
     @Expose
     private String stock;
+
     @SerializedName("min_stock")
     @Expose
     private String minStock;
+
     @SerializedName("buy_price")
     @Expose
     private String buyPrice;
+
     @SerializedName("sell_price")
     @Expose
     private String sellPrice;
+
     @SerializedName("placement")
     @Expose
     private String placement;
+
     @SerializedName("placement_position")
     @Expose
     private String placementPosition;
+
     @SerializedName("placement_place")
     @Expose
     private String placementPlace;
+
     @SerializedName("placement_number")
     @Expose
+
     private String placementNumber;
+
     @SerializedName("image")
     @Expose
     private String image;

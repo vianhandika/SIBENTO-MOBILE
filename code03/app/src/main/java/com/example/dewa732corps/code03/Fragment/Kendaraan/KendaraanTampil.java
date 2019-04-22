@@ -28,7 +28,7 @@ public class KendaraanTampil extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.framelay, new KendaraanTambah());
+//                transaction.replace(R.id.framelay, new KendaraanTambah());
                 transaction.commit();
             }
         });

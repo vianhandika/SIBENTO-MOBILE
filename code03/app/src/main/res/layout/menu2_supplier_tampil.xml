@@ -5,21 +5,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/WhiteFragment"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnTambahSupplier"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="120dp"
-        android:text="Tambah" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/WhiteFragment"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <android.widget.SearchView
+            android:id="@+id/searchBarSupplier"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right"/>
+
+        <Button
+            android:id="@+id/btnTambahSupplier"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="left"
+            android:text="Tambah" />
+
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewSupplier"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
