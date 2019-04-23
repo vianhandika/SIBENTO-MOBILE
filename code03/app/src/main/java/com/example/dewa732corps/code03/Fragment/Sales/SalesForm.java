@@ -224,9 +224,7 @@ public class SalesForm extends AppCompatActivity {
 //                        mProgress.show();
                         getPutExtra();
                     }
-
                 }
-
             }
             @Override
             public void onFailure(Call<SupplierList> call, Throwable t) {
@@ -311,7 +309,7 @@ public class SalesForm extends AppCompatActivity {
         Integer id_sales = Integer.parseInt(idSales);
         String id_supplier = selectedId;
         String name_sales = txtNamaSales.getText().toString();
-        Integer phone_number_sales = Integer.parseInt(selectedId);
+        String phone_number_sales = txtNoTelpSales.getText().toString();
 
         Call<ResponseBody> call = retrofitInterface.editSales(id_sales, id_supplier, name_sales, phone_number_sales);
         call.enqueue(new Callback<ResponseBody>() {

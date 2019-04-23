@@ -21,10 +21,6 @@
             android:icon="@drawable/ic_menu2_pelanggan"
             android:title="Pelanggan" />
         <item
-            android:id="@+id/nav_kendaraan"
-            android:icon="@drawable/ic_menu2_kendaraan"
-            android:title="Kendaraan" />
-        <item
             android:id="@+id/nav_pengadaansparepart"
             android:icon="@drawable/ic_menu2_pengadaansparepart"
             android:title="Pengadaan Sparepart" />

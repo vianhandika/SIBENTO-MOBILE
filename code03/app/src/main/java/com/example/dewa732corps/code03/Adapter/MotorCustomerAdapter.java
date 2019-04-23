@@ -49,7 +49,7 @@ public class MotorCustomerAdapter extends RecyclerView.Adapter<MotorCustomerAdap
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView PlatNomor, IdBrand, IdType;
-        public ImageView btnEdit, btnDelete;
+        public ImageView btnAdd, btnEdit, btnDelete;
 
         public MyViewHolder(View v) {
             super(v);
@@ -78,27 +78,6 @@ public class MotorCustomerAdapter extends RecyclerView.Adapter<MotorCustomerAdap
                 .inflate(R.layout.content_motorcustomer, viewGroup, false);
         return new MotorCustomerAdapter.MyViewHolder(v);
     }
-
-    public void filter(String charText) {
-        Log.d( "filter: ", charText);
-
-        charText = charText.toLowerCase(Locale.getDefault());
-        MotorCustomerListFilter.clear();
-        if (charText.length() == 0) {
-            MotorCustomerListFilter.addAll(MotorCustomerBundle);
-        }
-        else
-        {
-            for (MotorCustomer obj : MotorCustomerBundle)
-            {
-                if (obj.getPlate().toLowerCase(Locale.getDefault()).contains(charText)) {
-                    MotorCustomerListFilter.add(obj);
-                }
-            }
-        }
-        notifyDataSetChanged();
-    }
-
 
     public Filter getFilter() { //INI JUGA KEK FILTER TO?
         return new Filter() {
@@ -140,6 +119,10 @@ public class MotorCustomerAdapter extends RecyclerView.Adapter<MotorCustomerAdap
         vh.PlatNomor.setText(data.getPlate());
         vh.IdBrand.setText(data.getBrand());
         vh.IdType.setText(data.getType());
+
+//        vh.btnAdd.setOnClickListener(new View.OnClickListener(){
+//
+//        });
 
         vh.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override

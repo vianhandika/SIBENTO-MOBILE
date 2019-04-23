@@ -9,7 +9,7 @@
         android:layout_height="170dp"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="40dp"
-        android:background="@drawable/box"/>
+        android:background="@drawable/box_radius"/>
 
     <TextView
         android:id="@+id/box"

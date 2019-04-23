@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -24,7 +23,6 @@ import com.example.dewa732corps.code03.Controller.ApiClient;
 import com.example.dewa732corps.code03.Controller.MotorCustomer;
 import com.example.dewa732corps.code03.Controller.MotorCustomerList;
 import com.example.dewa732corps.code03.Controller.SessionController;
-import com.example.dewa732corps.code03.Fragment.Customer.CustomerTampil;
 import com.example.dewa732corps.code03.R;
 
 import java.util.ArrayList;
@@ -38,7 +36,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MotorCustomerTampil extends AppCompatActivity {
+public class MotorCustomerTampil2 extends Fragment {
+
+    View dashboard;
     FrameLayout framelay;
     Button btnTambahMotorCustomer;
     android.support.v7.widget.Toolbar toolbar;
@@ -48,36 +48,31 @@ public class MotorCustomerTampil extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layout;
     private List<MotorCustomerList> motorCustomerLists;
-    private List<MotorCustomer> motorCustomerData=new ArrayList<>();
-
-    private List<MotorCustomer> motorCustomerFilter=new ArrayList<>();
+    private List<MotorCustomer> motorCustomerData;
 
     MotorCustomerAdapter sAdapter;
-    String id_customer;
     ProgressDialog mProgress;
     ResponseBody AllData;
 
     SessionController session;
 
-    public void onCreate(Bundle savedInstanceState)  {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu2_motorcustomer_tampil);
-
+        dashboard= inflater.inflate(R.layout.menu2_motorcustomer_tampil,container,false);
         setinit();
 
-        mProgress = new ProgressDialog(MotorCustomerTampil.this);
+        mProgress = new ProgressDialog(getContext());
         mProgress.setMessage("Loading Data");
         mProgress.show();
 
-        rview = findViewById(R.id.recyclerViewMotorCustomer);
+        rview = dashboard.findViewById(R.id.recyclerViewMotorCustomer);
         rview.setHasFixedSize(true);
-        layout = new LinearLayoutManager(this);
+        layout = new LinearLayoutManager(getContext());
         rview.setLayoutManager(layout);
 
         motorCustomerLists = new ArrayList<>();
 
-        session = new SessionController(this);
+        session = new SessionController(getContext());
         session.checkLogin();
 
         Retrofit retrofit= new retrofit2.Retrofit.Builder()
@@ -93,44 +88,38 @@ public class MotorCustomerTampil extends AppCompatActivity {
             @Override
             public void onResponse(Call<MotorCustomerList> call, Response<MotorCustomerList> response) {
                 try {
-                    getPutExtra();
-                    Log.d( "id Customer: ",id_customer);
                     motorCustomerData = response.body().getData();
-
-                    for (MotorCustomer motor : motorCustomerData) { //INI FILTER UNTUK PER ID
-                        if (motor.getIdCustomer().toString().equalsIgnoreCase(id_customer)) {
-                            motorCustomerFilter.add(motor);
-                        }
-                    }
-                    sAdapter = new MotorCustomerAdapter(motorCustomerFilter,MotorCustomerTampil.this); //response.body().getData()
+                    sAdapter = new MotorCustomerAdapter(response.body().getData(),getContext());
                     sAdapter.notifyDataSetChanged();
                     rview.setAdapter(sAdapter);
 
                     mProgress.hide();
 
                 } catch (Exception e) {
-                    Toast.makeText(MotorCustomerTampil.this, "Tidak Ada Motor Customer!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Tidak Ada Motor Customer!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<MotorCustomerList> call, Throwable t) {
-                Toast.makeText(MotorCustomerTampil.this, "Fail", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
                 mProgress.hide();
             }
         });
+        return dashboard;
     }
 
     public void setinit(){
-        Button btnTambahMotorCustomer = findViewById(R.id.btnTambahMotorCustomer);
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle("Manajemen Motor Customer");
+        Button btnTambahMotorCustomer = dashboard.findViewById(R.id.btnTambahMotorCustomer);
 
-        search = findViewById(R.id.searchBarMotorCustomer);
+        search = dashboard.findViewById(R.id.searchBarMotorCustomer);
 
         btnTambahMotorCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MotorCustomerTampil.this, MotorCustomerForm.class);
-                intent.putExtra("id_customer", id_customer);
+                Intent intent = new Intent(getContext(), MotorCustomerForm.class);
                 startActivity(intent);
             }
         });
@@ -152,14 +141,5 @@ public class MotorCustomerTampil extends AppCompatActivity {
                 return true;
             }
         });
-    }
-    public void getPutExtra(){ // mendapatkan parsing data dari activity sebelumnya beserta pengesetan form sesuai parsing data
-        Intent intent = getIntent();
-
-        if(!String.valueOf(intent.getStringExtra("id_customer")).equals("null")) {
-            String id = intent.getStringExtra("id_customer");
-            //Log.d("id",id);
-            id_customer = id;
-        }
     }
 }

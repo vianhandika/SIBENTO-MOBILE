@@ -36,32 +36,32 @@
                 android:hint="Masukkan Nomor Plat"
                 android:textAlignment="center"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="BRAND"
-                android:textSize="20dp" />
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:text="BRAND MOTOR"-->
+                <!--android:textSize="20dp" />-->
 
-            <Spinner
-                android:id="@+id/dropdownBrandMotorCustomer"
-                android:layout_width="185dp"
-                android:layout_height="54dp"
-                android:layout_below="@+id/txtNomorPlatMotorCust"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:layout_toEndOf="@+id/txtMerek"
-                android:layout_toRightOf="@+id/txtMerek"
-                android:spinnerMode="dropdown" />
+            <!--<Spinner-->
+                <!--android:id="@+id/dropdownBrandMotorCustomer"-->
+                <!--android:layout_width="185dp"-->
+                <!--android:layout_height="54dp"-->
+                <!--android:layout_below="@+id/txtNomorPlatMotorCust"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_toEndOf="@+id/txtMerek"-->
+                <!--android:layout_toRightOf="@+id/txtMerek"-->
+                <!--android:spinnerMode="dropdown" />-->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="20dp"
-                android:text="NAMA SALES"/>
+                android:text="TIPE MOTOR"/>
 
             <Spinner
                 android:id="@+id/dropdownTypeMotorCustomer"

@@ -28,12 +28,9 @@
             android:id="@+id/btnTambahSupplier"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_gravity="left"
             android:text="Tambah" />
-
-
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

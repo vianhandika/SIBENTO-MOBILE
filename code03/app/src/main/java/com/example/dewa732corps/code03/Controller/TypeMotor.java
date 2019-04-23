@@ -12,28 +12,31 @@ public class TypeMotor {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("typelist")
+    @SerializedName("id_brand")
     @Expose
-    private TypeMotor type;
+    private Integer idBrand;
+    @SerializedName("brand")
+    @Expose
+    private Object brand;
 
     /**
      * No args constructor for use in serialization
-     *
      */
     public TypeMotor() {
     }
 
     /**
-     *
      * @param id
+     * @param idBrand
      * @param name
-     * @param type
+     * @param brand
      */
-    public TypeMotor(Integer id, String name, TypeMotor type) {
+    public TypeMotor(Integer id, String name, Integer idBrand, Object brand) {
         super();
         this.id = id;
         this.name = name;
-        this.type = type;
+        this.idBrand = idBrand;
+        this.brand = brand;
     }
 
     public Integer getId() {
@@ -52,12 +55,19 @@ public class TypeMotor {
         this.name = name;
     }
 
-    public TypeMotor getType() {
-        return type;
+    public Integer getIdBrand() {
+        return idBrand;
     }
 
-    public void setType(TypeMotor type) {
-        this.type = type;
+    public void setIdBrand(Integer idBrand) {
+        this.idBrand = idBrand;
     }
 
+    public Object getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Object brand) {
+        this.brand = brand;
+    }
 }

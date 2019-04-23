@@ -76,7 +76,8 @@ public class MotorCustomerForm extends AppCompatActivity {
     private int simpan=0;
     private int editMode=0;
 
-    String selectedIdBrand, selectedIdType, idMotorCustomer;
+    String selectedIdBrand, selectedIdType, idMotorCustomer, selectedIdCustomer;
+    public String id_customer2;
     private List<String> listNameBrandMotorCustomer = new ArrayList<String>();
     private List<String> listIdBrandMotorCustomer = new ArrayList<String>();
 
@@ -106,7 +107,7 @@ public class MotorCustomerForm extends AppCompatActivity {
                 }
                 else if (formChecking()==0 && editMode ==1){ //kalau pengecekan form benar dan pada mode edit
                     Log.d("sukses","editMotorCustomer");
-//                    editMotorCustomer();
+                    editMotorCustomer();
                 }
             }
         });
@@ -116,21 +117,21 @@ public class MotorCustomerForm extends AppCompatActivity {
             public void onClick(View v) { //Listener button btnSaveSparepart saat di klik
                 Toast.makeText(MotorCustomerForm.this, "Batal.", Toast.LENGTH_SHORT).show();
                 final Intent intent = new Intent(MotorCustomerForm.this, MainActivity.class);
-                intent.putExtra("menuBefore", 5);
+                intent.putExtra("menuBefore", 4);
                 startActivity(intent);
             }
         });
 
-        dropdownBrandMotorCustomer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown tipe sparepart saat dipilih
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int brand, long id) {
-                selectedIdBrand = listIdBrandMotorCustomer.get(brand); //Mendapatkan id dari dropdown yang dipilih
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-            }
-        });
+//        dropdownBrandMotorCustomer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown tipe sparepart saat dipilih
+//            @Override
+//            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int brand, long id) {
+//                selectedIdBrand = listIdBrandMotorCustomer.get(brand); //Mendapatkan id dari dropdown yang dipilih
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parentView) {
+//            }
+//        });
 
         dropdownTypeMotorCustomer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown tipe sparepart saat dipilih
             @Override
@@ -171,10 +172,12 @@ public class MotorCustomerForm extends AppCompatActivity {
         simpan = getIntent().getIntExtra("simpan", 0);
 
 //        Log.d("Id Sparepart", String.valueOf(((Intent) intent).getStringExtra("id")));
+
+        id_customer2 = intent.getStringExtra("id_customer"); //buat nerima
+
         if(!String.valueOf(intent.getStringExtra("id")).equals("null")) {
 
             String id = intent.getStringExtra("id");
-            //Log.d("id",id);
             idMotorCustomer = id;
             String platnomor = intent.getStringExtra("platnomor");
             String brand_motorcustomer = intent.getStringExtra("brand_motorcustomer");
@@ -182,7 +185,7 @@ public class MotorCustomerForm extends AppCompatActivity {
 
             txtNomorPlatMotorCust.setText(platnomor);
 
-            dropdownBrandMotorCustomer.setSelection(getIndex(dropdownBrandMotorCustomer, brand_motorcustomer));
+//            dropdownBrandMotorCustomer.setSelection(getIndex(dropdownBrandMotorCustomer, brand_motorcustomer));
             dropdownTypeMotorCustomer.setSelection(getIndex(dropdownTypeMotorCustomer, type_motorcustomer));
             editMode = 1; //pengubahan menjadi mode edit
 //            mProgress.hide();
@@ -202,57 +205,59 @@ public class MotorCustomerForm extends AppCompatActivity {
     }
 
     public void setDropdown(){ // Mengeset dropdown dari data pemanggilan API server
+        Log.d("ID masuk: ", "test");
 
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
 
+//        Call<BrandMotorList> call_brand = service.getBrandMotor();
+//        //Log.d("responsecode", String.valueOf(request.getSparepart()));
+//
+//        call_brand.enqueue(new Callback<BrandMotorList>() {
+//            @Override
+//            public void onResponse(Call<BrandMotorList> call, Response<BrandMotorList> response) {
+//                if (response.isSuccessful()) {
+//                    List<BrandMotor> spinnerArrayList = response.body().getData();
+//                    for (int i = 0; i < spinnerArrayList.size(); i++) {
+//                        String nameBrand = spinnerArrayList.get(i).getName();
+//                        String idBrand = spinnerArrayList.get(i).getId().toString();
+//                        listNameBrandMotorCustomer.add(nameBrand);
+//                        listIdBrandMotorCustomer.add(idBrand);
+//                    }
+//
+//                    ArrayAdapter<String> adapter = new ArrayAdapter<>(MotorCustomerForm.this,
+//                            android.R.layout.simple_spinner_dropdown_item
+//                            , listNameBrandMotorCustomer);
+//                    dropdownBrandMotorCustomer.setAdapter(adapter);
+//
+//                    Intent intent = getIntent();
+//
+//                    if(!String.valueOf(intent.getStringExtra("id")).equals("null")) { //pengecekan ada atau tidaknya parsing data dari aktivity sebelumnya
+////                        mProgress.show();
+//                        getPutExtra();
+//                    }
+//                }
+//
+//            }
+//            @Override
+//            public void onFailure(Call<BrandMotorList> call, Throwable t) {
+//                Log.d("Error",t.getMessage());
+//            }
+//        });
 
-        Call<BrandMotorList> call_brand = service.getBrandMotor();
-        //Log.d("responsecode", String.valueOf(request.getSparepart()));
+        Call<TypeMotorList> call = service.getTypeMotor();
 
-        call_brand.enqueue(new Callback<BrandMotorList>() {
-            @Override
-            public void onResponse(Call<BrandMotorList> call, Response<BrandMotorList> response) {
-                if (response.isSuccessful()) {
-                    List<BrandMotor> spinnerArrayList = response.body().getData();
-                    for (int i = 0; i < spinnerArrayList.size(); i++) {
-                        String nameBrand = spinnerArrayList.get(i).getBrand().toString();
-                        String idBrand = spinnerArrayList.get(i).getId().toString();
-                        listNameBrandMotorCustomer.add(nameBrand);
-                        listIdBrandMotorCustomer.add(idBrand);
-                    }
-
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(MotorCustomerForm.this,
-                            android.R.layout.simple_spinner_dropdown_item
-                            , listNameBrandMotorCustomer);
-                    dropdownBrandMotorCustomer.setAdapter(adapter);
-
-                    Intent intent = getIntent();
-
-                    if(!String.valueOf(intent.getStringExtra("id")).equals("null")) { //pengecekan ada atau tidaknya parsing data dari aktivity sebelumnya
-//                        mProgress.show();
-                        getPutExtra();
-                    }
-                }
-
-            }
-            @Override
-            public void onFailure(Call<BrandMotorList> call, Throwable t) {
-                Log.d("Error",t.getMessage());
-            }
-        });
-
-        Call<TypeMotorList> call_type = service.getTypeMotor();
-
-        call_type.enqueue(new Callback<TypeMotorList>() {
+        call.enqueue(new Callback<TypeMotorList>() {
             @Override
             public void onResponse(Call<TypeMotorList> call, Response<TypeMotorList> response) {
                 if (response.isSuccessful()) {
                     List<TypeMotor> spinnerArrayList = response.body().getData();
                     for (int i = 0; i < spinnerArrayList.size(); i++) {
-                        String nameType = spinnerArrayList.get(i).getType().toString();
+                        String nameType = spinnerArrayList.get(i).getName();
                         String idType = spinnerArrayList.get(i).getId().toString();
+                        String idBrand = spinnerArrayList.get(i).getIdBrand().toString();
                         listNameTypeMotorCustomer.add(nameType);
                         listIdTypeMotorCustomer.add(idType);
+                        listIdBrandMotorCustomer.add(idBrand);
                     }
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(MotorCustomerForm.this,
@@ -262,10 +267,10 @@ public class MotorCustomerForm extends AppCompatActivity {
 
                     Intent intent = getIntent();
 
-                    if(!String.valueOf(intent.getStringExtra("id")).equals("null")) { //pengecekan ada atau tidaknya parsing data dari aktivity sebelumnya
+//                    if(!String.valueOf(intent.getStringExtra("id_customer")).equals("null")) { //pengecekan ada atau tidaknya parsing data dari aktivity sebelumnya
 //                        mProgress.show();
                         getPutExtra();
-                    }
+//                    }
                 }
 
             }
@@ -285,19 +290,21 @@ public class MotorCustomerForm extends AppCompatActivity {
 
         ApiClient retrofitInterface = retrofit.create(ApiClient.class);
 
-        RequestBody plate_motorcustomer =
+        RequestBody plate_number =
                 RequestBody.create(
                         MediaType.parse("multipart/form-data"), txtNomorPlatMotorCust.getText().toString());
 
-        RequestBody id_brand_motorcustomer=
-                RequestBody.create(
-                        MediaType.parse("multipart/form-data"), selectedIdBrand);
-
-        RequestBody id_type_motorcustomer =
+        RequestBody id_motorcycle_type =
                 RequestBody.create(
                         MediaType.parse("multipart/form-data"), selectedIdType);
 
-        Call<ResponseBody> call = retrofitInterface.addMotorCustomer(plate_motorcustomer, id_brand_motorcustomer, id_type_motorcustomer);
+        Log.d("id customer2: ", id_customer2);
+
+        RequestBody id_customer =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), id_customer2);
+
+        Call<ResponseBody> call = retrofitInterface.addMotorCustomer(plate_number, id_motorcycle_type, id_customer);
 //        mProgressBar.setVisibility(View.VISIBLE);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -306,12 +313,11 @@ public class MotorCustomerForm extends AppCompatActivity {
 //                mProgressBar.setVisibility(View.GONE);
 
                 if (response.isSuccessful()) {
-
                     ResponseBody responseBody = response.body();
                     Log.d("SUKSES",responseBody.toString());
                     Toast.makeText(MotorCustomerForm.this, "Sukses", Toast.LENGTH_SHORT).show();
                     final Intent intent = new Intent(MotorCustomerForm.this, MainActivity.class);
-                    intent.putExtra("menuBefore", 5);
+                    intent.putExtra("menuBefore", 4);
                     startActivity(intent);
 //                    mBtImageShow.setVisibility(View.VISIBLE);
 //                     mImageUrl = URL + responseBody.getPath();
@@ -333,50 +339,48 @@ public class MotorCustomerForm extends AppCompatActivity {
         });
     }
 
-//    private void editMotorCustomer() { // Fungsi mengedit Data sparepart
-//
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(URL)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        ApiClient retrofitInterface = retrofit.create(ApiClient.class);
-//
-//        String ddsalessupplier = dropdownNameOfSupplier.getSelectedItem().toString();
-//
-//        Integer id_sales = Integer.parseInt(idSales);
-//        String id_supplier = selectedId;
-//        String name_sales = txtNamaSales.getText().toString();
-//        Integer phone_number_sales = Integer.parseInt(selectedId);
-//
-//        Call<ResponseBody> call = retrofitInterface.editSales(id_sales, id_supplier, name_sales, phone_number_sales);
-//        call.enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-//
-//
-//                if (response.isSuccessful()) {
-//                    ResponseBody responseBody = response.body();
-////                    Log.d("SUKSES UPDATE DATA",responseBody.toString());
-//                    Toast.makeText(SalesForm.this, "SUKSES UPDATE SALES", Toast.LENGTH_SHORT).show();
-//                    final Intent intent = new Intent(SalesForm.this, MainActivity.class);
-//                    intent.putExtra("menuBefore", 3);
-//                    startActivity(intent);
-//
-//                } else {
-//                    Log.d( "onResponse: ",response.message());
-//                    Toast.makeText(SalesForm.this, "Gagal Update Data", Toast.LENGTH_SHORT).show();
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                Log.d("onFailure: ",t.toString());
-//
-////                mProgressBar.setVisibility(View.GONE);
-////                Log.d(TAG, "onFailure: "+t.getLocalizedMessage());
-//            }
-//        });
-//    }
+    private void editMotorCustomer() { // Fungsi mengedit Data sparepart
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiClient retrofitInterface = retrofit.create(ApiClient.class);
+
+//        String plate_number = txtNomorPlatMotorCust.getText().toString();
+        Integer id_motorcustomer = Integer.parseInt(idMotorCustomer);
+        String plate_number = txtNomorPlatMotorCust.getText().toString();
+        String id_motorcycle_type = selectedIdType;
+        String id_customer = id_customer2;
+
+
+        Call<ResponseBody> call = retrofitInterface.editMotorCustomer(id_motorcustomer, plate_number, id_motorcycle_type, id_customer);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+
+                if (response.isSuccessful()) {
+                    ResponseBody responseBody = response.body();
+//                    Log.d("SUKSES UPDATE DATA",responseBody.toString());
+                    Toast.makeText(MotorCustomerForm.this, "SUKSES UPDATE MOTOR CUSTOMER", Toast.LENGTH_SHORT).show();
+                    final Intent intent = new Intent(MotorCustomerForm.this, MainActivity.class);
+                    intent.putExtra("menuBefore", 4);
+                    startActivity(intent);
+
+                } else {
+                    Log.d( "onResponse: ",response.message());
+                    Toast.makeText(MotorCustomerForm.this, "Gagal Update Data", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("onFailure: ",t.toString());
+
+//                mProgressBar.setVisibility(View.GONE);
+//                Log.d(TAG, "onFailure: "+t.getLocalizedMessage());
+            }
+        });
+    }
 }

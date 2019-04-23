@@ -61,6 +61,10 @@
         <activity
             android:name=".Fragment.Motor_Customer.MotorCustomerForm">
         </activity>
+
+        <activity
+            android:name=".Fragment.Motor_Customer.MotorCustomerTampil">
+        </activity>
     </application>
 
 </manifest>

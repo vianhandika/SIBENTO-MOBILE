@@ -22,6 +22,13 @@ public interface ApiClient {
             @Field("username")String username,
             @Field("password")String password);
 
+    // ==============================================================  CHANGE PASSWORD
+    @PATCH ("user/changepassword/{id}")
+    @FormUrlEncoded
+    Call<ResponseBody> editPassword(
+           @Path("username") String username
+    );
+
     // ==============================================================  SPAREPART
     @GET("sparepart")
     Call<SparepartList> getSparepart();
@@ -111,8 +118,8 @@ public interface ApiClient {
     Call<ResponseBody> editSales(
             @Path("id_sales") Integer id_sales,
             @Field("id_supplier") String id_supplier,
-            @Field("name_sales") String name_supplier,
-            @Field("phone_number_sales") Integer phone_number_supplier
+            @Field("name_sales") String name_sales,
+            @Field("phone_number_sales") String phone_number_sales
     );
 
     @DELETE("sales/{id}")
@@ -150,18 +157,18 @@ public interface ApiClient {
     @Multipart
     @POST("motorcustomer")
     Call<ResponseBody> addMotorCustomer(
-            @Part("plate_motorcustomer") RequestBody plate_motorcustomer,
-            @Part("id_brandcustomer") RequestBody id_brandcustomer,
-            @Part("id_typecustomer") RequestBody id_typecustomer
+            @Part("plate_number") RequestBody plate_number,
+            @Part("id_motorcycle_type") RequestBody id_motorcycle_type,
+            @Part("id_customer") RequestBody id_customer
     );
 
-    @PATCH("motorCustomer/{id_motorcustomer}")
+    @PATCH("motorcustomer/{id_motorcustomer}")
     @FormUrlEncoded
     Call<ResponseBody> editMotorCustomer(
-            @Path ("id_motorcustomer") Integer id_customer,
-            @Field("plate_motorcustomer") String plate_motorcustomer,
-            @Field("brand_motorcustomer") String brand_motorcustomer,
-            @Field("type_motorcustomer") String type_motorcustomer
+            @Path ("id_motorcustomer") Integer id_motorcustomer,
+            @Field("plate_number") String plate_number,
+            @Field("id_motorcycle_type") String id_motorcycle_type,
+            @Field("id_customer") String id_customer
     );
 
     @DELETE("motorcustomer/{id}")
@@ -172,6 +179,6 @@ public interface ApiClient {
     Call<BrandMotorList> getBrandMotor();
 
     // ==============================================================  TYPE MOTOR
-    @GET("typemotor")
+    @GET("motortype")
     Call<TypeMotorList> getTypeMotor();
 }

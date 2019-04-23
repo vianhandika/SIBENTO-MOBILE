@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.dewa732corps.code03.Controller.ApiClient;
 import com.example.dewa732corps.code03.Controller.Customer;
 import com.example.dewa732corps.code03.Fragment.Customer.CustomerForm;
+import com.example.dewa732corps.code03.Fragment.Motor_Customer.MotorCustomerTampil;
 import com.example.dewa732corps.code03.R;
 
 import okhttp3.ResponseBody;
@@ -40,7 +41,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView Name, Address, PhoneNumber;
-        public ImageView btnEdit, btnDelete;
+        public ImageView btnMotorCustomer, btnEdit, btnDelete;
 //        public LinearLayout topWraper;
 //        public LinearLayout bottomWraper;
 
@@ -49,6 +50,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
             Name = v.findViewById(R.id.txtNameCustomer);
             Address = v.findViewById(R.id.txtAddressCustomer);
             PhoneNumber = v.findViewById(R.id.txtPhoneNumberCustomer);
+
+            btnMotorCustomer = v.findViewById(R.id.btnMotorCustomer);
             btnEdit = v.findViewById(R.id.btnEditCustomer);
             btnDelete = v.findViewById(R.id.btnDeleteCustomer);
         }
@@ -138,6 +141,18 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
         vh.Name.setText(data.getName());
         vh.Address.setText(data.getAddress());
         vh.PhoneNumber.setText(data.getPhoneNumber());
+
+        vh.btnMotorCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MotorCustomerTampil.class);
+//                intent.putExtra("mode", i);
+
+                intent.putExtra("id_customer", data.getId().toString());
+//                intent.putExtra("listsales", data.getSales());
+                v.getContext().startActivity(intent);
+            }
+        });
 
         vh.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case 4: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new CustomerTampil()).commit();Log.d("getPutExtra", "4");
                 break;
-            case 5: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new MotorCustomerTampil()).commit();Log.d("getPutExtra", "5");
+//            case 5: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new MotorCustomerTampil()).commit();Log.d("getPutExtra", "5");
 //                break;
 //            case 3: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SalesTampil()).commit();Log.d("getPutExtra", "3");
 //                break;
@@ -132,10 +132,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_pelanggan) {
             getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new CustomerTampil()).commit();
 //            toolbar.setTitle("Manajemen Pelanggan");
-        } else if (id == R.id.nav_kendaraan) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new MotorCustomerTampil()).commit();
+        }
+//        else if (id == R.id.nav_kendaraan) {
+//            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new MotorCustomerTampil()).commit();
 //            toolbar.setTitle("Manajemen Kendaraan");
-        } else if (id == R.id.nav_pengadaansparepart) {
+//        }
+        else if (id == R.id.nav_pengadaansparepart) {
 //            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new PanelPegawaiFragment()).commit();
         } else if (id == R.id.nav_transaksipenjualan) {
 //            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new CekServiceFragment()).commit();

@@ -36,6 +36,14 @@
             android:textSize="10dp" />
 
         <ImageView
+            android:id="@+id/btnMotorCustomer"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="285dp"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/ic_menu2_motorcustomer" />
+
+        <ImageView
             android:id="@+id/btnEditCustomer"
             android:layout_width="40dp"
             android:layout_height="40dp"

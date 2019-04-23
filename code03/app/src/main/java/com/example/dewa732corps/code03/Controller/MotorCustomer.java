@@ -23,9 +23,12 @@ public class MotorCustomer {
     @SerializedName("id_brand")
     @Expose
     private Integer idBrand;
+    @SerializedName("id_customer")
+    @Expose
+    private Integer idCustomer;
     @SerializedName("customer")
     @Expose
-    private Customer customer;
+    private Object customer;
 
     /**
      * No args constructor for use in serialization
@@ -39,12 +42,13 @@ public class MotorCustomer {
      * @param id
      * @param idBrand
      * @param idType
+     * @param idCustomer
      * @param plate
      * @param brand
      * @param customer
      * @param type
      */
-    public MotorCustomer(Integer id, String plate, String type, Integer idType, String brand, Integer idBrand, Customer customer) {
+    public MotorCustomer(Integer id, String plate, String type, Integer idType, String brand, Integer idBrand, Integer idCustomer, Customer customer) {
         super();
         this.id = id;
         this.plate = plate;
@@ -52,6 +56,7 @@ public class MotorCustomer {
         this.idType = idType;
         this.brand = brand;
         this.idBrand = idBrand;
+        this.idCustomer = idCustomer;
         this.customer = customer;
     }
 
@@ -103,11 +108,19 @@ public class MotorCustomer {
         this.idBrand = idBrand;
     }
 
-    public Customer getCustomer() {
+    public Integer getIdCustomer() {
+        return idCustomer;
+    }
+
+    public void setIdCustomer(Integer idCustomer) {
+        this.idCustomer = idCustomer;
+    }
+
+    public Object getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(Object customer) {
         this.customer = customer;
     }
 }
