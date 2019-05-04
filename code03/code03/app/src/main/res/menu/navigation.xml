@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_beranda"
+        android:icon="@drawable/ic_menu_pelanggan_beranda"
+        android:title="Beranda" />
+
+    <item
+        android:id="@+id/nav_panelpegawai"
+        android:icon="@drawable/ic_menu_pelanggan_panelpegawai"
+        android:title="Panel Pegawai" />
+
+    <item
+        android:id="@+id/nav_pengecekanstatusservice"
+        android:icon="@drawable/ic_menu_pelanggan_pengecekanstatusservice"
+        android:title="Cek Service" />
+
+    <item
+        android:id="@+id/nav_listsparepart"
+        android:icon="@drawable/ic_menu_pelanggan_listsparepart"
+        android:title="List Sparepart" />
+
+</menu>

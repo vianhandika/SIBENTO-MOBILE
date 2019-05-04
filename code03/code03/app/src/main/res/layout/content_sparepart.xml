@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#9A93ED"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="#D7E1E3">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/txtNoIDSparepart"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:textStyle="bold"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="40dp"
+            android:src="@drawable/circle_black"/>
+
+        <ImageView
+            android:layout_width="2dp"
+            android:layout_height="90dp"
+            android:layout_marginLeft="33dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/box_hitam"/>
+
+        <TextView
+            android:id="@+id/txtNameSparepart"
+            android:layout_height="wrap_content"
+            android:layout_width="270dp"
+            android:maxLines="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:textSize="20dp"
+            android:text=""/>
+
+        <TextView
+            android:id="@+id/txtTypeSparepart"
+            android:layout_height="wrap_content"
+            android:layout_width="270dp"
+            android:maxLines="1"
+            android:layout_marginTop="37dp"
+            android:layout_marginLeft="50dp"
+            android:textSize="17dp"
+            android:text=""/>
+
+        <TextView
+            android:id="@+id/txtBrandSparepart"
+            android:layout_height="wrap_content"
+            android:layout_width="270dp"
+            android:maxLines="1"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="50dp"
+            android:textSize="10dp"
+            android:text=""/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="73dp"
+            android:layout_marginLeft="50dp"
+            android:textSize="10dp"
+            android:text="Sisa Stok:"/>
+
+        <TextView
+            android:id="@+id/txtStockSparepart"
+            android:layout_height="wrap_content"
+            android:layout_width="220dp"
+            android:maxLines="1"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="73dp"
+            android:text=""
+            android:textSize="10dp" />
+
+        <ImageView
+            android:id="@+id/btnEditSparepart"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="335dp"
+            android:layout_marginTop="5dp"
+            app:srcCompat="@drawable/ic_edit"
+            android:padding="5dp"
+            android:background="@drawable/circle_putih" />
+
+        <ImageView
+            android:id="@+id/btnDeleteSparepart"
+            android:layout_below="@+id/btnEditSparepart"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="335dp"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/ic_delete"
+            android:padding="5dp"
+            android:background="@drawable/circle_putih" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

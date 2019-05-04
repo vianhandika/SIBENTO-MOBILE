@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    tools:context=".Fragment.Supplier.SupplierForm">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:background="@drawable/background"
+        tools:context=".Fragment.Supplier.SupplierForm">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="20dp"
+            android:elevation="20dp"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/LinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:gravity="center_horizontal"
+                    android:background="@color/pink">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:src="@drawable/logo_pengadaansparepart"
+                        android:background="@drawable/circle_putih"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/img1"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="-20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/LinearLayout"
+                    android:src="@drawable/triangle_pengadaansparepart"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/img1"
+                    android:orientation="vertical"
+                    android:layout_marginTop="-10dp"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/txtNumberProcurement"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:background="@drawable/box_gray"
+                        android:ems="10"
+                        android:text="4"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:ems="10"
+                        android:text="TANGGAL PEMESANAN"/>
+
+                    <EditText
+                        android:id="@+id/txtTanggal"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="CERITANYA TANGGAL YAA"
+                        android:ems="10"
+                        android:textAlignment="center"
+                        android:inputType="date"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/txt1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:textSize="20dp"
+                            android:gravity="center_horizontal"
+                            android:text="NAMA SALES"/>
+
+                        <Spinner
+                            android:id="@+id/dropdownNamaSalesPengadaanSparepart"
+                            android:layout_width="185dp"
+                            android:layout_height="54dp"
+                            android:layout_below="@+id/txt1"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="80dp"
+                            android:layout_gravity="center"
+                            android:spinnerMode="dropdown" />
+
+
+                        <TextView
+                            android:id="@+id/txtStatusProcess"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/dropdownNamaSalesPengadaanSparepart"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
+                            android:textSize="20dp"
+                            android:text="Status Proses"/>
+
+                        <Spinner
+                            android:id="@+id/dropdownStatusProcurement"
+                            android:layout_width="195dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/txtStatusProcess"
+                            android:layout_marginLeft="80dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:spinnerMode="dropdown"/>
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="330dp"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/box_hitam"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/txtListProcurement1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal"
+                            android:text="List Pemesanan Sparepart"/>
+
+                        <android.widget.SearchView
+                            android:id="@+id/searchBarSparepartProcurement"
+                            android:layout_width="250dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_below="@+id/txtListProcurement1"
+                            android:layout_gravity="right"/>
+
+                        <Button
+                            android:id="@+id/btnAddProcurement"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_below="@+id/txtListProcurement1"
+                            android:layout_toEndOf="@+id/searchBarSparepartProcurement"
+                            android:layout_toRightOf="@+id/searchBarSparepartProcurement"
+                            android:text="+"/>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerViewSparepartProcurementForm"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/btnAddProcurement"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="20dp"/>
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/btnSaveSales"
+                        android:layout_width="130dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="-80dp"
+                        android:background="#70C29F"
+                        android:text="SIMPAN"/>
+
+                    <Button
+                        android:id="@+id/btnCancelSales"
+                        android:layout_width="130dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="-30dp"
+                        android:layout_marginLeft="85dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="#F44336"
+                        android:text="BATAL"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>
