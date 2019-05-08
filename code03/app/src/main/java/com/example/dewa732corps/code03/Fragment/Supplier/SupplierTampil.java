@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,15 +18,11 @@ import android.widget.FrameLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.dewa732corps.code03.Adapter.SparepartAdapter;
 import com.example.dewa732corps.code03.Adapter.SupplierAdapter;
 import com.example.dewa732corps.code03.Controller.ApiClient;
 import com.example.dewa732corps.code03.Controller.SessionController;
-import com.example.dewa732corps.code03.Controller.Sparepart;
-import com.example.dewa732corps.code03.Controller.SparepartList;
 import com.example.dewa732corps.code03.Controller.Supplier;
 import com.example.dewa732corps.code03.Controller.SupplierList;
-import com.example.dewa732corps.code03.Fragment.Sparepart.SparepartForm;
 import com.example.dewa732corps.code03.R;
 
 import java.util.ArrayList;
@@ -64,7 +58,7 @@ public class SupplierTampil extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        dashboard= inflater.inflate(R.layout.menu2_supplier_tampil,container,false);
+        dashboard= inflater.inflate(R.layout.menu_owner_supplier_tampil,container,false);
         setinit();
 
         mProgress = new ProgressDialog(getContext());
@@ -82,7 +76,7 @@ public class SupplierTampil extends Fragment {
         session.checkLogin();
 
         Retrofit retrofit= new retrofit2.Retrofit.Builder()
-                .baseUrl("https://sibento.yafetrakan.com/api/")
+                .baseUrl("http://10.53.2.0/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

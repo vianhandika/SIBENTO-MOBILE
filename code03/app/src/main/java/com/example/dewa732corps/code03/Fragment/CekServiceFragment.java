@@ -17,7 +17,7 @@ public class CekServiceFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        dashboard= inflater.inflate(R.layout.menu1_cekservice,container,false);
+        dashboard= inflater.inflate(R.layout.menu_pelanggan_cekservice,container,false);
 
         return dashboard;
     }

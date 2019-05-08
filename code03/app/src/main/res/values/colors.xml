@@ -3,17 +3,23 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="BlueSibento">#1E87E4</color>
     <color name="WhiteFragment">#F3F7F8</color>
     <color name="white">#FFFFFF</color>
     <color name="abu2">#7295A6</color>
     <color name="black">#23313F</color>
-    
+    <color name="transparant">#00000000</color>
+
+    //PRIMARY
+    <color name="BlueSibento">#1E87E4</color>
+    <color name="SoftBlue">#A8D4FA</color>
+    <color name="BlueSibentoG">#971e87e4</color>
+    <color name="SoftBlueG">#92a8d4fa</color>
+
     // BOX
-    <color name="box_merah">#E62129</color>
-    <color name="box_hijau">#7BC38E</color>
-    <color name="box_kuning">#FDEB09</color>
-    <color name="box_ungu">#9962A4</color>
-    <color name="box_pink">#E46E9A</color>
-    <color name="box_orange">#F49F37</color>
+    <color name="merah">#E62129</color>
+    <color name="hijau">#7BC38E</color>
+    <color name="kuning">#FDEB09</color>
+    <color name="ungu">#9962A4</color>
+    <color name="pink">#E46E9A</color>
+    <color name="orange">#F49F37</color>
 </resources>

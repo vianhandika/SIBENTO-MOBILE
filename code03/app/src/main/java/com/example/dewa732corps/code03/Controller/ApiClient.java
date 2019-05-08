@@ -12,11 +12,15 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface ApiClient {
-    @POST("mobileauthenticate")
+
+
+    // ==============================================================  USERNAME DAN PASSWORD
+        @POST("mobileauthenticate")
     @FormUrlEncoded
     Call<ResponseBody> GetLogin(
             @Field("username")String username,
@@ -26,7 +30,9 @@ public interface ApiClient {
     @PATCH ("user/changepassword/{id}")
     @FormUrlEncoded
     Call<ResponseBody> editPassword(
-           @Path("username") String username
+           @Path("id") String id,
+           @Field("newPassword")String newPassword
+
     );
 
     // ==============================================================  SPAREPART
@@ -60,7 +66,6 @@ public interface ApiClient {
             @Field("sell_price") Integer sell_price,
             @Field("placement") String placement,
             @Field("id_sparepart_type") Integer id_sparepart_type
-
     );
 
     @Multipart
@@ -181,4 +186,54 @@ public interface ApiClient {
     // ==============================================================  TYPE MOTOR
     @GET("motortype")
     Call<TypeMotorList> getTypeMotor();
+
+    // ============================================================== PENGADAAN SPAREPART
+    @GET("procurement")
+    Call<SparepartProcurementList> getSparepartProcurement();
+
+
+    @POST("procurement")
+    @FormUrlEncoded
+    Call<ResponseBody> addSparepartProcurement(
+            @Field("date_procurement") String date_procurement,
+            @Field("status_procurement") String status_procurement,
+            @Field("id_sales") int id_sales
+    );
+
+    @PUT("procurement/{id_procurement}")
+    @FormUrlEncoded
+    Call<ResponseBody> editSparepartProcurement(
+            @Path("id_procurement") int id_procurement,
+            @Field("date_procurement") String date_procurement,
+            @Field("id_sales") int id_sales,
+            @Field("status_procurement") String status_procurement
+    );
+
+    @DELETE("procurement/{id}")
+    Call<ResponseBody> deleteSparepartProcurement(@Path("id") int id);
+
+    // ============================================================== DETAIL PENGADAAN SPAREPART
+
+    @POST("procurement/detail")
+    @FormUrlEncoded
+    Call<ResponseBody> addProcurementDetail(
+            @Field("price_detail_procurement") double price_detail_procurement,
+            @Field("amount_detail_procurement") int amount_detail_procurement,
+            @Field("subtotal_detail_procurement") double subtotal_detail_procurement,
+            @Field("id_sparepart") String id_sparepart,
+            @Field("id_procurement") int id_procurement
+    );
+
+    @PUT("procurement/detail{id}")
+    @FormUrlEncoded
+    Call<ResponseBody> editProcurementDetail(
+            @Path("id_procurement") int id_procurement,
+            @Field("price_detail_procurement") Double price_detail_procurement,
+            @Field("amount_detail_procurement") int amount_detail_procurement,
+            @Field("subtotal_detail_procurement") Double subtotal_detail_procurement
+    );
+
+    @GET("procurement/detail/{id}")
+    Call<SparepartProcurementDetailList> getProcurementDetail(@Path("id") int id);
+
 }

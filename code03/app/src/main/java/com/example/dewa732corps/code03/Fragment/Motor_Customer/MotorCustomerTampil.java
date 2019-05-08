@@ -3,17 +3,11 @@ package com.example.dewa732corps.code03.Fragment.Motor_Customer;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
@@ -24,7 +18,6 @@ import com.example.dewa732corps.code03.Controller.ApiClient;
 import com.example.dewa732corps.code03.Controller.MotorCustomer;
 import com.example.dewa732corps.code03.Controller.MotorCustomerList;
 import com.example.dewa732corps.code03.Controller.SessionController;
-import com.example.dewa732corps.code03.Fragment.Customer.CustomerTampil;
 import com.example.dewa732corps.code03.R;
 
 import java.util.ArrayList;
@@ -62,7 +55,7 @@ public class MotorCustomerTampil extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState)  {
         //return super.onCreateView(inflater, container, savedInstanceState);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu2_motorcustomer_tampil);
+        setContentView(R.layout.menu_customerservice_motorcustomer_tampil);
 
         setinit();
 
@@ -81,7 +74,7 @@ public class MotorCustomerTampil extends AppCompatActivity {
         session.checkLogin();
 
         Retrofit retrofit= new retrofit2.Retrofit.Builder()
-                .baseUrl("https://sibento.yafetrakan.com/api/")
+                .baseUrl("http://10.53.2.0/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -119,6 +112,8 @@ public class MotorCustomerTampil extends AppCompatActivity {
                 mProgress.hide();
             }
         });
+        mProgress.hide();
+        mProgress.dismiss();
     }
 
     public void setinit(){
@@ -162,4 +157,6 @@ public class MotorCustomerTampil extends AppCompatActivity {
             id_customer = id;
         }
     }
+
+
 }

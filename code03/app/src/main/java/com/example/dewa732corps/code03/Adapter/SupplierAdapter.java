@@ -170,7 +170,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.MyView
 
                 mProgress.show();
                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                        .baseUrl("https://sibento.yafetrakan.com/api/")
+                        .baseUrl("http://10.53.2.0/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 

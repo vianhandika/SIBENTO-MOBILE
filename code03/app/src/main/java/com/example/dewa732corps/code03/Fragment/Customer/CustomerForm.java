@@ -14,9 +14,6 @@ import com.example.dewa732corps.code03.Controller.ApiClient;
 import com.example.dewa732corps.code03.MainActivity;
 import com.example.dewa732corps.code03.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -37,13 +34,13 @@ public class CustomerForm extends AppCompatActivity {
     String selectedId, idCustomer;
 
     private static final int INTENT_REQUEST_CODE = 100;
-    public static final String URL = "https://sibento.yafetrakan.com/api/";
+    public static final String URL = "http://10.53.2.0/api/";
 
     android.support.v7.widget.Toolbar toolbar;
 
     protected void onCreate(Bundle savedInstanceState) {  //Fungsi didalamnya dijalankan pertama kali
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu2_customer_form);
+        setContentView(R.layout.menu_customerservice_customer_form);
 
         setInit();
         getPutExtra();
@@ -97,7 +94,7 @@ public class CustomerForm extends AppCompatActivity {
             String notelp = intent.getStringExtra("notelp");
 //            List<ListSales>
 
-//            Log.d("gambar","https://sibento.yafetrakan.com/"+gambar);
+//            Log.d("gambar","http://10.53.11.64.com/"+gambar);
 
             txtNamaCustomer.setText(nama);
             txtAlamatCustomer.setText(alamat);

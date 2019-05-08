@@ -58,7 +58,7 @@ public class MotorCustomerTampil2 extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        dashboard= inflater.inflate(R.layout.menu2_motorcustomer_tampil,container,false);
+        dashboard= inflater.inflate(R.layout.menu_customerservice_motorcustomer_tampil,container,false);
         setinit();
 
         mProgress = new ProgressDialog(getContext());
@@ -76,7 +76,7 @@ public class MotorCustomerTampil2 extends Fragment {
         session.checkLogin();
 
         Retrofit retrofit= new retrofit2.Retrofit.Builder()
-                .baseUrl("https://sibento.yafetrakan.com/api/")
+                .baseUrl("http://10.53.2.0/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

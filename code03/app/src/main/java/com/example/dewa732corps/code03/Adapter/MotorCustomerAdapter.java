@@ -132,8 +132,8 @@ public class MotorCustomerAdapter extends RecyclerView.Adapter<MotorCustomerAdap
 
                 intent.putExtra("id", data.getId().toString());
                 intent.putExtra("platnomor", data.getPlate());
-                intent.putExtra("brand_motorcustomer", data.getIdBrand());
-                intent.putExtra("type_motorcustomer", data.getIdType());
+                intent.putExtra("brand_motorcustomer", data.getIdBrand().toString());
+                intent.putExtra("type_motorcustomer", data.getIdType().toString());
 
 //                intent.putExtra("supplier", data.getSupplier());
 
@@ -147,7 +147,7 @@ public class MotorCustomerAdapter extends RecyclerView.Adapter<MotorCustomerAdap
 
                 mProgress.show();
                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                        .baseUrl("https://sibento.yafetrakan.com/api/")
+                        .baseUrl("http://10.53.2.0/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 

@@ -2,35 +2,56 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="#D7E1E3">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp">
 
+        <ImageView
+            android:id="@+id/txtNoIDSparepart"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:textStyle="bold"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="40dp"
+            android:src="@drawable/circle_black"/>
+
+        <ImageView
+            android:layout_width="2dp"
+            android:layout_height="90dp"
+            android:layout_marginLeft="33dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/box_hitam"/>
+
         <TextView
             android:id="@+id/txtNameCustomer"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_width="230dp"
+            android:maxLines="1"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp"
             android:text=""
             android:textSize="20dp" />
 
         <TextView
             android:id="@+id/txtAddressCustomer"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_width="230dp"
+            android:maxLines="1"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="37dp"
             android:text=""
             android:textSize="17dp" />
 
         <TextView
             android:id="@+id/txtPhoneNumberCustomer"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_width="230dp"
+            android:maxLines="1"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="60dp"
             android:text=""
             android:textSize="10dp" />
@@ -39,25 +60,35 @@
             android:id="@+id/btnMotorCustomer"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginLeft="285dp"
-            android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/ic_menu2_motorcustomer" />
+            android:layout_marginTop="31dp"
+            android:layout_marginBottom="29dp"
+            android:background="@drawable/circle_putih"
+            android:padding="5dp"
+            app:srcCompat="@drawable/ic_menu_customerservice_motorcustomer" />
 
         <ImageView
             android:id="@+id/btnEditCustomer"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="335dp"
-            android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/ic_edit" />
+            android:layout_marginTop="5dp"
+            app:srcCompat="@drawable/ic_edit"
+            android:padding="5dp"
+            android:background="@drawable/circle_putih" />
 
         <ImageView
             android:id="@+id/btnDeleteCustomer"
+            android:layout_below="@+id/btnEditCustomer"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="335dp"
-            android:layout_marginTop="50dp"
-            app:srcCompat="@drawable/ic_delete" />
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/ic_delete"
+            android:padding="5dp"
+            android:background="@drawable/circle_putih" />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/ProcPriceSparepart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:id="@+id/MinStock"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="13dp"
+            android:layout_toEndOf="@+id/ProcNameSparepart"
+            android:layout_toRightOf="@+id/ProcNameSparepart"
+            android:text="-"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/ProcAmountSparepart"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="7dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="13dp"
+            android:layout_toEndOf="@+id/MinStock"
+            android:layout_toRightOf="@+id/MinStock"
+            android:gravity="center"
+            android:text="55"
+            android:textAlignment="center"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/PlusStock"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="7dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="13dp"
+            android:layout_toEndOf="@+id/ProcAmountSparepart"
+            android:layout_toRightOf="@+id/ProcAmountSparepart"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="+"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/ProcNameSparepart"
+            android:layout_width="185dp"
+            android:layout_height="29dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="13dp"
+            android:text="Name Sparepart"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ProcSubtotalSparepart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ProcNameSparepart"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="0dp"
+            android:text="Subtotal" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

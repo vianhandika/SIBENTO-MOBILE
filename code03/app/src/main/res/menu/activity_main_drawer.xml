@@ -6,27 +6,27 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_sparepart"
-            android:icon="@drawable/ic_menu2_sparepart"
+            android:icon="@drawable/ic_menu_owner_sparepart"
             android:title="Sparepart" />
         <item
             android:id="@+id/nav_supplier"
-            android:icon="@drawable/ic_menu2_supplier"
+            android:icon="@drawable/ic_menu_owner_supplier"
             android:title="Supplier" />
         <item
             android:id="@+id/nav_sales"
-            android:icon="@drawable/ic_menu2_sales"
+            android:icon="@drawable/ic_menu_owner_sales"
             android:title="Sales" />
         <item
             android:id="@+id/nav_pelanggan"
-            android:icon="@drawable/ic_menu2_pelanggan"
+            android:icon="@drawable/ic_menu_customerservice_customer"
             android:title="Pelanggan" />
         <item
             android:id="@+id/nav_pengadaansparepart"
-            android:icon="@drawable/ic_menu2_pengadaansparepart"
+            android:icon="@drawable/ic_menu_owner_pengadaansparepart"
             android:title="Pengadaan Sparepart" />
         <item
             android:id="@+id/nav_transaksipenjualan"
-            android:icon="@drawable/ic_menu2_transaksipenjualan"
+            android:icon="@drawable/ic_menu_owner_transaksipenjualan"
             android:title="Transaksi Penjualan" />
         <item
             android:id="@+id/nav_ubahpassword"
@@ -34,7 +34,7 @@
             android:title="Ubah Password" />
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_menu2_logout"
+            android:icon="@drawable/ic_menu_owner_logout"
             android:title="Log Out" />
         
     </group>

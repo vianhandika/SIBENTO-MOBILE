@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import android.widget.Toast;
 
 import com.example.dewa732corps.code03.Controller.ApiClient;
 import com.example.dewa732corps.code03.Controller.SessionController;
-import com.example.dewa732corps.code03.Main2Activity;
 import com.example.dewa732corps.code03.MainActivity;
 import com.example.dewa732corps.code03.R;
 
@@ -83,7 +81,7 @@ public class LoginFragment extends Fragment {
             progressDialog.show();
 
             Retrofit retrofit= new retrofit2.Retrofit.Builder()
-                    .baseUrl("https://sibento.yafetrakan.com/api/")
+                    .baseUrl("http://10.53.2.0/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 

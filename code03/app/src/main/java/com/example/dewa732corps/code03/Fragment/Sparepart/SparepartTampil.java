@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +57,7 @@ public class SparepartTampil extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        dashboard= inflater.inflate(R.layout.menu2_sparepart_tampil,container,false);
+        dashboard= inflater.inflate(R.layout.menu_owner_sparepart_tampil,container,false);
         setinit();
 
         mProgress = new ProgressDialog(getContext());
@@ -77,7 +75,7 @@ public class SparepartTampil extends Fragment {
         session.checkLogin();
 
         Retrofit retrofit= new retrofit2.Retrofit.Builder()
-                .baseUrl("https://sibento.yafetrakan.com/api/")
+                .baseUrl("http://10.53.2.0/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -90,6 +88,7 @@ public class SparepartTampil extends Fragment {
             public void onResponse(Call<SparepartList> call, Response<SparepartList> response) {
                 try {
                     sparepartData = response.body().getData();
+
                     sAdapter = new SparepartAdapter(response.body().getData(),getContext());
                     sAdapter.notifyDataSetChanged();
 

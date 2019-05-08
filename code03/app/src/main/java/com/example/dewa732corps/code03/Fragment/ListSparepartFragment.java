@@ -17,7 +17,7 @@ public class ListSparepartFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        dashboard= inflater.inflate(R.layout.menu1_listsparepart,container,false);
+        dashboard= inflater.inflate(R.layout.menu_pelanggan_listsparepart,container,false);
 
         return dashboard;
     }

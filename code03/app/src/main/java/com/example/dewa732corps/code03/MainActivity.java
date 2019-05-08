@@ -1,28 +1,25 @@
 package com.example.dewa732corps.code03;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.example.dewa732corps.code03.Controller.SessionController;
-import com.example.dewa732corps.code03.Fragment.Kendaraan.KendaraanTampil;
 import com.example.dewa732corps.code03.Fragment.Customer.CustomerTampil;
-import com.example.dewa732corps.code03.Fragment.Motor_Customer.MotorCustomerTampil;
+import com.example.dewa732corps.code03.Fragment.Sparepart_Procurement.SparepartProcurementTampil;
 import com.example.dewa732corps.code03.Fragment.Sales.SalesTampil;
 import com.example.dewa732corps.code03.Fragment.Sparepart.SparepartTampil;
 import com.example.dewa732corps.code03.Fragment.Supplier.SupplierTampil;
+import com.example.dewa732corps.code03.Fragment.Sparepart_Procurement.SparepartProcurementTampil;
+import com.example.dewa732corps.code03.Fragment.Transcation.TransactionTampil;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -59,10 +56,10 @@ public class MainActivity extends AppCompatActivity
                 break;
             case 4: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new CustomerTampil()).commit();Log.d("getPutExtra", "4");
                 break;
-//            case 5: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new MotorCustomerTampil()).commit();Log.d("getPutExtra", "5");
-//                break;
-//            case 3: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SalesTampil()).commit();Log.d("getPutExtra", "3");
-//                break;
+            case 5: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SparepartProcurementTampil()).commit();Log.d("getPutExtra", "5");
+                break;
+            case 6: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new TransactionTampil()).commit();Log.d("getPutExtra", "6");
+                break;
 //            case 3: getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SalesTampil()).commit();Log.d("getPutExtra", "3");
 //                break;
         }
@@ -83,25 +80,6 @@ public class MainActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }
-
-    public void showAlertDelete(View v) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setMessage("Apakah anda yakin ingin menghapus?");
-            alert.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int i) {
-                    Toast.makeText(MainActivity.this, "OK", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            alert.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(MainActivity.this, "CRY", Toast.LENGTH_SHORT).show();
-                }
-            });
-            alert.create().show();
     }
 
     @Override
@@ -138,9 +116,9 @@ public class MainActivity extends AppCompatActivity
 //            toolbar.setTitle("Manajemen Kendaraan");
 //        }
         else if (id == R.id.nav_pengadaansparepart) {
-//            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new PanelPegawaiFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SparepartProcurementTampil()).commit();
         } else if (id == R.id.nav_transaksipenjualan) {
-//            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new CekServiceFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SparepartProcurementTampil()).commit();
         } else if (id == R.id.nav_ubahpassword) {
             getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new UbahPassword()).commit();
         } else if (id == R.id.nav_logout) {

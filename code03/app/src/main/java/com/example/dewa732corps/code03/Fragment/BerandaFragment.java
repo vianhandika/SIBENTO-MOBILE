@@ -17,7 +17,7 @@ public class BerandaFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        dashboard= inflater.inflate(R.layout.menu1_beranda,container,false);
+        dashboard= inflater.inflate(R.layout.menu_pelanggan_beranda,container,false);
 
         return dashboard;
     }

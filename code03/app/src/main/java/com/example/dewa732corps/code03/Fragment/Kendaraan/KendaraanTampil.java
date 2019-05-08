@@ -20,9 +20,9 @@ public class KendaraanTampil extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        dashboard= inflater.inflate(R.layout.menu2_kendaraan_tampil,container,false);
+        dashboard= inflater.inflate(R.layout.menu_customerservice_motorcustomer_tampil,container,false);
 
-        Button btnTambahKendaraan = dashboard.findViewById(R.id.btnTambahKendaraan);
+        Button btnTambahKendaraan = dashboard.findViewById(R.id.btnTambahMotorCustomer);
 
         btnTambahKendaraan.setOnClickListener(new View.OnClickListener() {
             @Override
