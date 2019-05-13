@@ -236,4 +236,54 @@ public interface ApiClient {
     @GET("procurement/detail/{id}")
     Call<SparepartProcurementDetailList> getProcurementDetail(@Path("id") int id);
 
+    // ============================================================== DETAIL TRANSACTION
+
+    @POST("transactions")
+    @FormUrlEncoded
+    Call<ResponseBody> addTransaction(
+        @Field("transaction_type") String transaction_type,
+        @Field("transaction_status") String transaction_status,
+        @Field("transaction_total") double transaction_total,
+        @Field("id_customer") int id_customer);
+
+    @PUT("transactions/{id}")
+    @FormUrlEncoded
+    Call<ResponseBody> updateTransaction(
+        @Path("id") String id,@Field("transaction_type") String transaction_type,
+        @Field("transaction_status") String transaction_status,
+        @Field("transaction_total") double transaction_total,
+        @Field("id_customer") int id_customer);
+
+    @DELETE("transactions/{id}")
+    Call<ResponseBody> deleteTransaction(@Path("id") String id);
+
+    // ============================================================== DETAIL TRANSACTION SERVICE AND SPAREPART
+
+    @POST("detailService")
+    @FormUrlEncoded
+    Call<ResponseBody> addDetailService(
+        @Field("detail_service_price") double price,
+        @Field("detail_service_amount") int amount,
+        @Field("detail_service_subtotal") double subtotal,
+        @Field("id_motorcycle") int idMotorcycle,
+        @Field("id_employee") int idEmployee,
+        @Field("id_service") int idService,
+        @Field("id_transaction") String idTransaction);
+
+    @POST("detailSparepart")
+    @FormUrlEncoded
+    Call<ResponseBody> addDetailSparepart(
+        @Field("detail_sparepart_price") double price,
+        @Field("detail_sparepart_amount") int amount,
+        @Field("detail_sparepart_subtotal") double subtotal,
+        @Field("id_motorcycle") int idMotorcycle,
+        @Field("id_employee") int idEmployee,
+        @Field("id_sparepart") String idSparepart,
+        @Field("id_transaction") String idTransaction);
+
+    @GET("detailService/{id}")
+    Call<TransactionDetailServices> getDetailService(@Path("id") String id);
+
+    @GET("detailSparepart/{id}")
+    Call<TransactionDetailSparepart> getDetailSparepart(@Path("id") String id);
 }

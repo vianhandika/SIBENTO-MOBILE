@@ -91,7 +91,7 @@ public class SparepartProcurementForm extends AppCompatActivity {
     private List<Sparepart> sparepartData;
 
     private static final int INTENT_REQUEST_CODE = 100;
-    public static final String URL = "http://10.53.2.0/api/";
+    public static final String URL = "https://sibento.yafetrakan.com/api/";
 
     android.support.v7.widget.Toolbar toolbar;
 
@@ -286,6 +286,7 @@ public class SparepartProcurementForm extends AppCompatActivity {
             int id_sales = Integer.parseInt(intent.getStringExtra("id_sales"));
             String status_procurement = intent.getStringExtra("status_procurement");
 
+            Log.d("ID Procurement: ", String.valueOf(id));
             Log.d("Tanggal: ", date_procurement);
             Log.d("ID Sales: ", String.valueOf(id_sales));
             Log.d("Status Process: ", status_procurement);
@@ -302,7 +303,7 @@ public class SparepartProcurementForm extends AppCompatActivity {
 
             editMode = 1; //pengubahan menjadi mode edit
             Retrofit retrofit= new retrofit2.Retrofit.Builder()
-                    .baseUrl("http://10.53.2.0/api/")
+                    .baseUrl("https://sibento.yafetrakan.com/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
@@ -567,28 +568,92 @@ public class SparepartProcurementForm extends AppCompatActivity {
 
         String ddSalesProcurement = dropdownNameOfSales.getSelectedItem().toString();
 
-        Integer id_procurement = id;
+        final Integer id_procurement = id;
         String date_procurement = txtTanggal.getText().toString();
-        String id_sales = selectedIdSales.toString();
-        String status_procurement = dropdownStatusProcess.toString();
+        Integer id_sales = Integer.parseInt(selectedIdSales);
+        String status_procurement = dropdownStatusProcess.getSelectedItem().toString();
 
-        Call<ResponseBody> call = retrofitInterface.editSales(id_procurement, date_procurement, id_sales, status_procurement);
+        Log.d("id procurement: ", id_procurement.toString());
+        Log.d("id date_procurement: ", date_procurement);
+        Log.d("id id_sales: ", id_sales.toString());
+        Log.d("id status_procurement: ", status_procurement);
+
+        Call<ResponseBody> call = retrofitInterface.editSparepartProcurement(id_procurement, date_procurement, id_sales, status_procurement);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
 
+                try {
+                    JSONObject jsonRes = null;
+                    jsonRes = new JSONObject(response.body().string());
+                    String idprocurement =  jsonRes.getJSONObject("data").getString("id_procurement");
+                    Log.d("idprocurement", idprocurement);
+//                mProgressBar.setVisibility(View.GONE);
 
-                if (response.isSuccessful()) {
-                    ResponseBody responseBody = response.body();
-//                    Log.d("SUKSES UPDATE DATA",responseBody.toString());
-                    Toast.makeText(SparepartProcurementForm.this, "SUKSES UPDATE SPAREPART PROCUREMENT", Toast.LENGTH_SHORT).show();
-                    final Intent intent = new Intent(SparepartProcurementForm.this, MainActivity.class);
-                    intent.putExtra("menuBefore", 5);
-                    startActivity(intent);
+                    if (response.isSuccessful()) {
 
-                } else {
-                    Log.d( "onResponse: ",response.message());
-                    Toast.makeText(SparepartProcurementForm.this, "Gagal Update Data", Toast.LENGTH_SHORT).show();
+                        for(int x=0;x<detailProcurement.size();x++)
+                        {
+                            Log.d("masuk", "massuk");
+                            Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                                    .baseUrl(URL)
+                                    .addConverterFactory(GsonConverterFactory.create())
+                                    .build();
+
+                            ApiClient apiClient = retrofit.create(ApiClient.class);
+
+                            Double price_detail_procurement =  Double.parseDouble(detailProcurement.get(x).getPrice().toString());
+                            int amount_detail_procurement = Integer.parseInt(detailProcurement.get(x).getAmount().toString());
+                            Double subtotal_detail_procurement =  Double.parseDouble(detailProcurement.get(x).getSubtotal().toString());
+                            String id_sparepart = detailProcurement.get(x).getIdSparepart();
+
+
+                            Call<ResponseBody> addProcurementDetail = apiClient.addProcurementDetail(
+                                    price_detail_procurement,
+                                    amount_detail_procurement,
+                                    subtotal_detail_procurement,
+                                    id_sparepart,
+                                    id_procurement
+                            );
+
+                            addProcurementDetail.enqueue(new Callback<ResponseBody>() {
+                                @Override
+                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                    Log.d("successe", "hehehe");
+                                    try {
+                                        JSONObject jsonRes = new JSONObject(response.body().string());
+                                        String iddetailprocurement =  jsonRes.getJSONObject("data").getString("id_procurement_detail");
+                                        Log.d("idprocurement", iddetailprocurement);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                }
+                            });
+                        }
+//                        ResponseBody responseBody = response.body();
+//                        Log.d("SUKSES",responseBody.toString());
+                        Toast.makeText(SparepartProcurementForm.this, "Sukses", Toast.LENGTH_SHORT).show();
+                        final Intent intent = new Intent(SparepartProcurementForm.this, MainActivity.class);
+                        intent.putExtra("menuBefore", 5);
+                        startActivity(intent);
+
+
+                    } else {
+                        Log.d( "onResponse: ",response.message());
+                        Toast.makeText(SparepartProcurementForm.this, "Gagal", Toast.LENGTH_SHORT).show();
+                        mProgress.dismiss();
+                    }
+                    mProgress.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 

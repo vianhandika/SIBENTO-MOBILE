@@ -143,7 +143,7 @@ public class SparepartAdapter extends RecyclerView.Adapter<SparepartAdapter.MyVi
 
                 mProgress.show();
                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                        .baseUrl("http://10.53.2.0/api/")
+                        .baseUrl("https://sibento.yafetrakan.com/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 

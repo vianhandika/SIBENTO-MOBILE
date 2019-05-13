@@ -3,35 +3,34 @@ package com.example.dewa732corps.code03.Controller;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionList {
+public class TransactionDetailSparepart {
     @SerializedName("data")
     @Expose
-    private List<Transaction> data = new ArrayList<>();
+    private List<TransactionSparepart> data = null;
 
     /**
      * No args constructor for use in serialization
      *
      */
-    public TransactionList() {
+    public TransactionDetailSparepart() {
     }
 
     /**
      *
      * @param data
      */
-    public TransactionList(List<Transaction> data) {
+    public TransactionDetailSparepart(List<TransactionSparepart> data) {
         super();
         this.data = data;
     }
 
-    public List<Transaction> getData() {
+    public List<TransactionSparepart> getData() {
         return data;
     }
 
-    public void setData(List<Transaction> data) {
+    public void setData(List<TransactionSparepart> data) {
         this.data = data;
     }
 }

@@ -49,7 +49,7 @@ public class SalesForm extends AppCompatActivity {
     private List<String> listIdSupplier = new ArrayList<String>();
 
     private static final int INTENT_REQUEST_CODE = 100;
-    public static final String URL = "http://10.53.2.0/api/";
+    public static final String URL = "https://sibento.yafetrakan.com/api/";
 
     android.support.v7.widget.Toolbar toolbar;
 

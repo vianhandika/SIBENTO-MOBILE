@@ -36,7 +36,7 @@ public class UbahPassword extends Fragment {
     String id_user;
     Button btnSavePassword,btnCancelPassword;
     private static final int INTENT_REQUEST_CODE = 100;
-    public static final String URL = "http://10.53.2.0/api/";
+    public static final String URL = "https://sibento.yafetrakan.com/api/";
     SessionController session;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -111,14 +111,10 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new CustomerTampil()).commit();
 //            toolbar.setTitle("Manajemen Pelanggan");
         }
-//        else if (id == R.id.nav_kendaraan) {
-//            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new MotorCustomerTampil()).commit();
-//            toolbar.setTitle("Manajemen Kendaraan");
-//        }
         else if (id == R.id.nav_pengadaansparepart) {
             getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SparepartProcurementTampil()).commit();
         } else if (id == R.id.nav_transaksipenjualan) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new SparepartProcurementTampil()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new TransactionTampil()).commit();
         } else if (id == R.id.nav_ubahpassword) {
             getSupportFragmentManager().beginTransaction().replace(R.id.framelay, new UbahPassword()).commit();
         } else if (id == R.id.nav_logout) {
