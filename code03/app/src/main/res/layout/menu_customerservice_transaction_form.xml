@@ -81,7 +81,7 @@
                         android:text="TANGGAL"
                         android:textSize="20dp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/txtTanggal_TransactionForm"
                         android:layout_width="300dp"
                         android:layout_height="40dp"
@@ -113,7 +113,7 @@
                         android:text="ALAMAT"
                         android:textSize="20dp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/txtNoTelpSales_transaction"
                         android:layout_width="300dp"
                         android:layout_height="40dp"
@@ -128,7 +128,7 @@
                         android:text="NOMOR HP"
                         android:textSize="20dp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/txtNoTelp_TransactionForm"
                         android:layout_width="300dp"
                         android:layout_height="40dp"
@@ -221,7 +221,7 @@
                         android:layout_marginRight="10dp" />
 
                     <Button
-                        android:id="@+id/btnSaveSales"
+                        android:id="@+id/btnSaveTransaction"
                         android:layout_width="130dp"
                         android:layout_height="30dp"
                         android:layout_marginTop="20dp"
@@ -230,7 +230,7 @@
                         android:text="SIMPAN"/>
 
                     <Button
-                        android:id="@+id/btnCancelSales"
+                        android:id="@+id/btnCancelTransaction"
                         android:layout_width="130dp"
                         android:layout_height="30dp"
                         android:layout_marginTop="-30dp"

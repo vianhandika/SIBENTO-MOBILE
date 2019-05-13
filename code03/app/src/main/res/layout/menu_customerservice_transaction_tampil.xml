@@ -17,7 +17,7 @@
         android:orientation="horizontal">
 
         <android.widget.SearchView
-            android:id="@+id/searchBarMotorCustomer"
+            android:id="@+id/searchBarTransaction"
             android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
@@ -25,7 +25,7 @@
             android:layout_gravity="right"/>
 
         <Button
-            android:id="@+id/btnTambahMotorCustomer"
+            android:id="@+id/btnTambahTransaction"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"

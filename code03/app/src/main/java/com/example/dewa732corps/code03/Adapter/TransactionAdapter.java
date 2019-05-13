@@ -43,9 +43,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.MyViewHolder>{
-    private List<Transaction> TransactionBundle = new ArrayList<>();
     private List<Transaction> TransactionListFilter = new ArrayList<>();
 
+    private List<Transaction> TransactionBundle = new ArrayList<>();
     private Context context;
     ProgressDialog mProgress;
 
@@ -58,8 +58,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         public MyViewHolder(View v) {
             super(v);
             IdTransaction = v.findViewById(R.id.txtIdTransaksi);
-            NameCustomer = v.findViewById(R.id.txtNamaCustomer);
-            StatusProcess = v.findViewById(R.id.txtStatusProcess);
+            NameCustomer = v.findViewById(R.id.txtNamaCustomer_1);
+            StatusProcess = v.findViewById(R.id.txtProsesStatus);
 
             btnEdit = v.findViewById(R.id.btnEditTransaction);
             btnDelete = v.findViewById(R.id.btnDeleteTransaction);
@@ -72,7 +72,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public TransactionAdapter(List<Transaction> TransactionBundle , Context context) {
         this.TransactionBundle = TransactionBundle;
         this.context = context;
-        this.TransactionListFilter = TransactionListFilter;
+        this.TransactionListFilter = TransactionBundle;
         mProgress = new ProgressDialog(context);
         mProgress.setMessage("Loading");
     }
@@ -119,7 +119,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
-                        if (obj.getIdTransaction().toLowerCase().contains(charString.toLowerCase())) { // || obj.getId().contains(charSequence)
+                        if (obj.getIdTransaction().toLowerCase().contains(charString.toLowerCase()) || obj.getStatusProcess().toLowerCase().contains(charString.toLowerCase()) || obj.getNameCustomer().toLowerCase().contains(charString.toLowerCase())) { // || obj.getId().contains(charSequence)
                             filteredList.add(obj);
                         }
                     }
@@ -139,7 +139,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TransactionAdapter.MyViewHolder vh, final int i) {
+    public void onBindViewHolder(@NonNull final TransactionAdapter.MyViewHolder vh, final int i) {
 
 //        final Sparepart data = SparepartBundle.get(i);
         final Transaction data = TransactionListFilter.get(i);
@@ -148,6 +148,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         vh.IdTransaction.setText(data.getIdTransaction());
         vh.NameCustomer.setText(data.getNameCustomer());
         vh.StatusProcess.setText(data.getStatusProcess());
+
+
 
         vh.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +164,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 Log.d("ID Transaksi: ", data.getIdTransaction());
                 Log.d("Nama Customer: ", data.getNameCustomer());
                 Log.d("Status Proses: ", data.getStatusProcess());
+
 
 //                intent.putExtra("supplier", data.getSupplier());
 

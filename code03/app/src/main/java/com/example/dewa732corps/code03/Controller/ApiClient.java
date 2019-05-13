@@ -213,6 +213,8 @@ public interface ApiClient {
     Call<ResponseBody> deleteSparepartProcurement(@Path("id") int id);
 
     // ============================================================== DETAIL PENGADAAN SPAREPART
+    @GET("procurement/detail")
+    Call<SparepartProcurementDetailList> getProcurementDetail();
 
     @POST("procurement/detail")
     @FormUrlEncoded
@@ -237,27 +239,32 @@ public interface ApiClient {
     Call<SparepartProcurementDetailList> getProcurementDetail(@Path("id") int id);
 
     // ============================================================== DETAIL TRANSACTION
+    @GET("transaction")
+    Call<TransactionList> getTransaction();
 
-    @POST("transactions")
+    @POST("transaction")
     @FormUrlEncoded
     Call<ResponseBody> addTransaction(
-        @Field("transaction_type") String transaction_type,
-        @Field("transaction_status") String transaction_status,
-        @Field("transaction_total") double transaction_total,
+        @Field("type_transaction") String type_transaction,
+        @Field("status_process") String status_process,
+        @Field("total_transaction") double total_transaction,
         @Field("id_customer") int id_customer);
 
-    @PUT("transactions/{id}")
+    @PUT("transaction/{id}")
     @FormUrlEncoded
     Call<ResponseBody> updateTransaction(
-        @Path("id") String id,@Field("transaction_type") String transaction_type,
-        @Field("transaction_status") String transaction_status,
-        @Field("transaction_total") double transaction_total,
+        @Path("id") String id,
+        @Field("type_transaction") String type_transaction,
+        @Field("status_process") String status_process,
+        @Field("total_transaction") double total_transaction,
         @Field("id_customer") int id_customer);
 
-    @DELETE("transactions/{id}")
+    @DELETE("transaction/{id}")
     Call<ResponseBody> deleteTransaction(@Path("id") String id);
 
     // ============================================================== DETAIL TRANSACTION SERVICE AND SPAREPART
+    @GET("transaction/service")
+    Call<TransactionServiceList> getTransactionService();
 
     @POST("detailService")
     @FormUrlEncoded
