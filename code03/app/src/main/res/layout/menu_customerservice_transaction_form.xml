@@ -69,11 +69,6 @@
                     android:orientation="vertical"
                     android:gravity="center_horizontal">
 
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pelanggan baru."/>
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -81,7 +76,7 @@
                         android:text="TANGGAL"
                         android:textSize="20dp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/txtTanggal_TransactionForm"
                         android:layout_width="300dp"
                         android:layout_height="40dp"
@@ -104,137 +99,225 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="10dp"
                         android:layout_gravity="center"
+                        android:spinnerMode="dropdown"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:ems="10"
+                        android:text="STATUS PROSES"/>
+
+                    <Spinner
+                        android:id="@+id/dropdownStatusProses_TransaksiForm"
+                        android:layout_width="185dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:spinnerMode="dropdown"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:ems="10"
+                        android:text="JENIS TRANSAKSI"/>
+
+                    <Spinner
+                        android:id="@+id/dropdownJenisTransaksi_TransaksiForm"
+                        android:layout_width="185dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:spinnerMode="dropdown"/>
+
+                <LinearLayout
+                    android:id="@+id/transactionService"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <ImageView
+                        android:layout_width="330dp"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/box_hitam"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="INPUT SERVICE"
+                        android:gravity="center_horizontal"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <Spinner
+                        android:id="@+id/dropdownJenisService_TransaksiFormService"
+                        android:layout_width="185dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
                         android:spinnerMode="dropdown" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="ALAMAT"
-                        android:textSize="20dp" />
-
-                    <EditText
-                        android:id="@+id/txtNoTelpSales_transaction"
-                        android:layout_width="300dp"
+                    <Spinner
+                        android:id="@+id/dropdownPlatKendaraan_TransaksiFormService"
+                        android:layout_width="185dp"
                         android:layout_height="40dp"
+                        android:layout_gravity="center"
                         android:layout_marginTop="10dp"
-                        android:ems="10"
-                        android:textAlignment="center"/>
+                        android:spinnerMode="dropdown" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="NOMOR HP"
-                        android:textSize="20dp" />
-
-                    <EditText
-                        android:id="@+id/txtNoTelp_TransactionForm"
-                        android:layout_width="300dp"
+                    <Spinner
+                        android:id="@+id/dropdownMontir_TransaksiFormService"
+                        android:layout_width="185dp"
                         android:layout_height="40dp"
+                        android:layout_gravity="center"
                         android:layout_marginTop="10dp"
-                        android:ems="10"
-                        android:textAlignment="center"/>
-
-                    <ImageView
-                        android:layout_width="330dp"
-                        android:layout_height="3dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:src="@drawable/box_hitam"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Data Kendaraan"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:textSize="24dp"/>
+                        android:spinnerMode="dropdown" />
 
                     <Button
-                        android:id="@+id/btnAddDetailMotor_TransactionForm"
-                        android:layout_width="90dp"
-                        android:layout_height="40dp"
-                        android:layout_below="@+id/txtList_Procurement"
-                        android:layout_marginTop="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
-                        android:text="+"/>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerViewTransactionForm"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_below="@+id/btnAddDetailMotor_TransactionForm"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="10dp" />
-
-                    <ImageView
-                        android:layout_width="330dp"
-                        android:layout_height="3dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:src="@drawable/box_hitam"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Data Service"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:textSize="24dp"/>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <Spinner
-                            android:id="@+id/dropdownNamaSparepart_TransactionForm"
-                            android:layout_width="250dp"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="20dp"
-                            android:spinnerMode="dropdown"/>
-
-                        <Button
-                            android:id="@+id/btnAddDetailService"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_below="@+id/txtList_Procurement"
-                            android:layout_marginTop="10dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
-                            android:text="+"/>
-
-                    </RelativeLayout>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerViewSparepartProcurementForm"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_below="@+id/btnAddDetailProcurement"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="10dp" />
-
-                    <Button
-                        android:id="@+id/btnSaveTransaction"
+                        android:id="@+id/btnAddService_TransaksiForm"
                         android:layout_width="130dp"
                         android:layout_height="30dp"
                         android:layout_marginTop="20dp"
-                        android:layout_marginLeft="-80dp"
                         android:background="#70C29F"
-                        android:text="SIMPAN"/>
+                        android:text="TAMBAH" />
+
+                    <ImageView
+                        android:layout_width="330dp"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/box_hitam"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_horizontal"
+                        android:text="DETAIL SERVICE"
+                        android:textColor="@color/black"
+                        android:textSize="25dp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/detailservice_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:paddingTop="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/transactionSparepart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <ImageView
+                        android:layout_width="330dp"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/box_hitam"/>
+
+                    <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="INPUT SPAREPART"
+                    android:gravity="center_horizontal"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                    <Spinner
+                        android:id="@+id/dropdownSparepart_TransaksiFormSparepart"
+                        android:layout_width="185dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:spinnerMode="dropdown" />
+
+                    <EditText
+                        android:id="@+id/txtAmount_TransaksiFormSparepart"
+                        android:layout_width="185dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:spinnerMode="dropdown" />
+
+                    <Spinner
+                        android:id="@+id/dropdownPlatKendaraan_TransaksiFormSparepart"
+                        android:layout_width="185dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:spinnerMode="dropdown" />
+
+                    <Spinner
+                        android:id="@+id/dropdownMontir_TransaksiFormSparepart"
+                        android:layout_width="185dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:spinnerMode="dropdown" />
 
                     <Button
-                        android:id="@+id/btnCancelTransaction"
+                        android:id="@+id/btnAddSparepart_TransaksiForm"
                         android:layout_width="130dp"
                         android:layout_height="30dp"
-                        android:layout_marginTop="-30dp"
-                        android:layout_marginLeft="85dp"
+                        android:layout_marginTop="20dp"
+                        android:background="#70C29F"
+                        android:text="TAMBAH" />
+
+                    <ImageView
+                        android:layout_width="330dp"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/box_hitam"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_horizontal"
+                        android:text="DETAIL SPAREPART"
+                        android:textColor="@color/black"
+                        android:textSize="25dp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/detailSparepart_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:paddingTop="5dp" />
+
+                </LinearLayout>
+
+
+                    <Button
+                        android:id="@+id/btnSaveTransaksi"
+                        android:layout_width="170dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="20dp"
+                        android:background="#70C29F"
+                        android:text="INPUT TRANSAKSI"/>
+
+                    <Button
+                        android:id="@+id/btnCancelTransaksi"
+                        android:layout_width="130dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="3dp"
                         android:layout_marginBottom="30dp"
                         android:background="#F44336"
                         android:text="BATAL"/>

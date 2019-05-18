@@ -43,16 +43,10 @@ public class LoginFragment extends Fragment {
     private View mLoginFormView;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-        login= inflater.inflate(R.layout.activity_login,container,false);
+       login= inflater.inflate(R.layout.activity_login,container,false);
 
         setinit();
         session = new SessionController(getContext());
-//        if(session.isLoggedIn())
-//        {
-//            Intent in = new Intent(getActivity(), MainActivity.class);
-//            startActivity(in);
-//        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,6 +3,7 @@ package com.example.dewa732corps.code03.Adapter;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
@@ -19,9 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dewa732corps.code03.Controller.ApiClient;
+import com.example.dewa732corps.code03.Controller.Customer;
 import com.example.dewa732corps.code03.Controller.Sales;
 import com.example.dewa732corps.code03.Controller.Sparepart;
+import com.example.dewa732corps.code03.Controller.SparepartProcurementDetail;
 import com.example.dewa732corps.code03.Controller.Transaction;
+import com.example.dewa732corps.code03.Controller.TransactionList;
 import com.example.dewa732corps.code03.Fragment.BerandaFragment;
 import com.example.dewa732corps.code03.Fragment.Sales.SalesForm;
 import com.example.dewa732corps.code03.Fragment.Sparepart.SparepartForm;
@@ -43,23 +47,21 @@ import java.util.List;
 import java.util.Locale;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.MyViewHolder>{
+    private List<Transaction> TransactionBundle = new ArrayList<>();
     private List<Transaction> TransactionListFilter = new ArrayList<>();
 
-    private List<Transaction> TransactionBundle = new ArrayList<>();
     private Context context;
     ProgressDialog mProgress;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView IdTransaction, NameCustomer, StatusProcess;
         public ImageView btnEdit, btnDelete;
-//        public LinearLayout topWraper;
-//        public LinearLayout bottomWraper;
 
         public MyViewHolder(View v) {
             super(v);
-            IdTransaction = v.findViewById(R.id.txtIdTransaksi);
-            NameCustomer = v.findViewById(R.id.txtNamaCustomer_1);
-            StatusProcess = v.findViewById(R.id.txtProsesStatus);
+            IdTransaction = v.findViewById(R.id.txtIdTransaksi_Transaksi);
+            NameCustomer = v.findViewById(R.id.txtNamaCustomer_Transaksi);
+            StatusProcess = v.findViewById(R.id.txtProsesStatus_Transaksi);
 
             btnEdit = v.findViewById(R.id.btnEditTransaction);
             btnDelete = v.findViewById(R.id.btnDeleteTransaction);
@@ -71,8 +73,9 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     public TransactionAdapter(List<Transaction> TransactionBundle , Context context) {
         this.TransactionBundle = TransactionBundle;
-        this.context = context;
         this.TransactionListFilter = TransactionBundle;
+        this.context = context;
+
         mProgress = new ProgressDialog(context);
         mProgress.setMessage("Loading");
     }
@@ -81,7 +84,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     @Override
     public TransactionAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         // create a new view
-        View v = (View) LayoutInflater.from(viewGroup.getContext())
+        View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.content_transaction, viewGroup, false);
         return new TransactionAdapter.MyViewHolder(v);
     }
@@ -97,14 +100,13 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         else
         {
             for (Transaction obj : TransactionBundle) {
-                if (obj.getIdTransaction().toLowerCase(Locale.getDefault()).contains(charText)) {
+                if (obj.getIdTransaction().toLowerCase(Locale.getDefault()).contains(charText) || obj.getNameCustomer().toLowerCase(Locale.getDefault()).contains(charText) || obj.getStatusProcess().toLowerCase(Locale.getDefault()).contains(charText)) {
                     TransactionListFilter.add(obj);
                 }
             }
         }
         notifyDataSetChanged();
     }
-
 
     public Filter getFilter() {
         return new Filter() {
@@ -119,12 +121,14 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
-                        if (obj.getIdTransaction().toLowerCase().contains(charString.toLowerCase()) || obj.getStatusProcess().toLowerCase().contains(charString.toLowerCase()) || obj.getNameCustomer().toLowerCase().contains(charString.toLowerCase())) { // || obj.getId().contains(charSequence)
+                        if (obj.getIdTransaction().toLowerCase().contains(charString.toLowerCase()) || obj.getNameCustomer().toLowerCase().contains(charString.toLowerCase()) || obj.getStatusProcess().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(obj);
                         }
                     }
+
                     TransactionListFilter = filteredList;
                 }
+
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = TransactionListFilter;
                 return filterResults;
@@ -141,15 +145,25 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     @Override
     public void onBindViewHolder(@NonNull final TransactionAdapter.MyViewHolder vh, final int i) {
 
-//        final Sparepart data = SparepartBundle.get(i);
         final Transaction data = TransactionListFilter.get(i);
 
         final int ifinal = vh.getAdapterPosition();
+
         vh.IdTransaction.setText(data.getIdTransaction());
         vh.NameCustomer.setText(data.getNameCustomer());
         vh.StatusProcess.setText(data.getStatusProcess());
 
-
+        if(data.getStatusProcess().equalsIgnoreCase("On Process")){
+            vh.StatusProcess.setBackgroundColor(Color.parseColor("#f6d82d"));
+        }
+        else if(data.getStatusProcess().equalsIgnoreCase("Unprocessed"))
+        {
+            vh.StatusProcess.setBackgroundColor(Color.RED);
+        }
+        else if(data.getStatusProcess().equalsIgnoreCase("Finish"))
+        {
+            vh.StatusProcess.setBackgroundColor(Color.GREEN);
+        }
 
         vh.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,7 +202,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 deleteTransaction.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.code() == 201){
+                        if (response.code() == 200){
                             Toast.makeText(context.getApplicationContext(), "BERHASIL MENGHAPUS DATA TRANSAKSI", Toast.LENGTH_SHORT).show();
                             mProgress.hide();
                         }else{

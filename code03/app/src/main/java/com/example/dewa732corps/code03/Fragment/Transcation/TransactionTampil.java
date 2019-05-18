@@ -97,7 +97,7 @@ public class TransactionTampil extends Fragment {
                     transactionData = response.body().getData();
                     Log.d( "onResponse: ","MUNCUL");
                     rview.setAdapter(sAdapter);
-                    Toast.makeText(getContext(), " Ada Transaksi!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Transaksi Berhasil Ditampilkan.", Toast.LENGTH_SHORT).show();
                     sAdapter.notifyDataSetChanged();
 
                     mProgress.hide();

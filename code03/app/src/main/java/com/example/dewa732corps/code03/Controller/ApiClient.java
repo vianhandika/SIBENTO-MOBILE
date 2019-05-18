@@ -4,7 +4,6 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -20,7 +19,7 @@ public interface ApiClient {
 
 
     // ==============================================================  USERNAME DAN PASSWORD
-        @POST("mobileauthenticate")
+    @POST("mobileauthenticate")
     @FormUrlEncoded
     Call<ResponseBody> GetLogin(
             @Field("username")String username,
@@ -34,6 +33,14 @@ public interface ApiClient {
            @Field("newPassword")String newPassword
 
     );
+    // ==============================================================  EMPLOYEE
+    @GET("employee")
+    Call<EmployeeList> getEmployee();
+
+    // ==============================================================  EMPLOYEE
+    @GET("service")
+    Call<ServicesList> getService();
+
 
     // ==============================================================  SPAREPART
     @GET("sparepart")
@@ -80,6 +87,14 @@ public interface ApiClient {
 
     @GET("spareparttype")
     Call<SparepartTypeList> getSparepartType();
+
+    @PUT("sparepart/verifymobile/{id}")
+    @FormUrlEncoded
+    Call<ResponseBody> verifymobile(
+            @Path("id") String id_sparepart,
+            @Field("amount") Integer amount
+    );
+
 
     // ============================================================== SUPPLIER
     @GET("supplier")
@@ -293,4 +308,9 @@ public interface ApiClient {
 
     @GET("detailSparepart/{id}")
     Call<TransactionDetailSparepart> getDetailSparepart(@Path("id") String id);
+
+    @POST("searchDetail")
+    @FormUrlEncoded
+    Call<HistoryList> checkMotor(@Field("license_number") String license_number,
+                                 @Field("phone_number") String phone_number);
 }

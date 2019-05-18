@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content">
 
     <RelativeLayout
@@ -50,13 +51,13 @@
             android:layout_marginTop="13dp"
             android:layout_toEndOf="@+id/ProcAmountSparepart"
             android:layout_toRightOf="@+id/ProcAmountSparepart"
-            android:gravity="center_vertical|center_horizontal"
+            android:gravity="center_horizontal"
             android:text="+"
             android:textSize="15dp" />
 
         <TextView
             android:id="@+id/ProcNameSparepart"
-            android:layout_width="185dp"
+            android:layout_width="150dp"
             android:layout_height="29dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
@@ -79,6 +80,22 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="0dp"
             android:text="Subtotal" />
+
+        <ImageView
+            android:id="@+id/btnDelSparepart"
+
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/PlusStock"
+            android:layout_toRightOf="@+id/PlusStock"
+            android:background="@drawable/circle_putih"
+            android:padding="5dp"
+            app:srcCompat="@drawable/ic_delete" />
 
     </RelativeLayout>
 

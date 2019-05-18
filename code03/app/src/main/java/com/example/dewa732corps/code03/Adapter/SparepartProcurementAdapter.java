@@ -39,7 +39,7 @@ public class SparepartProcurementAdapter extends RecyclerView.Adapter<SparepartP
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView NoId, Date, Supplier, Sales, StatusProcurement;
-        public ImageView btnEdit, btnDelete;
+        public ImageView btnEdit, btnDelete,btnVerif;
 
         public MyViewHolder(View v) {
             super(v);
@@ -50,6 +50,7 @@ public class SparepartProcurementAdapter extends RecyclerView.Adapter<SparepartP
             StatusProcurement = v.findViewById(R.id.txtStatusProcess);
             btnEdit = v.findViewById(R.id.btnEditSparepartProcurementTampil);
             btnDelete = v.findViewById(R.id.btnDeleteSparepartProcurementTampil);
+            btnVerif = v.findViewById(R.id.btnVerifyProcurement);
         }
     }
 
@@ -118,11 +119,30 @@ public class SparepartProcurementAdapter extends RecyclerView.Adapter<SparepartP
         if(data.getStatusProcurement().equalsIgnoreCase("Finish"))
         {
             vh.StatusProcurement.setBackgroundColor(Color.GREEN);
+            vh.btnVerif.setVisibility(View.GONE);
+
+        }
+        else if(data.getStatusProcurement().equalsIgnoreCase("On Process")){
+            vh.StatusProcurement.setBackgroundColor(Color.parseColor("#f6d82d"));
         }
         else{
             vh.StatusProcurement.setBackgroundColor(Color.RED);
 
         }
+        vh.btnVerif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(v.getContext(), SparepartProcurementForm.class);
+                intent.putExtra("mode", "verif");
+
+                intent.putExtra("id", data.getIdProcurement().toString());
+                intent.putExtra("date", data.getDateProcurement());
+                intent.putExtra("id_sales", data.getIdSales().toString());
+                intent.putExtra("status_procurement", data.getStatusProcurement());
+                v.getContext().startActivity(intent);
+            }
+        });
 
         vh.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override

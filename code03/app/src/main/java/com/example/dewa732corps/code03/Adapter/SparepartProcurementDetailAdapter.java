@@ -3,6 +3,7 @@ package com.example.dewa732corps.code03.Adapter;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dewa732corps.code03.Controller.ApiClient;
 import com.example.dewa732corps.code03.Controller.SparepartProcurement;
@@ -22,6 +24,10 @@ import com.example.dewa732corps.code03.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -35,6 +41,7 @@ public class SparepartProcurementDetailAdapter extends RecyclerView.Adapter<Spar
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView Name, Amount, Subtotal, Price, StatusProcurement;
         public Button btnPlus, btnMin;
+        public ImageView btnDel;
 
         public MyViewHolder(View v) {
             super(v);
@@ -44,6 +51,9 @@ public class SparepartProcurementDetailAdapter extends RecyclerView.Adapter<Spar
 //            Price= v.findViewById(R.id.ProcPriceSparepart);
             btnPlus = v.findViewById(R.id.PlusStock);
             btnMin = v.findViewById(R.id.MinStock);
+            btnDel = v.findViewById(R.id.btnDelSparepart);
+
+
         }
     }
 
@@ -51,6 +61,7 @@ public class SparepartProcurementDetailAdapter extends RecyclerView.Adapter<Spar
         this.DetailProcurementBundle = DetailProcurementBundle;
         this.context = context;
         this.DetailProcurementListFilter = DetailProcurementBundle;
+
         mProgress = new ProgressDialog(context);
         mProgress.setMessage("Loading");
     }
@@ -126,6 +137,16 @@ public class SparepartProcurementDetailAdapter extends RecyclerView.Adapter<Spar
                 notifyDataSetChanged();
             }
         });
+        vh.btnDel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    DetailProcurementBundle.remove(ifinal);
+                    notifyItemRemoved(ifinal);
+                    notifyItemRangeChanged(ifinal, getItemCount());
+                }
+        });
+
     }
 
     @Override

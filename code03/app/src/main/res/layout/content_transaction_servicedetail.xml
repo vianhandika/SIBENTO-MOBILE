@@ -26,55 +26,34 @@
             android:src="@drawable/box_hitam"/>
 
         <TextView
-            android:id="@+id/txtIdTransaksi_Transaksi"
+            android:id="@+id/txtNameService_TransactionDetailService"
             android:layout_height="wrap_content"
-            android:layout_width="270dp"
+            android:layout_width="230dp"
             android:maxLines="1"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp"
-            android:text="ID Transaksi"
-            android:textSize="20dp"/>
+            android:text="Nama Service"
+            android:textSize="20dp" />
 
         <TextView
-            android:id="@+id/txtNamaCustomer_Transaksi"
+            android:id="@+id/txtPlatNomor_TransactionDetailService"
             android:layout_height="wrap_content"
-            android:layout_width="270dp"
+            android:layout_width="230dp"
             android:maxLines="1"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="37dp"
-            android:text="Nama Customer"
+            android:text="Plat Nomor"
             android:textSize="17dp" />
 
         <TextView
-            android:id="@+id/txtProsesStatus_Transaksi"
+            android:id="@+id/txtSubTotal_TransactionDetailService"
             android:layout_height="wrap_content"
-            android:layout_width="270dp"
+            android:layout_width="230dp"
             android:maxLines="1"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="60dp"
-            android:text="Status Proses"
+            android:text="Sub Total"
             android:textSize="10dp" />
-
-        <ImageView
-            android:id="@+id/btnEditTransaction"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="335dp"
-            android:layout_marginTop="5dp"
-            app:srcCompat="@drawable/ic_edit"
-            android:padding="5dp"
-            android:background="@drawable/circle_putih" />
-
-        <ImageView
-            android:id="@+id/btnDeleteTransaction"
-            android:layout_below="@+id/btnEditTransaction"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="335dp"
-            android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/ic_delete"
-            android:padding="5dp"
-            android:background="@drawable/circle_putih" />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

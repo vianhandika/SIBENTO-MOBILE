@@ -156,7 +156,6 @@ public class SparepartForm extends AppCompatActivity {
                 return i;
             }
         }
-
         return 0;
     }
 
@@ -205,6 +204,7 @@ public class SparepartForm extends AppCompatActivity {
 
         }
     }
+
     private int formChecking(){ //Fungsi Check Form
 
         String idSparepart=txtIdSparepart.getText().toString(),

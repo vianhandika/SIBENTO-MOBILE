@@ -147,6 +147,11 @@ public class SparepartProcurementForm extends AppCompatActivity {
                     Log.d("sukses","editSparepartProcurement");
                     editSparepartProcurement();
                 }
+                else if (formChecking()==0 && editMode ==2){ //kalau pengecekan form benar dan pada mode edit
+                    Log.d("sukses","editSparepartProcurement");
+
+                    verifySparepartProcurement();
+                }
             }
         });
 
@@ -232,9 +237,6 @@ public class SparepartProcurementForm extends AppCompatActivity {
                     });
                     alertDialog.show();
                 }
-
-
-
             }
         });
     }
@@ -269,7 +271,6 @@ public class SparepartProcurementForm extends AppCompatActivity {
                 return i;
             }
         }
-
         return 0;
     }
 
@@ -300,8 +301,15 @@ public class SparepartProcurementForm extends AppCompatActivity {
             dropdownStatusProcess.setSelection(getIndex(dropdownStatusProcess,status_procurement));
 
 //            Toast.makeText(SparepartProcurementForm.this, getIndexListString(listIdSales, String.valueOf(id_sales)), Toast.LENGTH_SHORT).show();
+            if(!String.valueOf(intent.getStringExtra("mode")).equals("verif"))
+            {
+                editMode = 1; //pengubahan menjadi mode edit
 
-            editMode = 1; //pengubahan menjadi mode edit
+            }
+            else{
+                editMode =2;
+                btnSaveSparepartProcurement.setText("Verif");
+            }
             Retrofit retrofit= new retrofit2.Retrofit.Builder()
                     .baseUrl("https://sibento.yafetrakan.com/api/")
                     .addConverterFactory(GsonConverterFactory.create())
@@ -549,6 +557,114 @@ public class SparepartProcurementForm extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 mProgress.dismiss();
+                Log.d("onFailure: ",t.toString());
+
+//                mProgressBar.setVisibility(View.GONE);
+//                Log.d(TAG, "onFailure: "+t.getLocalizedMessage());
+            }
+        });
+    }
+
+    private void verifySparepartProcurement(){ // Fungsi Verif Data sparepart
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiClient retrofitInterface = retrofit.create(ApiClient.class);
+
+        String ddSalesProcurement = dropdownNameOfSales.getSelectedItem().toString();
+
+        final Integer id_procurement = id;
+        String date_procurement = txtTanggal.getText().toString();
+        Integer id_sales = Integer.parseInt(selectedIdSales);
+        String status_procurement = "Finish";
+
+        Log.d("id procurement: ", id_procurement.toString());
+        Log.d("id date_procurement: ", date_procurement);
+        Log.d("id id_sales: ", id_sales.toString());
+        Log.d("id status_procurement: ", status_procurement);
+
+        Call<ResponseBody> call = retrofitInterface.editSparepartProcurement(id_procurement, date_procurement, id_sales, status_procurement);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+
+                try {
+                    JSONObject jsonRes = null;
+                    jsonRes = new JSONObject(response.body().string());
+                    String idprocurement =  jsonRes.getJSONObject("data").getString("id_procurement");
+                    Log.d("idprocurement", idprocurement);
+//                mProgressBar.setVisibility(View.GONE);
+
+                    if (response.isSuccessful()) {
+
+                        for(int x=0;x<detailProcurement.size();x++)
+                        {
+                            Log.d("masuk", "massuk");
+                            Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                                    .baseUrl(URL)
+                                    .addConverterFactory(GsonConverterFactory.create())
+                                    .build();
+
+                            ApiClient apiClient = retrofit.create(ApiClient.class);
+
+
+                            int amount = Integer.parseInt(detailProcurement.get(x).getAmount().toString());
+                            String id_sparepart = detailProcurement.get(x).getIdSparepart();
+                            Log.d( "amount: ",String.valueOf(amount));
+                            Log.d( "amount: ",id_sparepart);
+
+
+                            Call<ResponseBody> verifymobile = apiClient.verifymobile(
+                                    id_sparepart,
+                                    amount
+
+                            );
+
+                            verifymobile.enqueue(new Callback<ResponseBody>() {
+                                @Override
+                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                                    Log.d("onResponse: ",String.valueOf(response.code()));
+                                    if (response.code() == 200){
+                                        Log.d("successe", "hehehe");
+                                    }else{
+                                        Log.d("onResponse: ",String.valueOf(response.code()));
+
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                }
+                            });
+                        }
+//                        ResponseBody responseBody = response.body();
+//                        Log.d("SUKSES",responseBody.toString());
+                        Toast.makeText(SparepartProcurementForm.this, "Sukses", Toast.LENGTH_SHORT).show();
+                        final Intent intent = new Intent(SparepartProcurementForm.this, MainActivity.class);
+                        intent.putExtra("menuBefore", 5);
+                        startActivity(intent);
+
+
+                    }
+//                    else {
+//                        Log.d( "onResponse: ",response.message());
+//                        Toast.makeText(SparepartProcurementForm.this, "Gagal", Toast.LENGTH_SHORT).show();
+//                        mProgress.dismiss();
+//                    }
+                    mProgress.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d("onFailure: ",t.toString());
 
 //                mProgressBar.setVisibility(View.GONE);

@@ -79,6 +79,10 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:name=".Fragment.Sparepart_Procurement.SparepartProcurementForm">
         </activity>
+        <activity
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:name=".Fragment.Transcation.TransactionForm">
+        </activity>
     </application>
 
 </manifest>

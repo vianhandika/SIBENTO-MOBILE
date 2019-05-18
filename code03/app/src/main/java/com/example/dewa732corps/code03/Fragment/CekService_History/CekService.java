@@ -1,19 +1,18 @@
-package com.example.dewa732corps.code03.Fragment;
+package com.example.dewa732corps.code03.Fragment.CekService_History;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.dewa732corps.code03.Fragment.CekService_History.CekService;
-import com.example.dewa732corps.code03.Fragment.CekService_History.HistoryTransaksi;
+import com.example.dewa732corps.code03.Fragment.Supplier.SupplierForm;
+import com.example.dewa732corps.code03.MainActivity;
 import com.example.dewa732corps.code03.R;
 
-public class CekServiceFragment extends Fragment {
+public class CekService extends AppCompatActivity {
 //    Button checkButton;
 //    EditText license_number, phone_number;
 //

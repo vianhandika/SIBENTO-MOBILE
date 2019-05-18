@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtCekServiceTampil1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="HISTORY MOTOR"
+        android:textSize="25dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="20dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewCekServiceTampil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtCekServiceTampil1"/>
+
+    <Button
+        android:id="@+id/btnHome"
+        android:layout_width="130dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/recyclerViewCekServiceTampil"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="20dp"
+        android:background="#70C29F"
+        android:text="HOME"/>
+
+</RelativeLayout>

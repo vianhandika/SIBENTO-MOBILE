@@ -8,7 +8,7 @@ import java.util.List;
 public class TransactionDetailServices {
     @SerializedName("data")
     @Expose
-    private List<Service> data = null;
+    private List<TransactionService> data = null;
 
     /**
      * No args constructor for use in serialization
@@ -21,16 +21,16 @@ public class TransactionDetailServices {
      *
      * @param data
      */
-    public TransactionDetailServices(List<Service> data) {
+    public TransactionDetailServices(List<TransactionService> data) {
         super();
         this.data = data;
     }
 
-    public List<Service> getData() {
+    public List<TransactionService> getData() {
         return data;
     }
 
-    public void setData(List<Service> data) {
+    public void setData(List<TransactionService> data) {
         this.data = data;
     }
 }
