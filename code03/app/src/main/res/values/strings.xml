@@ -19,4 +19,15 @@
         completions."
     </string>
     <string name="title_activity_main2">PANEL PEGAWAI</string>
+
+
+
+    <string-array name="sort">
+        <item>Sort By Name Ascending</item>
+        <item>Sort By Name Descending</item>
+        <item>Sort By Low Stock</item>
+        <item>Sort By High Stock</item>
+        <item>Sort By Low Price</item>
+        <item>Sort By High Price</item>
+    </string-array>
 </resources>
